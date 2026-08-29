@@ -27,6 +27,9 @@ app.enable('trust proxy');
 // Nomor Kontak WhatsApp Resmi Admin
 const WHATSAPP_NUMBER = '6285338922586';
 
+// Production Domain Resmi
+const PRODUCTION_DOMAIN = 'https://jokiborangpidgi.vercel.app';
+
 /**
  * Metadata Registry untuk Dynamic SSR SEO (GSC Gold Standard)
  */
@@ -97,11 +100,14 @@ const SEO_REGISTRY = {
 };
 
 /**
- * Resolver Base URL yang akurat untuk Vercel Serverless & Localhost
+ * Resolver Base URL yang mengutamakan Domain Produksi Resmi
  */
 function getBaseUrl(req) {
+  if (process.env.NODE_ENV === 'production') {
+    return PRODUCTION_DOMAIN;
+  }
   const host = req.headers['x-forwarded-host'] || req.get('host') || 'localhost:3000';
-  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'http';
   return `${protocol}://${host}`;
 }
 
@@ -205,7 +211,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
 
   // 4. Schema.org Multi-Entity Graph
   const schemaGraph = [
-    // WebSite with Sitelinks SearchBox Capability
+    // WebSite with Sitelinks Capability
     {
       "@type": "WebSite",
       "@id": `${baseUrl}/#website`,
