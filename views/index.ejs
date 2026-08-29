@@ -11,14 +11,23 @@
   <meta name="keywords" content="<%= seo.keywords %>">
   <meta name="author" content="jokiborangpidgi">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="<%= seo.canonicalUrl %>">
+
+  <!-- REGIONAL & LANGUAGE TAGS -->
+  <meta name="geo.region" content="ID">
+  <meta name="geo.placename" content="Indonesia">
+  <meta name="language" content="Indonesian">
+  <meta http-equiv="content-language" content="id">
 
   <!-- FAVICON & TOUCH ICONS -->
   <link rel="icon" type="image/png" href="/img/jokiborang.png">
   <link rel="shortcut icon" type="image/png" href="/img/jokiborang.png">
-  <link rel="apple-touch-icon" href="/img/jokiborang.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/jokiborang.png">
   <meta name="theme-color" content="#070b14">
   <meta name="msapplication-TileColor" content="#070b14">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- OPEN GRAPH / FACEBOOK (DYNAMIC SSR) -->
   <meta property="og:type" content="<%= seo.ogType %>">
@@ -26,7 +35,11 @@
   <meta property="og:title" content="<%= seo.title %>">
   <meta property="og:description" content="<%= seo.description %>">
   <meta property="og:image" content="<%= seo.ogImage %>">
-  <meta property="og:image:alt" content="Joki Borang PIDGI - Layanan Logbook Dokter Gigi Internsip">
+  <meta property="og:image:secure_url" content="<%= seo.ogImage %>">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Joki Borang PIDGI - Layanan Input Logbook Dokter Gigi Internsip">
   <meta property="og:site_name" content="jokiborangpidgi">
   <meta property="og:locale" content="id_ID">
 
@@ -36,10 +49,11 @@
   <meta name="twitter:title" content="<%= seo.title %>">
   <meta name="twitter:description" content="<%= seo.description %>">
   <meta name="twitter:image" content="<%= seo.ogImage %>">
+  <meta name="twitter:image:alt" content="Joki Borang PIDGI Logo">
   <meta name="twitter:site" content="@jokiborangpidgi">
   <meta name="twitter:creator" content="@jokiborangpidgi">
 
-  <!-- JSON-LD STRUCTURED DATA / GOOGLE RICH RESULTS SCHEMA (SSR) -->
+  <!-- DYNAMIC STRUCTURED DATA / GOOGLE RICH RESULTS SCHEMA GRAPH (SSR) -->
   <script type="application/ld+json">
   <%- JSON.stringify(seo.schemaJson) %>
   </script>
@@ -93,7 +107,7 @@
         </div>
       </a>
 
-      <!-- Clean URL Navbar Links (Without Hash '#') with Dynamic SSR Active State -->
+      <!-- Clean URL Navbar Links (SSR Sitelinks Active State) -->
       <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
         <a href="/tentang" class="<%= currentSection === 'tentang' ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1' : 'text-slate-300 hover:text-cyan-400 transition-colors' %>">Tentang</a>
         <a href="/keunggulan" class="<%= currentSection === 'keunggulan' ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1' : 'text-slate-300 hover:text-cyan-400 transition-colors' %>">Keunggulan</a>
