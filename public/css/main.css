@@ -74,15 +74,19 @@ body {
   overflow: hidden;
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Masking for smooth fade out on the left and right edges */
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
+/* Track 1: Running Left */
 .marquee-track {
   display: flex;
   width: max-content;
   gap: 1.5rem;
-  animation: marqueeScroll 50s linear infinite;
+  animation: marqueeScroll 45s linear infinite;
   will-change: transform;
 }
 
@@ -90,11 +94,12 @@ body {
   animation-play-state: paused;
 }
 
+/* Track 2: Running Right (Reverse) */
 .marquee-track-reverse {
   display: flex;
   width: max-content;
   gap: 1.5rem;
-  animation: marqueeScrollReverse 55s linear infinite;
+  animation: marqueeScrollReverse 50s linear infinite;
   will-change: transform;
 }
 
@@ -102,27 +107,21 @@ body {
   animation-play-state: paused;
 }
 
+/* Translate EXACTLY -50% because the track holds 2 identical sets of cards */
 @keyframes marqueeScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.75rem)); } /* -50% minus half the gap for perfect loop */
 }
 
 @keyframes marqueeScrollReverse {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0% { transform: translateX(calc(-50% - 0.75rem)); }
+  100% { transform: translateX(0); }
 }
 
+/* Review Card Sizing to prevent squishing */
 .review-card {
   width: 320px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Important: prevents cards from compressing into grid/flex wrap */
   user-select: none;
 }
 
