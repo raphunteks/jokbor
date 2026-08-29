@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  
+  <meta name="description" content="Jasa Joki Input Borang & E-Logbook Dokter Gigi Internsip (PIDGI) Terpercaya. Handle UKP, UKM, Lapsus, Manajemen & PKRS Stase RS dan Puskesmas.">
+  <meta name="keywords" content="joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs">
+  <meta property="og:title" content="Joki Borang PIDGI - Partner Tuntas Logbook Dokter Gigi Internsip">
+  <meta property="og:description" content="Tuntaskan ratusan logbook stase RS & Puskesmas tepat waktu dengan format rapi dan bergaransi lolos validasi DP.">
+  <meta property="og:image" content="/img/jokiborang.PNG">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#0d9488',
+              cyan: '#06b6d4',
+              indigo: '#6366f1',
+              dark: '#070b14',
+              slate: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white relative">
+
+  <div class="mesh-glow mesh-teal w-[600px] h-[600px] top-[-100px] left-[-150px]"></div>
+  <div class="mesh-glow mesh-cyan w-[500px] h-[500px] top-[40%] right-[-100px]"></div>
+  <div class="mesh-glow mesh-indigo w-[700px] h-[700px] bottom-[10%] left-[10%]"></div>
+
+  <nav class="fixed top-0 left-0 w-full z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
+            <img src="/img/jokiborang.PNG" alt="Logo jokiborangpidgi" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-teal-300 via-cyan-200 to-white bg-clip-text text-transparent">
+            jokiborangpidgi
+          </span>
+          <span class="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">PIDGI Assistance</span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#tentang" class="hover:text-cyan-400 transition-colors">Tentang</a>
+        <a href="#keunggulan" class="hover:text-cyan-400 transition-colors">Keunggulan</a>
+        <a href="#layanan" class="hover:text-cyan-400 transition-colors">Layanan</a>
+        <a href="#testimoni" class="hover:text-cyan-400 transition-colors">Testimoni</a>
+        <a href="#biaya" class="hover:text-cyan-400 transition-colors">Pricelist</a>
+        <a href="#faq" class="hover:text-cyan-400 transition-colors">FAQ</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 flex items-center gap-2">
+          <i class="fab fa-whatsapp text-sm"></i>
+          <span>Hubungi Kami</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="relative pt-36 pb-24 md:pt-44 md:pb-32 px-6 z-10">
+    <div class="max-w-6xl mx-auto text-center">
+      
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border border-teal-500/30 text-teal-300 text-xs font-semibold mb-8 shadow-inner">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span>Jasa Administrasi & Input Logbook PIDGI No. 1 di Indonesia</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.15] mb-8">
+        Fokus Tangani Pasien, <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-teal-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
+          Biar Borang PIDGI Kami yang Tuntaskan.
+        </span>
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-normal">
+        Solusi terpercaya pengisian e-logbook harian, stase Puskesmas, dan Rumah Sakit. Dari koding UKP, laporan UKM lapangan, hingga penyusunan PKRS & Laporan Kasus tuntas tanpa pusing.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="#biaya" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-sm shadow-xl shadow-teal-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition duration-200">
+          <i class="fas fa-tags mr-2"></i> Lihat Daftar Harga (Pricelist)
+        </a>
+        <a href="#layanan" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card text-slate-200 font-semibold text-sm hover:bg-white/10 hover:text-white transition duration-200">
+          <i class="fas fa-layer-group mr-2 text-cyan-400"></i> Pelajari Layanan Modul
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-2xl font-black text-cyan-400">100%</div>
+          <div class="text-[11px] text-slate-400 uppercase font-semibold mt-1">Kerahasiaan Akun</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-2xl font-black text-teal-400">ICD-10</div>
+          <div class="text-[11px] text-slate-400 uppercase font-semibold mt-1">Koding Gigi Tepat</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-2xl font-black text-indigo-400">1 Hari</div>
+          <div class="text-[11px] text-slate-400 uppercase font-semibold mt-1">Opsi Express Kilat</div>
+        </div>
+        <div class="glass-card p-4 rounded-2xl">
+          <div class="text-2xl font-black text-pink-400">Valid</div>
+          <div class="text-[11px] text-slate-400 uppercase font-semibold mt-1">Garansi Approval DP</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="tentang" class="py-24 px-6 relative z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="glass-panel rounded-3xl p-8 sm:p-14 relative overflow-hidden border border-white/10">
+        
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          
+          <div class="lg:col-span-7">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-xs uppercase tracking-wider mb-4">
+              Tentang Layanan Kami
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6">
+              Sahabat Administrasi Terbaik untuk Dokter Gigi Internsip
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+              <strong>@jokiborangpidgi</strong> didirikan untuk memberikan solusi nyata bagi rekan-rekan sejawat dokter gigi yang tengah menjalani Program Internsip Dokter Gigi Indonesia (PIDGI).
+            </p>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+              Kami menyadari padatnya jadwal pelayanan poli gigi, ekstraksi serial, jaga instalasi gawat darurat, hingga kegiatan lapangan UKGS/UKGMD yang menyita tenaga dan waktu istirahat Anda. Kami hadir mendampingi beban administratif Anda dengan pengerjaan logbook yang terstruktur, akurat, dan sesuai pedoman resmi Kemenkes.
+            </p>
+            
+            <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-300">
+              <div class="flex items-center gap-2 bg-white/5 px-3.5 py-2 rounded-xl border border-white/10">
+                <i class="fas fa-check-circle text-teal-400"></i> Standar SOAP Klinis
+              </div>
+              <div class="flex items-center gap-2 bg-white/5 px-3.5 py-2 rounded-xl border border-white/10">
+                <i class="fas fa-check-circle text-cyan-400"></i> Format Laporan Terstandar
+              </div>
+              <div class="flex items-center gap-2 bg-white/5 px-3.5 py-2 rounded-xl border border-white/10">
+                <i class="fas fa-check-circle text-indigo-400"></i> Garansi Revisi
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="w-full max-w-sm rounded-3xl p-6 glass-card border-cyan-500/30 relative">
+              <div class="text-center pb-4 border-b border-white/10">
+                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[2px] mb-3 shadow-lg shadow-cyan-500/30">
+                  <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                    <img src="/img/jokiborang.PNG" alt="Profile" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
+                  </div>
+                </div>
+                <h3 class="font-bold text-white text-base">@jokiborangpidgi</h3>
+                <p class="text-xs text-cyan-400 mt-0.5">Asisten Logbook Terpercaya</p>
+              </div>
+              <div class="pt-4 space-y-3 text-xs text-slate-300">
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Target Pelayanan:</span>
+                  <span class="font-semibold text-white">Stase RS & PKM</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Kecepatan Respon:</span>
+                  <span class="font-semibold text-teal-400">< 15 Menit</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Privasi Akun Portal:</span>
+                  <span class="font-semibold text-emerald-400">Terenkripsi 100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="keunggulan" class="py-24 px-6 relative z-10 bg-slate-950/40 border-y border-white/5">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-bold text-xs uppercase tracking-wider">
+          Keunggulan Utama
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">
+          Mengapa Memilih @jokiborangpidgi?
+        </h2>
+        <p class="text-slate-400 text-sm mt-3">
+          Standar pengerjaan profesional yang mengutamakan ketelitian medis dan kenyamanan klien.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="glass-card p-8 rounded-3xl">
+          <div class="w-14 h-14 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2.5">Paham Istilah & Koding Gigi</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Tidak asal ketik. Kami memahami terminologi odontologi, penulisan status lokalis, prosedur konservasi, bedah mulut, serta koding ICD-10 gigi yang valid.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2.5">Kerahasiaan Data 100%</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Privasi akun e-Logbook, nama wahana, nomor registrasi pasien, dan identitas dokter internsip dijamin aman dengan protokol pembersihan data berkala.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2.5">Pengerjaan Tepat Waktu</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Komitmen deadline ketat. Tersedia opsi Reguler (3-5 hari) hingga layanan Express (1x24 jam) saat menghadapi batas akhir monev bulanan.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2.5">Format Standar Approval DP</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Penyusunan format SOAP, kegiatan promkes, dan laporan evaluasi telah disesuaikan agar mudah diverifikasi dan disetujui Dokter Pendamping.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
+            <i class="fas fa-tags"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2.5">Biaya Fleksibel & Transparan</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Tersedia skema per kasus, paket mingguan, bulanan, hingga paket combo 6 bulan all-in dengan transparansi harga tanpa biaya tersembunyi.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl">
+          <div class="w-14 h-14 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2.5">Konsultasi Ramah & Responsif</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Komunikasi mudah melalui WhatsApp langsung dengan admin yang mengerti alur sistem internsip dokter gigi di berbagai wahana Indonesia.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="layanan" class="py-24 px-6 relative z-10">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-xs uppercase tracking-wider">
+          Modul & Cakupan
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">
+          Layanan Lengkap Logbook PIDGI
+        </h2>
+        <p class="text-slate-400 text-sm mt-3">
+          Kami menangani seluruh pembagian stase Puskesmas dan Rumah Sakit secara menyeluruh.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        
+        <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-teal-500/30 relative">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-2xl">
+              <i class="fas fa-clinic-medical"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white">Logbook Stase Puskesmas</h3>
+              <p class="text-xs text-teal-300 font-medium">Poli Gigi, Posyandu, & Pelayanan Masyarakat</p>
+            </div>
+          </div>
+
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Pengelolaan menyeluruh untuk pemenuhan kuota tindakan di poli gigi puskesmas serta pelaporan kegiatan terpadu lintas sektor.
+          </p>
+
+          <div class="space-y-4">
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">UKP (Upaya Kesehatan Perseorangan)</h4>
+                <p class="text-xs text-slate-400 mt-1">Input logbook kasus harian poli: ekstraksi, tumpatan (GIC/Komposit), scalling, premedikasi, serta edukasi pasien (KIE).</p>
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">UKM (Upaya Kesehatan Masyarakat)</h4>
+                <p class="text-xs text-slate-400 mt-1">Penyusunan laporan Promkes lapangan, program UKGS di sekolah, penyuluhan posyandu, dan laporan evaluasi program puskesmas.</p>
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">Laporan Kasus (Lapsus) Puskesmas</h4>
+                <p class="text-xs text-slate-400 mt-1">Penyusunan makalah laporan kasus komprehensif dari pasien poli gigi puskesmas lengkap dengan tinjauan teori terkini.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-cyan-500/30 relative">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl">
+              <i class="fas fa-hospital"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white">Logbook Stase Rumah Sakit</h3>
+              <p class="text-xs text-cyan-300 font-medium">Poli Spesialis, IGD, Manajemen & Penunjang</p>
+            </div>
+          </div>
+
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Penyusunan administrasi klinis rumah sakit terintegrasi, laporan divisi manajemen mutu pelayanan, serta presentasi edukasi pasien.
+          </p>
+
+          <div class="space-y-4">
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">UKP Rumah Sakit</h4>
+                <p class="text-xs text-slate-400 mt-1">Input kasus poli gigi RS, asistensi tindakan bedah minor (odontektomi/alveolektomi), serta penanganan kasus kegawatdaruratan gigi di IGD.</p>
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">UKM Stase RS</h4>
+                <p class="text-xs text-slate-400 mt-1">Kegiatan edukasi dan penyuluhan kesehatan gigi untuk pasien rawat jalan / keluarga penunggu pasien di area Rumah Sakit.</p>
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">Manajemen & PKRS</h4>
+                <p class="text-xs text-slate-400 mt-1">Laporan manajemen RS, serta pembuatan dokumen Word & Slide Presentasi PPT Promosi Kesehatan Rumah Sakit (PKRS).</p>
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">4</span>
+              <div>
+                <h4 class="text-sm font-bold text-white">Laporan Kasus (Lapsus) RS</h4>
+                <p class="text-xs text-slate-400 mt-1">Penulisan ilmiah laporan kasus spesialistik RS disertai dokumentasi foto klinis, rontgen panoramik, dan pembahasan jurnal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="testimoni" class="py-24 px-6 relative z-10 bg-slate-950/40 border-y border-white/5">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs uppercase tracking-wider">
+          Ulasan Rekan Sejawat
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">
+          Apa Kata Klien Kami?
+        </h2>
+        <p class="text-slate-400 text-sm mt-3">
+          Testimoni asli dari rekan dokter gigi internsip di berbagai wahana di Indonesia.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        
+        <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="text-amber-400 text-sm mb-4 flex gap-1">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed mb-6">
+              "Penyelamat hidup banget pas stase PKM! Pasien lagi rame-ramenya di poli dan harus megang UKGS. Format borangnya rapi banget, koding ICD-10 pas, dan DP langsung approve tanpa revisi."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+            <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-sm">
+              FA
+            </div>
+            <div>
+              <div class="font-bold text-sm text-white">drg. F*** A***</div>
+              <div class="text-[11px] text-slate-400">Wahana PKM Jawa Tengah</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="text-amber-400 text-sm mb-4 flex gap-1">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed mb-6">
+              "Pesan paket kilat Express 1 hari buat 140 kasus UKP RS karena mau monev mendadak. Beneran kelar besok siangnya! Sangat profesional dan privasi akun beneran dijaga aman."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+            <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-sm">
+              RP
+            </div>
+            <div>
+              <div class="font-bold text-sm text-white">drg. R*** P***</div>
+              <div class="text-[11px] text-slate-400">Wahana RSUD Sumatera Utara</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="text-amber-400 text-sm mb-4 flex gap-1">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed mb-6">
+              "Saya ambil paket Combo Full 6 Bulan (RS + PKM). PPT PKRS sama evaluasi UKM-nya keren banget desainnya. Jadi bisa fokus belajar kasus tanpa stres mikirin ketikan borang."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+            <div class="w-10 h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-sm">
+              MH
+            </div>
+            <div>
+              <div class="font-bold text-sm text-white">drg. M*** H***</div>
+              <div class="text-[11px] text-slate-400">Wahana Sulawesi Selatan</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="biaya" class="py-24 px-6 relative z-10">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-xs uppercase tracking-wider">
+          Pricelist Transparan
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">
+          Biaya Jasa / Pricelist Borang PIDGI
+        </h2>
+        <p class="text-slate-400 text-sm mt-3">
+          Tarif transparan, hemat, dan dapat disesuaikan dengan kebutuhan masa stase Anda.
+        </p>
+      </div>
+
+      <div class="mb-14">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
+            1
+          </div>
+          <h3 class="text-xl font-bold text-white tracking-tight">Layanan UKP (Upaya Kesehatan Perseorangan)</h3>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          
+          <div class="glass-card p-6 rounded-3xl flex flex-col justify-between border-teal-500/20">
+            <div>
+              <div class="inline-block px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 text-[10px] font-bold uppercase tracking-wider mb-4">
+                Stase Puskesmas (PKM)
+              </div>
+              <div class="text-xs text-slate-400 mb-1">Reguler (3-5 Hari Kerja)</div>
+              <div class="text-3xl font-black text-white mb-6">
+                Rp 5.000 <span class="text-xs text-slate-400 font-normal">/ kasus</span>
+              </div>
+              
+              <ul class="text-xs text-slate-300 space-y-3 pt-4 border-t border-white/10 mb-6">
+                <li class="flex justify-between items-center">
+                  <span>Paket 1 Minggu</span>
+                  <span class="font-bold text-white">Rp 250.000</span>
+                </li>
+                <li class="flex justify-between items-center text-teal-300">
+                  <span>All-in 1 Bulan PKM</span>
+                  <span class="font-bold">Rp 1.000.000</span>
+                </li>
+                <li class="flex justify-between items-center text-teal-200">
+                  <span>All-in 3 Bulan PKM</span>
+                  <span class="font-bold">Rp 2.800.000</span>
+                </li>
+              </ul>
+            </div>
+            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20PKM" target="_blank" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-xs transition duration-200">
+              Pilih Paket PKM
+            </a>
+          </div>
+
+          <div class="glass-card p-6 rounded-3xl flex flex-col justify-between border-cyan-500/20">
+            <div>
+              <div class="inline-block px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-4">
+                Stase Rumah Sakit (RS)
+              </div>
+              <div class="text-xs text-slate-400 mb-1">Reguler (3-5 Hari Kerja)</div>
+              <div class="text-3xl font-black text-white mb-6">
+                Rp 5.000 <span class="text-xs text-slate-400 font-normal">/ kasus</span>
+              </div>
+              
+              <ul class="text-xs text-slate-300 space-y-3 pt-4 border-t border-white/10 mb-6">
+                <li class="flex justify-between items-center">
+                  <span>Paket 1 Minggu</span>
+                  <span class="font-bold text-white">Rp 150.000</span>
+                </li>
+                <li class="flex justify-between items-center text-cyan-300">
+                  <span>All-in 1 Bulan RS</span>
+                  <span class="font-bold">Rp 600.000</span>
+                </li>
+                <li class="flex justify-between items-center text-cyan-200">
+                  <span>All-in 3 Bulan RS</span>
+                  <span class="font-bold">Rp 2.400.000</span>
+                </li>
+              </ul>
+            </div>
+            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20RS" target="_blank" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-xs transition duration-200">
+              Pilih Paket RS
+            </a>
+          </div>
+
+          <div class="glass-panel p-6 rounded-3xl flex flex-col justify-between border-indigo-500/40 relative overflow-hidden">
+            <div class="absolute -top-3 -right-3 w-24 h-24 bg-indigo-500/20 rounded-full blur-xl"></div>
+            <div>
+              <div class="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-wider mb-4">
+                Express & Paket Combo
+              </div>
+              <div class="text-xs text-slate-400 mb-1">Pengerjaan 1x24 Jam Kilat</div>
+              <div class="text-3xl font-black text-white mb-2">
+                Rp 7.000 <span class="text-xs text-slate-400 font-normal">/ kasus</span>
+              </div>
+              <div class="text-[11px] text-cyan-300 font-medium mb-6">⚡ Diskon 10% untuk pemesanan > 100 kasus</div>
+              
+              <div class="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 mb-6">
+                <div class="text-xs font-bold text-indigo-300 mb-1">🔥 COMBO FULL 6 BULAN (RS + PKM)</div>
+                <div class="text-2xl font-black text-white">Rp 5.000.000</div>
+                <div class="text-[10px] text-slate-400 mt-1">Solusi tenang tuntas satu masa internsip penuh</div>
+              </div>
+            </div>
+            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Paket%20Combo%206%20Bulan%20atau%20Express" target="_blank" class="w-full text-center py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-xs shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition duration-200">
+              Ambil Paket Combo
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-teal-500/30">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
+              2
+            </div>
+            <h3 class="text-lg font-bold text-white">Layanan UKM (Stase PKM)</h3>
+          </div>
+
+          <div class="space-y-3 mb-8">
+            <div class="flex justify-between items-center p-3.5 rounded-2xl bg-white/5 text-xs">
+              <span class="text-slate-300">Laporan Promkes PKM</span>
+              <span class="font-bold text-white">Rp 10.000 <span class="text-slate-400 font-normal">/laporan</span></span>
+            </div>
+            <div class="flex justify-between items-center p-3.5 rounded-2xl bg-white/5 text-xs">
+              <span class="text-slate-300">Laporan Evaluasi Program</span>
+              <span class="font-bold text-white">Rp 35.000 <span class="text-slate-400 font-normal">/laporan</span></span>
+            </div>
+            <div class="flex justify-between items-center p-3.5 rounded-2xl bg-teal-950/30 border border-teal-500/30 text-xs">
+              <span class="font-semibold text-teal-300">All-in 3 Laporan Evaluasi</span>
+              <span class="font-bold text-white text-sm">Rp 100.000</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Laporan%20UKM%20Puskesmas" target="_blank" class="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-xs transition duration-200">
+            Order Modul UKM
+          </a>
+        </div>
+
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/30">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-sm">
+              3
+            </div>
+            <h3 class="text-lg font-bold text-white">Laporan Manajemen & PKRS (Stase RS)</h3>
+          </div>
+
+          <div class="space-y-2.5 mb-8">
+            <div class="flex justify-between items-center p-3 rounded-xl bg-white/5 text-xs">
+              <span class="text-slate-300">PKRS Format Dokumen Word</span>
+              <span class="font-bold text-white">Rp 50.000</span>
+            </div>
+            <div class="flex justify-between items-center p-3 rounded-xl bg-white/5 text-xs">
+              <div>
+                <span class="text-slate-300 block">PKRS Slide Presentasi PPT</span>
+                <span class="text-[10px] text-slate-500">*Materi teks dikirimkan dlm bentuk Word</span>
+              </div>
+              <span class="font-bold text-white">Rp 60.000</span>
+            </div>
+            <div class="flex justify-between items-center p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-xs">
+              <span class="font-semibold text-cyan-300">Paket Hemat PKRS (Word + PPT)</span>
+              <span class="font-bold text-white text-sm">Rp 100.000</span>
+            </div>
+            <div class="flex justify-between items-center p-3 rounded-xl bg-white/5 text-xs">
+              <span class="text-slate-300">Laporan Manajemen RS</span>
+              <span class="font-bold text-white">Rp 10.000 <span class="text-slate-400 font-normal">/laporan</span></span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Laporan%20Manajemen%20dan%20PKRS" target="_blank" class="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-xs transition duration-200">
+            Order Modul PKRS & Manajemen
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="faq" class="py-24 px-6 relative z-10 bg-slate-950/40 border-t border-white/5">
+    <div class="max-w-4xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-bold text-xs uppercase tracking-wider">
+          Tanya Jawab
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">
+          Ada yang Ingin Ditanyakan?
+        </h2>
+        <p class="text-slate-400 text-sm mt-3">
+          Pertanyaan umum mengenai alur pemesanan dan durasi pengerjaan borang.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="glass-card rounded-2xl p-6 cursor-pointer group transition-all">
+          <summary class="font-bold text-sm sm:text-base text-white flex justify-between items-center">
+            <span>1. Berapa lama estimasi pengerjaan logbook UKP?</span>
+            <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+            Untuk paket reguler stase RS maupun Puskesmas estimasi pengerjaan adalah 3-5 hari kerja. Jika Anda membutuhkan pengerjaan mendesak sebelum monev atau rotasi stase, Anda dapat memilih paket Express dengan jaminan selesai dalam kurun waktu 1x24 jam.
+          </div>
+        </details>
+
+        <details class="glass-card rounded-2xl p-6 cursor-pointer group transition-all">
+          <summary class="font-bold text-sm sm:text-base text-white flex justify-between items-center">
+            <span>2. Berapa lama pengerjaan modul UKM Puskesmas?</span>
+            <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+            Laporan Promkes dan Laporan Evaluasi UKM diselesaikan rata-rata dalam 1-3 hari kerja sejak data dasar, topik kegiatan, atau materi penyuluhan dikirimkan kepada tim kami.
+          </div>
+        </details>
+
+        <details class="glass-card rounded-2xl p-6 cursor-pointer group transition-all">
+          <summary class="font-bold text-sm sm:text-base text-white flex justify-between items-center">
+            <span>3. Berapa lama pengerjaan Laporan Manajemen & PKRS?</span>
+            <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+            Laporan PKRS (baik dokumen Word maupun slide presentasi PowerPoint) dan laporan manajemen RS memakan waktu pengerjaan 2-3 hari kerja. Desain PPT kami rancang secara visual, profesional, dan siap dipresentasikan di hadapan Dokter Pendamping.
+          </div>
+        </details>
+
+        <details class="glass-card rounded-2xl p-6 cursor-pointer group transition-all">
+          <summary class="font-bold text-sm sm:text-base text-white flex justify-between items-center">
+            <span>4. Bagaimana alur pengerjaan Laporan Kasus (Lapsus)?</span>
+            <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+            Pengerjaan Lapsus membutuhkan waktu 3-5 hari kerja. Laporan disusun secara komprehensif mulai dari tinjauan pustaka, anamnesis, pemeriksaan klinis, rencana perawatan, hingga pembahasan ilmiah yang dilengkapi sitasi jurnal kedokteran gigi terkini.
+          </div>
+        </details>
+
+        <details class="glass-card rounded-2xl p-6 cursor-pointer group transition-all">
+          <summary class="font-bold text-sm sm:text-base text-white flex justify-between items-center">
+            <span>5. Apakah data akun dan rekam medis pasien dijamin aman?</span>
+            <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+            Kami menjamin 100% kerahasiaan. Kredensial akun portal e-logbook hanya digunakan selama proses penginputan dan akan langsung dihapus dari perangkat kami setelah transaksi selesai. Identitas pasien dan wahana Anda dijaga secara ketat.
+          </div>
+        </details>
+
+        <details class="glass-card rounded-2xl p-6 cursor-pointer group transition-all">
+          <summary class="font-bold text-sm sm:text-base text-white flex justify-between items-center">
+            <span>6. Bagaimana jika terdapat revisi dari Dokter Pendamping?</span>
+            <svg class="w-5 h-5 text-cyan-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+            Kami memberikan garansi revisi gratis sampai borang dan laporan Anda dinyatakan valid dan disetujui oleh Dokter Pendamping (DP) wahana Anda.
+          </div>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10 py-12 px-6 relative z-10 bg-brand-dark">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[1px]">
+          <div class="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
+            <img src="/img/jokiborang.PNG" alt="Logo" class="w-full h-full object-cover rounded-[11px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-lg\'>🦷</span>';">
+          </div>
+        </div>
+        <span class="font-extrabold text-sm tracking-tight text-white">jokiborangpidgi</span>
+      </div>
+
+      <div class="text-xs text-slate-400 text-center">
+        © 2026 <strong>@jokiborangpidgi</strong>. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.
+      </div>
+
+      <div class="flex items-center gap-4 text-slate-400 text-sm">
+        <a href="https://instagram.com/jokiborangpidgi" target="_blank" class="hover:text-pink-400 transition-colors">
+          <i class="fab fa-instagram text-lg"></i>
+        </a>
+        <a href="https://wa.me/<%= whatsappNumber %>" target="_blank" class="hover:text-emerald-400 transition-colors">
+          <i class="fab fa-whatsapp text-lg"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <aside aria-label="Kontak Cepat" class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" class="flex items-center gap-3 px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
+      <i class="fab fa-whatsapp text-lg"></i>
+      <span class="hidden sm:inline">Chat Admin Sekarang</span>
+    </a>
+  </aside>
+
+  <script src="/js/protect-devtools.js"></script>
+
+</body>
+</html>
