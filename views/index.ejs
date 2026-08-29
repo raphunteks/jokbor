@@ -3,17 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= pageTitle %></title>
-  
-  <meta name="description" content="Jasa Joki Input Borang & E-Logbook Dokter Gigi Internsip (PIDGI) Terpercaya. Handle UKP, UKM, Lapsus, Manajemen & PKRS Stase RS dan Puskesmas.">
-  <meta name="keywords" content="joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs">
-  <meta property="og:title" content="Joki Borang PIDGI - Partner Tuntas Logbook Dokter Gigi Internsip">
-  <meta property="og:description" content="Tuntaskan ratusan logbook stase RS & Puskesmas tepat waktu dengan format rapi dan bergaransi lolos validasi DP.">
-  <meta property="og:image" content="/img/jokiborang.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <!-- DYNAMIC SSR SEO META TAGS -->
+  <title><%= seo.title %></title>
+  <meta name="description" content="<%= seo.description %>">
+  <meta name="keywords" content="<%= seo.keywords %>">
+  <meta name="author" content="jokiborangpidgi">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="<%= seo.canonicalUrl %>">
+
+  <!-- FAVICON & TOUCH ICONS -->
+  <link rel="icon" type="image/png" href="/img/jokiborang.png">
+  <link rel="shortcut icon" type="image/png" href="/img/jokiborang.png">
+  <link rel="apple-touch-icon" href="/img/jokiborang.png">
+  <meta name="theme-color" content="#070b14">
+  <meta name="msapplication-TileColor" content="#070b14">
+
+  <!-- OPEN GRAPH / FACEBOOK (DYNAMIC SSR) -->
+  <meta property="og:type" content="<%= seo.ogType %>">
+  <meta property="og:url" content="<%= seo.canonicalUrl %>">
+  <meta property="og:title" content="<%= seo.title %>">
+  <meta property="og:description" content="<%= seo.description %>">
+  <meta property="og:image" content="<%= seo.ogImage %>">
+  <meta property="og:image:alt" content="Logo Joki Borang PIDGI">
+  <meta property="og:site_name" content="jokiborangpidgi">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- TWITTER CARDS (DYNAMIC SSR) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="<%= seo.canonicalUrl %>">
+  <meta name="twitter:title" content="<%= seo.title %>">
+  <meta name="twitter:description" content="<%= seo.description %>">
+  <meta name="twitter:image" content="<%= seo.ogImage %>">
+  <meta name="twitter:site" content="@jokiborangpidgi">
+
+  <!-- JSON-LD STRUCTURED DATA / GOOGLE RICH RESULTS SCHEMA (SSR) -->
+  <script type="application/ld+json">
+  <%- JSON.stringify(seo.schemaJson) %>
+  </script>
+
+  <!-- TAILWIND & ASSETS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
   <link rel="stylesheet" href="/css/main.css">
 
   <script>
@@ -36,17 +68,19 @@
 </head>
 <body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white relative">
 
+  <!-- Decorative Mesh Gradients -->
   <div class="mesh-glow mesh-teal w-[600px] h-[600px] top-[-100px] left-[-150px]"></div>
   <div class="mesh-glow mesh-cyan w-[500px] h-[500px] top-[40%] right-[-100px]"></div>
   <div class="mesh-glow mesh-indigo w-[700px] h-[700px] bottom-[10%] left-[10%]"></div>
 
+  <!-- NAVBAR -->
   <nav class="fixed top-0 left-0 w-full z-50 glass-nav">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
-      <a href="#" class="flex items-center gap-3 group">
+      <a href="#" class="flex items-center gap-3 group" title="Beranda Joki Borang PIDGI">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20">
           <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
-            <img src="/img/jokiborang.PNG" alt="Logo jokiborangpidgi" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
+            <img src="/img/jokiborang.png" alt="Logo jokiborangpidgi" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
           </div>
         </div>
         <div class="flex flex-col">
@@ -67,7 +101,7 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 flex items-center gap-2">
+        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 flex items-center gap-2">
           <i class="fab fa-whatsapp text-sm"></i>
           <span>Hubungi Kami</span>
         </a>
@@ -75,6 +109,7 @@
     </div>
   </nav>
 
+  <!-- PAGE 1: HERO SECTION -->
   <section class="relative pt-36 pb-24 md:pt-44 md:pb-32 px-6 z-10">
     <div class="max-w-6xl mx-auto text-center">
       
@@ -125,6 +160,7 @@
     </div>
   </section>
 
+  <!-- PAGE 2: TENTANG JOKI BORANG PIDGI -->
   <section id="tentang" class="py-24 px-6 relative z-10">
     <div class="max-w-6xl mx-auto">
       <div class="glass-panel rounded-3xl p-8 sm:p-14 relative overflow-hidden border border-white/10">
@@ -163,7 +199,7 @@
               <div class="text-center pb-4 border-b border-white/10">
                 <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[2px] mb-3 shadow-lg shadow-cyan-500/30">
                   <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                    <img src="/img/jokiborang.PNG" alt="Profile" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
+                    <img src="/img/jokiborang.png" alt="Profile Joki Borang PIDGI" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
                   </div>
                 </div>
                 <h3 class="font-bold text-white text-base">@jokiborangpidgi</h3>
@@ -176,7 +212,7 @@
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-slate-400">Kecepatan Respon:</span>
-                  <span class="font-semibold text-teal-400">< 15 Menit</span>
+                  <span class="font-semibold text-teal-400">&lt; 15 Menit</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-slate-400">Privasi Akun Portal:</span>
@@ -192,6 +228,7 @@
     </div>
   </section>
 
+  <!-- PAGE 3: MENGAPA MEMILIH JOKIBORANGPIDGI -->
   <section id="keunggulan" class="py-24 px-6 relative z-10 bg-slate-950/40 border-y border-white/5">
     <div class="max-w-6xl mx-auto">
       
@@ -274,6 +311,7 @@
     </div>
   </section>
 
+  <!-- PAGE 4: LAYANAN KAMI -->
   <section id="layanan" class="py-24 px-6 relative z-10">
     <div class="max-w-6xl mx-auto">
       
@@ -291,6 +329,7 @@
 
       <div class="grid lg:grid-cols-2 gap-8">
         
+        <!-- PUSKESMAS -->
         <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-teal-500/30 relative">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-2xl">
@@ -333,6 +372,7 @@
           </div>
         </div>
 
+        <!-- RUMAH SAKIT -->
         <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-cyan-500/30 relative">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl">
@@ -388,6 +428,7 @@
     </div>
   </section>
 
+  <!-- PAGE 5: APA KATA KLIEN KAMI -->
   <section id="testimoni" class="py-24 px-6 relative z-10 bg-slate-950/40 border-y border-white/5">
     <div class="max-w-6xl mx-auto">
       
@@ -470,6 +511,7 @@
     </div>
   </section>
 
+  <!-- PAGE 6: BIAYA JASA / PRICELIST -->
   <section id="biaya" class="py-24 px-6 relative z-10">
     <div class="max-w-6xl mx-auto">
       
@@ -485,6 +527,7 @@
         </p>
       </div>
 
+      <!-- KATEGORI 1: UKP -->
       <div class="mb-14">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
@@ -520,7 +563,7 @@
                 </li>
               </ul>
             </div>
-            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20PKM" target="_blank" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-xs transition duration-200">
+            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20PKM" target="_blank" rel="noopener noreferrer" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-xs transition duration-200">
               Pilih Paket PKM
             </a>
           </div>
@@ -550,7 +593,7 @@
                 </li>
               </ul>
             </div>
-            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20RS" target="_blank" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-xs transition duration-200">
+            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20RS" target="_blank" rel="noopener noreferrer" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-xs transition duration-200">
               Pilih Paket RS
             </a>
           </div>
@@ -565,7 +608,7 @@
               <div class="text-3xl font-black text-white mb-2">
                 Rp 7.000 <span class="text-xs text-slate-400 font-normal">/ kasus</span>
               </div>
-              <div class="text-[11px] text-cyan-300 font-medium mb-6">⚡ Diskon 10% untuk pemesanan > 100 kasus</div>
+              <div class="text-[11px] text-cyan-300 font-medium mb-6">⚡ Diskon 10% untuk pemesanan &gt; 100 kasus</div>
               
               <div class="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 mb-6">
                 <div class="text-xs font-bold text-indigo-300 mb-1">🔥 COMBO FULL 6 BULAN (RS + PKM)</div>
@@ -573,7 +616,7 @@
                 <div class="text-[10px] text-slate-400 mt-1">Solusi tenang tuntas satu masa internsip penuh</div>
               </div>
             </div>
-            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Paket%20Combo%206%20Bulan%20atau%20Express" target="_blank" class="w-full text-center py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-xs shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition duration-200">
+            <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Paket%20Combo%206%20Bulan%20atau%20Express" target="_blank" rel="noopener noreferrer" class="w-full text-center py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-xs shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition duration-200">
               Ambil Paket Combo
             </a>
           </div>
@@ -581,6 +624,7 @@
         </div>
       </div>
 
+      <!-- KATEGORI 2 & 3: UKM & MANAJEMEN/PKRS -->
       <div class="grid md:grid-cols-2 gap-8">
         
         <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-teal-500/30">
@@ -606,7 +650,7 @@
             </div>
           </div>
 
-          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Laporan%20UKM%20Puskesmas" target="_blank" class="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-xs transition duration-200">
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Laporan%20UKM%20Puskesmas" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-xs transition duration-200">
             Order Modul UKM
           </a>
         </div>
@@ -641,7 +685,7 @@
             </div>
           </div>
 
-          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Laporan%20Manajemen%20dan%20PKRS" target="_blank" class="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-xs transition duration-200">
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Laporan%20Manajemen%20dan%20PKRS" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-xs transition duration-200">
             Order Modul PKRS & Manajemen
           </a>
         </div>
@@ -651,6 +695,7 @@
     </div>
   </section>
 
+  <!-- PAGE 7: ADA YANG INGIN DITANYAKAN? (FAQ) -->
   <section id="faq" class="py-24 px-6 relative z-10 bg-slate-950/40 border-t border-white/5">
     <div class="max-w-4xl mx-auto">
       
@@ -733,27 +778,28 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="border-t border-white/10 py-12 px-6 relative z-10 bg-brand-dark">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[1px]">
           <div class="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
-            <img src="/img/jokiborang.PNG" alt="Logo" class="w-full h-full object-cover rounded-[11px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-lg\'>🦷</span>';">
+            <img src="/img/jokiborang.png" alt="Logo jokiborangpidgi" class="w-full h-full object-cover rounded-[11px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-lg\'>🦷</span>';">
           </div>
         </div>
         <span class="font-extrabold text-sm tracking-tight text-white">jokiborangpidgi</span>
       </div>
 
       <div class="text-xs text-slate-400 text-center">
-        © 2026 <strong>@jokiborangpidgi</strong>. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.
+        &copy; <%= currentYear %> <strong>@jokiborangpidgi</strong>. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.
       </div>
 
       <div class="flex items-center gap-4 text-slate-400 text-sm">
-        <a href="https://instagram.com/jokiborangpidgi" target="_blank" class="hover:text-pink-400 transition-colors">
+        <a href="https://instagram.com/jokiborangpidgi" target="_blank" rel="noopener noreferrer" aria-label="Instagram jokiborangpidgi" class="hover:text-pink-400 transition-colors">
           <i class="fab fa-instagram text-lg"></i>
         </a>
-        <a href="https://wa.me/<%= whatsappNumber %>" target="_blank" class="hover:text-emerald-400 transition-colors">
+        <a href="https://wa.me/<%= whatsappNumber %>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Admin" class="hover:text-emerald-400 transition-colors">
           <i class="fab fa-whatsapp text-lg"></i>
         </a>
       </div>
@@ -761,13 +807,15 @@
     </div>
   </footer>
 
+  <!-- FLOATING WHATSAPP -->
   <aside aria-label="Kontak Cepat" class="fixed bottom-6 right-6 z-50">
-    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" class="flex items-center gap-3 px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
+    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
       <i class="fab fa-whatsapp text-lg"></i>
       <span class="hidden sm:inline">Chat Admin Sekarang</span>
     </a>
   </aside>
 
+  <!-- PROTECT DEVTOOLS SCRIPT -->
   <script src="/js/protect-devtools.js"></script>
 
 </body>
