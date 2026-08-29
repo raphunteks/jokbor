@@ -15,7 +15,7 @@ body {
   -webkit-user-select: none;
 }
 
-/* Glassmorphism Components */
+/* Glassmorphism Panel & Cards */
 .glass-panel {
   background: rgba(15, 23, 42, 0.55);
   backdrop-filter: blur(18px);
@@ -40,11 +40,31 @@ body {
   box-shadow: 0 15px 35px rgba(6, 182, 212, 0.15);
 }
 
+/* Glass Navbar */
 .glass-nav {
-  background: rgba(7, 11, 20, 0.75);
+  background: rgba(7, 11, 20, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile & Tablet Glassmorphism Dropdown Menu */
+.glass-mobile-menu {
+  background: rgba(7, 11, 20, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  animation: fadeInDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Glow Gradients Backgrounds */
