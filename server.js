@@ -39,7 +39,7 @@ const SEO_REGISTRY = {
     name: 'Beranda',
     title: 'Joki Borang PIDGI | Solusi Tuntas Logbook Dokter Gigi Internsip',
     description: 'Jasa Joki Input Borang & E-Logbook Dokter Gigi Internsip (PIDGI) Terpercaya. Handle UKP, UKM, Lapsus, Manajemen & PKRS Stase RS dan Puskesmas.',
-    keywords: 'joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs, koding icd 10 gigi, jasa borang dokter gigi, logbook kemenkes pidgi',
+    keywords: 'joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs, kode icd 10 gigi, jasa borang dokter gigi, logbook kemenkes pidgi',
     section: 'home',
     ogType: 'website'
   },
@@ -56,8 +56,8 @@ const SEO_REGISTRY = {
     route: 'keunggulan',
     name: 'Keunggulan',
     title: 'Keunggulan Layanan - Joki Borang PIDGI | Cepat, Rapi & Bergaransi',
-    description: 'Kenapa memilih @jokiborangpidgi? Paham koding ICD-10 gigi, data terenkripsi 100%, opsi pengerjaan kilat 1 hari, dan garansi revisi sampai approval Dokter Pendamping.',
-    keywords: 'keunggulan joki borang pidgi, joki logbook aman, joki borang cepat express, garansi approval dokter pendamping, kerahasiaan data pidgi',
+    description: 'Kenapa memilih @jokiborangpidgi? Paham kode ICD-10 gigi, data terenkripsi 100%, opsi pengerjaan kilat 1 hari, dan garansi revisi sampai approval Dokter Pendamping.',
+    keywords: 'keunggulan joki borang pidgi, joki logbook aman, joki borang cepat express, garansi approval dokter pendamping, kerahasiaan data pidgi, kode icd 10 gigi',
     section: 'keunggulan',
     ogType: 'article'
   },
@@ -83,8 +83,8 @@ const SEO_REGISTRY = {
     route: 'biaya',
     name: 'Daftar Harga',
     title: 'Daftar Harga / Pricelist Joki Borang PIDGI | Mulai 5rb/kasus',
-    description: 'Pricelist transparan jasa borang PIDGI: UKP mulai Rp 5.000/kasus, Paket All-in Bulanan, Laporan UKM 10rb, Slide PKRS, & Paket Hemat Combo 6 Bulan.',
-    keywords: 'harga joki borang pidgi, pricelist joki logbook dokter gigi, paket all in pidgi, jasa buat ppt pkrs, combo 6 bulan pidgi, biaya joki logbook',
+    description: 'Pricelist transparan jasa borang PIDGI: UKP mulai Rp 5.000/kasus, Paket All-in Bulanan, Laporan UKM 10rb, Slide PKRS, Lapsus, & Paket Hemat Combo 6 Bulan.',
+    keywords: 'harga joki borang pidgi, pricelist joki logbook dokter gigi, paket all in pidgi, jasa buat ppt pkrs, lapsus dokter gigi, combo 6 bulan pidgi, biaya joki logbook',
     section: 'biaya',
     ogType: 'product'
   },
@@ -149,7 +149,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
     { name: "FAQ Tanya Jawab", url: `${baseUrl}/faq` }
   ];
 
-  // 3. ItemList / OfferCatalog for Services & Pricing
+  // 3. ItemList / OfferCatalog for Services & Pricing (Updated Pricelist)
   const offerCatalogItems = [
     {
       "@type": "Offer",
@@ -175,21 +175,35 @@ function buildSeoPayload(req, sectionKey = 'home') {
     {
       "@type": "Offer",
       "name": "All-in UKP Stase PKM (1 Bulan)",
-      "price": "1000000",
+      "price": "900000",
       "priceCurrency": "IDR",
       "description": "Paket borongan lengkap input UKP stase Puskesmas selama 1 bulan penuh"
     },
     {
       "@type": "Offer",
+      "name": "All-in UKP Stase PKM (3 Bulan)",
+      "price": "2500000",
+      "priceCurrency": "IDR",
+      "description": "Paket borongan lengkap input UKP stase Puskesmas selama 3 bulan penuh"
+    },
+    {
+      "@type": "Offer",
       "name": "All-in UKP Stase RS (1 Bulan)",
-      "price": "600000",
+      "price": "500000",
       "priceCurrency": "IDR",
       "description": "Paket borongan lengkap input UKP stase Rumah Sakit selama 1 bulan penuh"
     },
     {
       "@type": "Offer",
+      "name": "All-in UKP Stase RS (3 Bulan)",
+      "price": "1800000",
+      "priceCurrency": "IDR",
+      "description": "Paket borongan lengkap input UKP stase Rumah Sakit selama 3 bulan penuh"
+    },
+    {
+      "@type": "Offer",
       "name": "Combo Hemat Full 6 Bulan (RS + PKM)",
-      "price": "5000000",
+      "price": "4000000",
       "priceCurrency": "IDR",
       "description": "Paket tuntas satu masa internsip penuh (3 bulan RS + 3 bulan Puskesmas)"
     },
@@ -202,10 +216,66 @@ function buildSeoPayload(req, sectionKey = 'home') {
     },
     {
       "@type": "Offer",
+      "name": "Laporan Evaluasi UKM PKM",
+      "price": "35000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dokumen laporan evaluasi program Puskesmas"
+    },
+    {
+      "@type": "Offer",
+      "name": "All-in 3 Laporan Evaluasi UKM",
+      "price": "100000",
+      "priceCurrency": "IDR",
+      "description": "Paket hemat penyusunan 3 laporan evaluasi program Puskesmas"
+    },
+    {
+      "@type": "Offer",
+      "name": "PKRS Dokumen Word",
+      "price": "40000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dokumen laporan PKRS format Microsoft Word"
+    },
+    {
+      "@type": "Offer",
+      "name": "PKRS Slide Presentasi PPT",
+      "price": "60000",
+      "priceCurrency": "IDR",
+      "description": "Desain slide presentasi PKRS PowerPoint dari materi Word klien"
+    },
+    {
+      "@type": "Offer",
       "name": "Paket Hemat PKRS (Word + PPT)",
       "price": "100000",
       "priceCurrency": "IDR",
       "description": "Paket komplit dokumen Word dan slide presentasi PPT Promosi Kesehatan Rumah Sakit"
+    },
+    {
+      "@type": "Offer",
+      "name": "Laporan Manajemen RS",
+      "price": "10000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dan input laporan manajemen mutu Rumah Sakit per laporan"
+    },
+    {
+      "@type": "Offer",
+      "name": "Lapsus Dokumen Word (10 Halaman)",
+      "price": "100000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan karya ilmiah laporan kasus stase RS/PKM format Word (10 halaman)"
+    },
+    {
+      "@type": "Offer",
+      "name": "Lapsus Slide Presentasi PPT",
+      "price": "150000",
+      "priceCurrency": "IDR",
+      "description": "Desain slide presentasi Laporan Kasus ilmiah siap monev DP"
+    },
+    {
+      "@type": "Offer",
+      "name": "Paket Hemat Lapsus (Word + PPT)",
+      "price": "200000",
+      "priceCurrency": "IDR",
+      "description": "Paket komplit Laporan Kasus dokumen Word dan slide presentasi PPT"
     }
   ];
 
@@ -255,7 +325,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
       },
       "image": logoUrl,
       "telephone": `+${WHATSAPP_NUMBER}`,
-      "priceRange": "Rp 5.000 - Rp 5.000.000",
+      "priceRange": "Rp 5.000 - Rp 4.000.000",
       "currenciesAccepted": "IDR",
       "paymentAccepted": "Bank Transfer, QRIS, E-Wallet",
       "description": "Jasa Asisten Administrasi & Input Logbook Terpercaya untuk Dokter Gigi Internsip Indonesia (PIDGI). Menangani modul UKP, UKM, Lapsus, Manajemen, dan PKRS.",
@@ -285,7 +355,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
             "name": "drg. F*** A***"
           },
           "datePublished": "2026-01-15",
-          "reviewBody": "Penyelamat hidup banget pas stase PKM! Pasien lagi rame-ramenya di poli dan harus megang UKGS. Format borangnya rapi banget, koding ICD-10 pas, dan DP langsung approve tanpa revisi.",
+          "reviewBody": "Penyelamat hidup banget pas stase PKM! Pasien lagi rame-ramenya di poli dan harus megang UKGS. Format borangnya rapi banget, kode ICD-10 pas, dan DP langsung approve tanpa revisi.",
           "reviewRating": {
             "@type": "Rating",
             "ratingValue": "5"
@@ -311,7 +381,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
             "name": "drg. M*** H***"
           },
           "datePublished": "2026-03-01",
-          "reviewBody": "Saya ambil paket Combo Full 6 Bulan (RS + PKM). PPT PKRS sama evaluasi UKM-nya keren banget desainnya. Jadi bisa fokus belajar kasus tanpa stres mikirin ketikan borang.",
+          "reviewBody": "Saya ambil paket Combo Full 6 Bulan (RS + PKM). PPT PKRS, lapsus, sama evaluasi UKM-nya keren banget desainnya. Jadi bisa fokus belajar kasus tanpa stres mikirin ketikan borang.",
           "reviewRating": {
             "@type": "Rating",
             "ratingValue": "5"
