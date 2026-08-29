@@ -95,7 +95,7 @@
   <nav class="fixed top-0 left-0 w-full z-50 glass-nav">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
-      <!-- Brand Logo Links to Clean Root -->
+      <!-- Brand Logo -->
       <a href="/" class="flex items-center gap-3 group" title="Beranda Joki Borang PIDGI">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20">
           <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
@@ -110,7 +110,7 @@
         </div>
       </a>
 
-      <!-- Desktop Links (Hidden on Mobile/Tablet) -->
+      <!-- Desktop Links -->
       <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
         <a href="/tentang" class="<%= currentSection === 'tentang' ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1' : 'text-slate-300 hover:text-cyan-400 transition-colors' %>">Tentang</a>
         <a href="/keunggulan" class="<%= currentSection === 'keunggulan' ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1' : 'text-slate-300 hover:text-cyan-400 transition-colors' %>">Keunggulan</a>
@@ -120,14 +120,14 @@
         <a href="/faq" class="<%= currentSection === 'faq' ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1' : 'text-slate-300 hover:text-cyan-400 transition-colors' %>">FAQ</a>
       </div>
 
-      <!-- Action & Mobile 3-Dots Button Container -->
+      <!-- Action & Mobile Button -->
       <div class="flex items-center gap-3">
         <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="hidden sm:flex px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
           <i class="fab fa-whatsapp text-sm"></i>
           <span>Hubungi Kami</span>
         </a>
 
-        <!-- Mobile & Tablet 3-Dots Navigation Trigger Button -->
+        <!-- Mobile 3-Dots Trigger -->
         <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" aria-expanded="false" class="lg:hidden w-11 h-11 rounded-2xl glass-card flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 active:scale-95 transition duration-200 focus:outline-none shadow-lg shadow-cyan-500/10">
           <i id="menuIcon" class="fas fa-ellipsis-vertical text-xl transition-transform duration-300"></i>
         </button>
@@ -135,7 +135,7 @@
 
     </div>
 
-    <!-- Mobile & Tablet Responsive Glassmorphism Dropdown Menu -->
+    <!-- Mobile Dropdown Menu -->
     <div id="mobileMenu" class="hidden lg:hidden glass-mobile-menu border-b border-white/10 px-6 py-6 transition-all duration-300 shadow-2xl">
       <div class="flex flex-col gap-2.5 text-sm font-medium">
         <a href="/tentang" class="flex items-center justify-between px-4 py-3 rounded-xl transition duration-200 <%= currentSection === 'tentang' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-bold' : 'text-slate-300 hover:bg-white/5 hover:text-cyan-400' %>">
@@ -162,8 +162,6 @@
           <span>FAQ Tanya Jawab</span>
           <i class="fas fa-chevron-right text-xs opacity-50"></i>
         </a>
-
-        <!-- Mobile CTA Button inside Menu -->
         <div class="pt-3 mt-2 border-t border-white/10 sm:hidden">
           <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
             <i class="fab fa-whatsapp text-base"></i>
@@ -191,7 +189,7 @@
       </h1>
 
       <p class="text-slate-300 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-normal">
-        Solusi terpercaya pengisian e-logbook harian, stase Puskesmas, dan Rumah Sakit. Dari koding UKP, laporan UKM lapangan, hingga penyusunan PKRS & Laporan Kasus tuntas tanpa pusing.
+        Solusi terpercaya pengisian e-logbook harian, stase Puskesmas, dan Rumah Sakit. Dari Kode ICD-10 UKP, laporan UKM lapangan, hingga penyusunan PKRS & Laporan Kasus tuntas tanpa pusing.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -231,7 +229,6 @@
       <div class="glass-panel rounded-3xl p-8 sm:p-14 relative overflow-hidden border border-white/10">
         
         <div class="grid lg:grid-cols-12 gap-10 items-center">
-          
           <div class="lg:col-span-7">
             <span class="inline-block px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-xs uppercase tracking-wider mb-4">
               Tentang Layanan Kami
@@ -245,7 +242,6 @@
             <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
               Kami menyadari padatnya jadwal pelayanan poli gigi, ekstraksi serial, jaga instalasi gawat darurat, hingga kegiatan lapangan UKGS/UKGMD yang menyita tenaga dan waktu istirahat Anda. Kami hadir mendampingi beban administratif Anda dengan pengerjaan logbook yang terstruktur, akurat, dan sesuai pedoman resmi Kemenkes.
             </p>
-            
             <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-300">
               <div class="flex items-center gap-2 bg-white/5 px-3.5 py-2 rounded-xl border border-white/10">
                 <i class="fas fa-check-circle text-teal-400"></i> Standar SOAP Klinis
@@ -258,7 +254,6 @@
               </div>
             </div>
           </div>
-
           <div class="lg:col-span-5 flex justify-center">
             <div class="w-full max-w-sm rounded-3xl p-6 glass-card border-cyan-500/30 relative">
               <div class="text-center pb-4 border-b border-white/10">
@@ -286,7 +281,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
       </div>
@@ -296,7 +290,6 @@
   <!-- PAGE 3: MENGAPA MEMILIH JOKIBORANGPIDGI -->
   <section id="keunggulan" class="py-24 px-6 relative z-10 bg-slate-950/40 border-y border-white/5">
     <div class="max-w-6xl mx-auto">
-      
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-bold text-xs uppercase tracking-wider">
           Keunggulan Utama
@@ -310,7 +303,6 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        
         <div class="glass-card p-8 rounded-3xl">
           <div class="w-14 h-14 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
             <i class="fas fa-tooth"></i>
@@ -320,7 +312,6 @@
             Tidak asal ketik. Kami memahami terminologi odontologi, penulisan status lokalis, prosedur konservasi, bedah mulut, serta kode ICD-10 gigi yang valid.
           </p>
         </div>
-
         <div class="glass-card p-8 rounded-3xl">
           <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
             <i class="fas fa-user-shield"></i>
@@ -330,7 +321,6 @@
             Privasi akun e-Logbook, nama wahana, nomor registrasi pasien, dan identitas dokter internsip dijamin aman dengan protokol pembersihan data berkala.
           </p>
         </div>
-
         <div class="glass-card p-8 rounded-3xl">
           <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
             <i class="fas fa-bolt"></i>
@@ -340,7 +330,6 @@
             Komitmen deadline ketat. Tersedia opsi Reguler (3-5 hari) hingga layanan Express (1x24 jam) saat menghadapi batas akhir monev bulanan.
           </p>
         </div>
-
         <div class="glass-card p-8 rounded-3xl">
           <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
             <i class="fas fa-clipboard-check"></i>
@@ -350,7 +339,6 @@
             Penyusunan format SOAP, kegiatan promkes, dan laporan evaluasi telah disesuaikan agar mudah diverifikasi dan disetujui Dokter Pendamping.
           </p>
         </div>
-
         <div class="glass-card p-8 rounded-3xl">
           <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
             <i class="fas fa-tags"></i>
@@ -360,7 +348,6 @@
             Tersedia skema per kasus, paket mingguan, bulanan, hingga paket combo 6 bulan all-in dengan transparansi harga tanpa biaya tersembunyi.
           </p>
         </div>
-
         <div class="glass-card p-8 rounded-3xl">
           <div class="w-14 h-14 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-2xl mb-6 shadow-inner">
             <i class="fas fa-headset"></i>
@@ -370,16 +357,13 @@
             Komunikasi mudah melalui WhatsApp langsung dengan admin yang mengerti alur sistem internsip dokter gigi di berbagai wahana Indonesia.
           </p>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- PAGE 4: LAYANAN KAMI -->
   <section id="layanan" class="py-24 px-6 relative z-10">
     <div class="max-w-6xl mx-auto">
-      
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-xs uppercase tracking-wider">
           Modul & Cakupan
@@ -393,7 +377,6 @@
       </div>
 
       <div class="grid lg:grid-cols-2 gap-8">
-        
         <!-- PUSKESMAS -->
         <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-teal-500/30 relative">
           <div class="flex items-center gap-4 mb-6">
@@ -405,11 +388,9 @@
               <p class="text-xs text-teal-300 font-medium">Poli Gigi, Posyandu, & Pelayanan Masyarakat</p>
             </div>
           </div>
-
           <p class="text-slate-300 text-sm leading-relaxed mb-6">
             Pengelolaan menyeluruh untuk pemenuhan kuota tindakan di poli gigi puskesmas serta pelaporan kegiatan terpadu lintas sektor.
           </p>
-
           <div class="space-y-4">
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold mt-0.5">1</span>
@@ -418,7 +399,6 @@
                 <p class="text-xs text-slate-400 mt-1">Input logbook kasus harian poli: ekstraksi, tumpatan (GIC/Komposit), scalling, premedikasi, serta edukasi pasien (KIE).</p>
               </div>
             </div>
-
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
               <div>
@@ -426,7 +406,6 @@
                 <p class="text-xs text-slate-400 mt-1">Penyusunan laporan Promkes lapangan, program UKGS di sekolah, penyuluhan posyandu, dan laporan evaluasi program puskesmas.</p>
               </div>
             </div>
-
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
               <div>
@@ -448,11 +427,9 @@
               <p class="text-xs text-cyan-300 font-medium">Poli Spesialis, IGD, Manajemen & Penunjang</p>
             </div>
           </div>
-
           <p class="text-slate-300 text-sm leading-relaxed mb-6">
             Penyusunan administrasi klinis rumah sakit terintegrasi, laporan divisi manajemen mutu pelayanan, serta presentasi edukasi pasien.
           </p>
-
           <div class="space-y-4">
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">1</span>
@@ -461,7 +438,6 @@
                 <p class="text-xs text-slate-400 mt-1">Input kasus poli gigi RS, asistensi tindakan bedah minor (odontektomi/alveolektomi), serta penanganan kasus kegawatdaruratan gigi di IGD.</p>
               </div>
             </div>
-
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
               <div>
@@ -469,7 +445,6 @@
                 <p class="text-xs text-slate-400 mt-1">Kegiatan edukasi dan penyuluhan kesehatan gigi untuk pasien rawat jalan / keluarga penunggu pasien di area Rumah Sakit.</p>
               </div>
             </div>
-
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
               <div>
@@ -477,7 +452,6 @@
                 <p class="text-xs text-slate-400 mt-1">Laporan manajemen RS, serta pembuatan dokumen Word & Slide Presentasi PPT Promosi Kesehatan Rumah Sakit (PKRS).</p>
               </div>
             </div>
-
             <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
               <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold mt-0.5">4</span>
               <div>
@@ -489,13 +463,12 @@
         </div>
 
       </div>
-
     </div>
   </section>
 
   <!-- PAGE 5: APA KATA KLIEN KAMI (SEAMLESS INFINITE HORIZONTAL MARQUEE) -->
   <section id="testimoni" class="py-24 px-0 relative z-10 bg-slate-950/40 border-y border-white/5 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-6 mb-16 text-center">
+    <div class="max-w-6xl mx-auto px-6 mb-12 text-center">
       <span class="px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs uppercase tracking-wider">
         Ulasan Rekan Sejawat
       </span>
@@ -508,250 +481,205 @@
     </div>
 
     <!-- MARQUEE ROW 1: Running Left -->
-    <div class="marquee-wrapper mb-6">
+    <div class="marquee-wrapper">
       <div class="marquee-track">
-        
-        <!-- Review 1 -->
+        <!-- GROUP 1 (Items 1-9) -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Pelayanan luar biasa cepat dan sangat teliti. Format SOAP & tindakan poli bedah minor di RSAD langsung diverifikasi DP tanpa ada catatan revisi. Sangat recommended!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Pelayanan luar biasa cepat dan teliti. Format SOAP & tindakan poli bedah minor di RSAD langsung diverifikasi DP tanpa ada catatan revisi. Sangat recommended!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">RD</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ro*** De*****</div>
-              <div class="text-[10px] text-slate-400">RSAD TK IV dr. R. Ismoyo Kendari</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ro*** De*****</div><div class="text-[10px] text-slate-400">RSAD TK IV dr. R. Ismoyo Kendari</div></div>
           </div>
         </div>
 
-        <!-- Review 2 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Beban stase RS yang padat jadi jauh lebih ringan. Penginputan kasus UKP RS dan slide PPT PKRS-nya sangat rapi dan estetik. Komunikasi admin juga super ramah."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Beban stase RS yang padat jadi jauh lebih ringan. Penginputan kasus UKP RS dan slide PPT PKRS-nya sangat rapi dan estetik. Komunikasi admin juga super ramah."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">US</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ul**** Sy*****</div>
-              <div class="text-[10px] text-slate-400">RSUD Kota Kendari</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ul**** Sy*****</div><div class="text-[10px] text-slate-400">RSUD Kota Kendari</div></div>
           </div>
         </div>
 
-        <!-- Review 3 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Laporan UKGS dan penyuluhan UKM Puskesmas tersusun sistematis sesuai indikator Kemenkes. Sangat membantu di tengah kesibukan pelayanan harian poli."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Laporan UKGS dan penyuluhan UKM Puskesmas tersusun sistematis sesuai indikator Kemenkes. Sangat membantu di tengah kesibukan pelayanan harian poli."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">NK</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Nu*** Kh****</div>
-              <div class="text-[10px] text-slate-400">PKM Lepo-Lepo</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Nu*** Kh****</div><div class="text-[10px] text-slate-400">PKM Lepo-Lepo</div></div>
           </div>
         </div>
 
-        <!-- Review 4 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Pengerjaan kilat dan akurasi Kode ICD-10 gigi sangat tepat. Admin fast response dan data akun portal beneran terjaga kerahasiaannya 100%."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Pengerjaan kilat dan akurasi Kode ICD-10 gigi sangat tepat. Admin fast response dan data akun portal beneran terjaga kerahasiaannya 100%."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">MT</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Mu***** Th***</div>
-              <div class="text-[10px] text-slate-400">PKM Perumnas</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Mu***** Th***</div><div class="text-[10px] text-slate-400">PKM Perumnas</div></div>
           </div>
         </div>
 
-        <!-- Review 5 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Penyusunan Lapsus dan laporan manajemen RS sangat terstruktur ilmiah dengan referensi jurnal terbaru. Dokter pendamping langsung approve sekali asistensi."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Penyusunan Lapsus dan laporan manajemen RS sangat terstruktur ilmiah dengan referensi jurnal terbaru. Dokter pendamping langsung approve sekali asistensi."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">NA</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Nur*** Ar****</div>
-              <div class="text-[10px] text-slate-400">RSU Sayang Rakyat</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Nur*** Ar****</div><div class="text-[10px] text-slate-400">RSU Sayang Rakyat</div></div>
           </div>
         </div>
 
-        <!-- Review 6 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Paket All-in stase Puskesmas bener-bener penyelamat waktu monev. Rekap ratusan kasus UKP rapi dan selesai sebelum deadline. Terima kasih banyak min!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Paket All-in stase Puskesmas bener-bener penyelamat waktu monev. Rekap ratusan kasus UKP rapi dan selesai sebelum deadline. Terima kasih banyak min!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">LJ</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. L** J****</div>
-              <div class="text-[10px] text-slate-400">PKM Kaluku Bodoa</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. L** J****</div><div class="text-[10px] text-slate-400">PKM Kaluku Bodoa</div></div>
           </div>
         </div>
 
-        <!-- Review 7 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Format borang dan evaluasi program UKM rapi banget. Timnya paham betul alur administrasi PIDGI jadi nggak perlu jelasin berulang-ulang."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Format borang dan evaluasi program UKM rapi banget. Timnya paham betul alur administrasi PIDGI jadi nggak perlu jelasin berulang-ulang."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">AI</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ai** In***</div>
-              <div class="text-[10px] text-slate-400">PKM Sudiang</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ai** In***</div><div class="text-[10px] text-slate-400">PKM Sudiang</div></div>
           </div>
         </div>
 
-        <!-- Review 8 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Penyusunan PPT PKRS dan laporan kasus spesialistiknya sangat memuaskan. Desain visualnya profesional dan siap dipresentasikan di hadapan DP."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Penyusunan PPT PKRS dan laporan kasus spesialistiknya sangat memuaskan. Desain visualnya profesional dan siap dipresentasikan di hadapan DP."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">AP</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. An*** Pr****</div>
-              <div class="text-[10px] text-slate-400">RSUD Labuang Baji Makassar</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. An*** Pr****</div><div class="text-[10px] text-slate-400">RSUD Labuang Baji Makassar</div></div>
           </div>
         </div>
 
-        <!-- Review 9 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Admin sangat amanah dan solutif. Pengerjaan paket 1 bulan UKP PKM selesai lebih cepat dari estimasi. Benar-benar partner terbaik selama internsip."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Admin sangat amanah dan solutif. Pengerjaan paket 1 bulan UKP PKM selesai lebih cepat dari estimasi. Benar-benar partner terbaik selama internsip."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">DR</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Di** Re*****</div>
-              <div class="text-[10px] text-slate-400">PKM Antang Perumnas Makassar</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Di** Re*****</div><div class="text-[10px] text-slate-400">PKM Antang Perumnas</div></div>
           </div>
         </div>
 
-        <!-- DUPLICATE SET 1 FOR SEAMLESS LOOP -->
+        <!-- DUPLICATE GROUP 1 (Items 1-9 for Seamless Loop) -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Pelayanan luar biasa cepat dan sangat teliti. Format SOAP & tindakan poli bedah minor di RSAD langsung diverifikasi DP tanpa ada catatan revisi. Sangat recommended!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Pelayanan luar biasa cepat dan teliti. Format SOAP & tindakan poli bedah minor di RSAD langsung diverifikasi DP tanpa ada catatan revisi. Sangat recommended!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">RD</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ro*** De*****</div>
-              <div class="text-[10px] text-slate-400">RSAD TK IV dr. R. Ismoyo Kendari</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ro*** De*****</div><div class="text-[10px] text-slate-400">RSAD TK IV dr. R. Ismoyo Kendari</div></div>
           </div>
         </div>
 
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Beban stase RS yang padat jadi jauh lebih ringan. Penginputan kasus UKP RS dan slide PPT PKRS-nya sangat rapi dan estetik. Komunikasi admin juga super ramah."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Beban stase RS yang padat jadi jauh lebih ringan. Penginputan kasus UKP RS dan slide PPT PKRS-nya sangat rapi dan estetik. Komunikasi admin juga super ramah."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">US</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ul**** Sy*****</div>
-              <div class="text-[10px] text-slate-400">RSUD Kota Kendari</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ul**** Sy*****</div><div class="text-[10px] text-slate-400">RSUD Kota Kendari</div></div>
           </div>
         </div>
 
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Laporan UKGS dan penyuluhan UKM Puskesmas tersusun sistematis sesuai indikator Kemenkes. Sangat membantu di tengah kesibukan pelayanan harian poli."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Laporan UKGS dan penyuluhan UKM Puskesmas tersusun sistematis sesuai indikator Kemenkes. Sangat membantu di tengah kesibukan pelayanan harian poli."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">NK</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Nu*** Kh****</div>
-              <div class="text-[10px] text-slate-400">PKM Lepo-Lepo</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Nu*** Kh****</div><div class="text-[10px] text-slate-400">PKM Lepo-Lepo</div></div>
           </div>
         </div>
 
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Pengerjaan kilat dan akurasi Kode ICD-10 gigi sangat tepat. Admin fast response dan data akun portal beneran terjaga kerahasiaannya 100%."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Pengerjaan kilat dan akurasi Kode ICD-10 gigi sangat tepat. Admin fast response dan data akun portal beneran terjaga kerahasiaannya 100%."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">MT</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Mu***** Th***</div>
-              <div class="text-[10px] text-slate-400">PKM Perumnas</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Mu***** Th***</div><div class="text-[10px] text-slate-400">PKM Perumnas</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Penyusunan Lapsus dan laporan manajemen RS sangat terstruktur ilmiah dengan referensi jurnal terbaru. Dokter pendamping langsung approve sekali asistensi."</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">NA</div>
+            <div><div class="font-bold text-xs text-white">drg. Nur*** Ar****</div><div class="text-[10px] text-slate-400">RSU Sayang Rakyat</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Paket All-in stase Puskesmas bener-bener penyelamat waktu monev. Rekap ratusan kasus UKP rapi dan selesai sebelum deadline. Terima kasih banyak min!"</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">LJ</div>
+            <div><div class="font-bold text-xs text-white">drg. L** J****</div><div class="text-[10px] text-slate-400">PKM Kaluku Bodoa</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Format borang dan evaluasi program UKM rapi banget. Timnya paham betul alur administrasi PIDGI jadi nggak perlu jelasin berulang-ulang."</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">AI</div>
+            <div><div class="font-bold text-xs text-white">drg. Ai** In***</div><div class="text-[10px] text-slate-400">PKM Sudiang</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Penyusunan PPT PKRS dan laporan kasus spesialistiknya sangat memuaskan. Desain visualnya profesional dan siap dipresentasikan di hadapan DP."</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">AP</div>
+            <div><div class="font-bold text-xs text-white">drg. An*** Pr****</div><div class="text-[10px] text-slate-400">RSUD Labuang Baji Makassar</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Admin sangat amanah dan solutif. Pengerjaan paket 1 bulan UKP PKM selesai lebih cepat dari estimasi. Benar-benar partner terbaik selama internsip."</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">DR</div>
+            <div><div class="font-bold text-xs text-white">drg. Di** Re*****</div><div class="text-[10px] text-slate-400">PKM Antang Perumnas</div></div>
           </div>
         </div>
 
@@ -759,237 +687,189 @@
     </div>
 
     <!-- MARQUEE ROW 2: Running Right (Reverse) -->
-    <div class="marquee-wrapper">
+    <div class="marquee-wrapper mt-6">
       <div class="marquee-track-reverse">
         
-        <!-- Review 10 -->
+        <!-- GROUP 2 (Items 10-17) -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Kualitas penulisan laporan kasus (Lapsus) luar biasa bagus dan komprehensif. Data pasien dan kredensial akun aman terpercaya."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Kualitas penulisan laporan kasus (Lapsus) luar biasa bagus dan komprehensif. Data pasien dan kredensial akun aman terpercaya."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">FH</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Fa*** Ha****</div>
-              <div class="text-[10px] text-slate-400">RSUD Bahteramas Sultra</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Fa*** Ha****</div><div class="text-[10px] text-slate-400">RSUD Bahteramas Sultra</div></div>
           </div>
         </div>
 
-        <!-- Review 11 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Sangat terbantu untuk pemenuhan target kasus UKP harian. Kode diagnosis dan status lokalis gigi diisi dengan sangat teliti."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Sangat terbantu untuk pemenuhan target kasus UKP harian. Kode diagnosis dan status lokalis gigi diisi dengan sangat teliti dan detail."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">GF</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Gh*** Fa****</div>
-              <div class="text-[10px] text-slate-400">PKM Batua Makassar</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Gh*** Fa****</div><div class="text-[10px] text-slate-400">PKM Batua Makassar</div></div>
           </div>
         </div>
 
-        <!-- Review 12 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Pernah order paket kilat 1 hari saat H-1 monev stase RS, hasilnya langsung tuntas dan diverifikasi tanpa kendala. Profesionalitasnya jempolan!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Pernah order paket kilat 1 hari saat H-1 monev stase RS, hasilnya langsung tuntas dan diverifikasi tanpa kendala. Profesionalitasnya jempolan!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">HN</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ha*** Nu*****</div>
-              <div class="text-[10px] text-slate-400">RSUD Tenriawaru Bone</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ha*** Nu*****</div><div class="text-[10px] text-slate-400">RSUD Tenriawaru Bone</div></div>
           </div>
         </div>
 
-        <!-- Review 13 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Laporan evaluasi UKM dan penyuluhan Promkes dikerjakan sangat terstruktur. Harga transparan dan sangat terjangkau untuk dokship."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Laporan evaluasi UKM dan penyuluhan Promkes dikerjakan sangat terstruktur. Harga transparan dan sangat terjangkau untuk dokship."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">IM</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Il*** Ma*****</div>
-              <div class="text-[10px] text-slate-400">PKM Somba Opu Gowa</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Il*** Ma*****</div><div class="text-[10px] text-slate-400">PKM Somba Opu Gowa</div></div>
           </div>
         </div>
 
-        <!-- Review 14 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Ambil Combo Full 6 Bulan (RS + PKM), beneran bikin masa internsip lebih tenang dan bisa fokus belajar klinis dengan pasien. Worth it banget!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Ambil Combo Full 6 Bulan (RS + PKM), beneran bikin masa internsip lebih tenang dan bisa fokus belajar klinis dengan pasien. Worth it banget!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">KW</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ke*** Wi*****</div>
-              <div class="text-[10px] text-slate-400">RSUD Dr. M. Haulussy Ambon</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ke*** Wi*****</div><div class="text-[10px] text-slate-400">RSUD Dr. M. Haulussy Ambon</div></div>
           </div>
         </div>
 
-        <!-- Review 15 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Format borang sesuai standar buku pedoman Kemenkes terbaru. DP langsung tanda tangan verifikasi mingguan tanpa revisi sama sekali."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Format borang sesuai standar buku pedoman Kemenkes terbaru. DP langsung tanda tangan verifikasi mingguan tanpa revisi sama sekali."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">MA</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Me*** An****</div>
-              <div class="text-[10px] text-slate-400">PKM Kassi-Kassi Makassar</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Me*** An****</div><div class="text-[10px] text-slate-400">PKM Kassi-Kassi Makassar</div></div>
           </div>
         </div>
 
-        <!-- Review 16 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Penulisan tinjauan pustaka dan pembahasan Lapsus bedah mulut sangat tajam dengan sitasi jurnal internasional. Sangat berkelas!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Penulisan tinjauan pustaka dan pembahasan Lapsus bedah mulut sangat tajam dengan sitasi jurnal internasional. Sangat berkelas!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">RY</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Re*** Yu****</div>
-              <div class="text-[10px] text-slate-400">RSUP Dr. Wahidin Sudirohusodo</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Re*** Yu****</div><div class="text-[10px] text-slate-400">RSUP Dr. Wahidin Sudirohusodo</div></div>
           </div>
         </div>
 
-        <!-- Review 17 -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Respon admin sangat cepat dan ramah, pengerjaan borang UKP harian rapi dan tepat waktu. Rekomendasi utama buat teman-teman PIDGI."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Respon admin sangat cepat dan ramah, pengerjaan borang UKP harian rapi dan tepat waktu. Rekomendasi utama buat teman-teman PIDGI."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">TN</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ta*** Nu*****</div>
-              <div class="text-[10px] text-slate-400">PKM Mandai Maros</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ta*** Nu*****</div><div class="text-[10px] text-slate-400">PKM Mandai Maros</div></div>
           </div>
         </div>
 
-        <!-- DUPLICATE SET 2 FOR SEAMLESS LOOP -->
+        <!-- DUPLICATE GROUP 2 (Items 10-17 for Seamless Loop) -->
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Kualitas penulisan laporan kasus (Lapsus) luar biasa bagus dan komprehensif. Data pasien dan kredensial akun aman terpercaya."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Kualitas penulisan laporan kasus (Lapsus) luar biasa bagus dan komprehensif. Data pasien dan kredensial akun aman terpercaya."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">FH</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Fa*** Ha****</div>
-              <div class="text-[10px] text-slate-400">RSUD Bahteramas Sultra</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Fa*** Ha****</div><div class="text-[10px] text-slate-400">RSUD Bahteramas Sultra</div></div>
           </div>
         </div>
 
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Sangat terbantu untuk pemenuhan target kasus UKP harian. Kode diagnosis dan status lokalis gigi diisi dengan sangat teliti."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Sangat terbantu untuk pemenuhan target kasus UKP harian. Kode diagnosis dan status lokalis gigi diisi dengan sangat teliti dan detail."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">GF</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Gh*** Fa****</div>
-              <div class="text-[10px] text-slate-400">PKM Batua Makassar</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Gh*** Fa****</div><div class="text-[10px] text-slate-400">PKM Batua Makassar</div></div>
           </div>
         </div>
 
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Pernah order paket kilat 1 hari saat H-1 monev stase RS, hasilnya langsung tuntas dan diverifikasi tanpa kendala. Profesionalitasnya jempolan!"
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Pernah order paket kilat 1 hari saat H-1 monev stase RS, hasilnya langsung tuntas dan diverifikasi tanpa kendala. Profesionalitasnya jempolan!"</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">HN</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Ha*** Nu*****</div>
-              <div class="text-[10px] text-slate-400">RSUD Tenriawaru Bone</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Ha*** Nu*****</div><div class="text-[10px] text-slate-400">RSUD Tenriawaru Bone</div></div>
           </div>
         </div>
 
         <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
           <div>
-            <div class="text-amber-400 text-xs mb-3 flex gap-1">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">
-              "Laporan evaluasi UKM dan penyuluhan Promkes dikerjakan sangat terstruktur. Harga transparan dan sangat terjangkau untuk dokship."
-            </p>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Laporan evaluasi UKM dan penyuluhan Promkes dikerjakan sangat terstruktur. Harga transparan dan sangat terjangkau untuk dokship."</p>
           </div>
           <div class="flex items-center gap-3 pt-3 border-t border-white/10">
             <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">IM</div>
-            <div>
-              <div class="font-bold text-xs text-white">drg. Il*** Ma*****</div>
-              <div class="text-[10px] text-slate-400">PKM Somba Opu Gowa</div>
-            </div>
+            <div><div class="font-bold text-xs text-white">drg. Il*** Ma*****</div><div class="text-[10px] text-slate-400">PKM Somba Opu Gowa</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Ambil Combo Full 6 Bulan (RS + PKM), beneran bikin masa internsip lebih tenang dan bisa fokus belajar klinis dengan pasien. Worth it banget!"</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">KW</div>
+            <div><div class="font-bold text-xs text-white">drg. Ke*** Wi*****</div><div class="text-[10px] text-slate-400">RSUD Dr. M. Haulussy Ambon</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Format borang sesuai standar buku pedoman Kemenkes terbaru. DP langsung tanda tangan verifikasi mingguan tanpa revisi sama sekali."</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs">MA</div>
+            <div><div class="font-bold text-xs text-white">drg. Me*** An****</div><div class="text-[10px] text-slate-400">PKM Kassi-Kassi Makassar</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Penulisan tinjauan pustaka dan pembahasan Lapsus bedah mulut sangat tajam dengan sitasi jurnal internasional. Sangat berkelas!"</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-xs">RY</div>
+            <div><div class="font-bold text-xs text-white">drg. Re*** Yu****</div><div class="text-[10px] text-slate-400">RSUP Dr. Wahidin Sudirohusodo</div></div>
+          </div>
+        </div>
+
+        <div class="review-card glass-card p-6 rounded-3xl flex flex-col justify-between" aria-hidden="true">
+          <div>
+            <div class="text-amber-400 text-xs mb-3 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="text-slate-300 text-xs italic leading-relaxed mb-4">"Respon admin sangat cepat dan ramah, pengerjaan borang UKP harian rapi dan tepat waktu. Rekomendasi utama buat teman-teman PIDGI."</p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">TN</div>
+            <div><div class="font-bold text-xs text-white">drg. Ta*** Nu*****</div><div class="text-[10px] text-slate-400">PKM Mandai Maros</div></div>
           </div>
         </div>
 
       </div>
     </div>
-
   </section>
 
   <!-- PAGE 6: BIAYA JASA / PRICELIST -->
