@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.render('index', {
     pageTitle: 'Joki Borang PIDGI | Solusi Tuntas Logbook Dokter Gigi Internsip',
-    whatsappNumber: '628XXXXXXXXXX' // Ganti dengan nomor WhatsApp admin asli
+    whatsappNumber: '6285338922586' // Ganti dengan nomor WhatsApp admin asli
   });
 });
 
