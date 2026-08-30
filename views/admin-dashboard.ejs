@@ -26,6 +26,78 @@
       }
     }
   </script>
+
+  <style>
+    /* Admin Specific Styling */
+    .admin-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 0.6rem 0.875rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .admin-input:focus {
+      outline: none;
+      border-color: #06b6d4;
+      box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+    }
+    .array-item-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .array-item-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .delete-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.2);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-center: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .delete-btn:hover {
+      background: #f43f5e;
+      color: white;
+    }
+    .add-btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px dashed rgba(6, 182, 212, 0.4);
+      border-radius: 0.75rem;
+      color: #06b6d4;
+      background: rgba(6, 182, 212, 0.05);
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .add-btn:hover {
+      background: rgba(6, 182, 212, 0.1);
+      border-style: solid;
+    }
+  </style>
 </head>
 <body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
 
@@ -66,7 +138,7 @@
       </button>
 
       <button type="button" onclick="switchTab('keunggulan')" id="tab-keunggulan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-star w-5 text-center"></i> <span>3. Keunggulan</span>
+        <i class="fas fa-star w-5 text-center"></i> <span>3. Keunggulan (CRUD)</span>
       </button>
 
       <button type="button" onclick="switchTab('layanan')" id="tab-layanan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
@@ -74,15 +146,15 @@
       </button>
 
       <button type="button" onclick="switchTab('testimoni')" id="tab-testimoni" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-comments w-5 text-center"></i> <span>5. Testimoni</span>
+        <i class="fas fa-comments w-5 text-center"></i> <span>5. Testimoni (CRUD)</span>
       </button>
 
       <button type="button" onclick="switchTab('pricelist')" id="tab-pricelist" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-tags w-5 text-center"></i> <span>6. Pricelist</span>
+        <i class="fas fa-tags w-5 text-center"></i> <span>6. Pricelist (CRUD)</span>
       </button>
 
       <button type="button" onclick="switchTab('faq')" id="tab-faq" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-question-circle w-5 text-center"></i> <span>7. FAQ</span>
+        <i class="fas fa-question-circle w-5 text-center"></i> <span>7. FAQ (CRUD)</span>
       </button>
     </nav>
 
@@ -97,7 +169,7 @@
   </aside>
 
   <main class="flex-1 p-4 sm:p-6 md:p-10 overflow-y-auto relative z-10 w-full">
-    <div class="max-w-4xl mx-auto space-y-6">
+    <div class="max-w-5xl mx-auto space-y-6">
       
       <div class="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-white/10">
         <div>
@@ -105,7 +177,7 @@
             <span>Management Content Studio</span>
           </h2>
           <p class="text-slate-400 text-xs mt-1">
-            Sunting teks bagian mana saja, lalu klik simpan untuk langsung update ke database Redis.
+            Sunting teks statis dan kelola daftar item (CRUD), lalu klik simpan untuk update realtime ke database Redis.
           </p>
         </div>
 
@@ -124,198 +196,227 @@
       </div>
 
       <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 relative">
-        <form id="editorForm" onsubmit="return false;" class="space-y-6">
+        <form id="editorForm" onsubmit="return false;">
           
           <div id="form-hero" class="tab-content block space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
-                <i class="fas fa-home"></i> <span>Hero Section (Halaman Depan Utamanya)</span>
+                <i class="fas fa-home"></i> <span>Hero Section (Halaman Depan Utama)</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur badge promosi, headline utama, dan paragraf pembuka di bagian paling atas.</p>
             </div>
 
             <div class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Promosi (Teks Kecil Atas Header)</label>
-                <input type="text" id="hero-badge" class="admin-input" placeholder="Contoh: Jasa Administrasi & Input Logbook PIDGI No. 1 di Indonesia">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Promosi (Teks Kecil Atas)</label>
+                <input type="text" id="hero_badge" data-path="hero.badge" class="admin-input">
               </div>
-
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-2">Headline Utama (Baris Atas Teks Putih)</label>
-                  <input type="text" id="hero-titleMain" class="admin-input" placeholder="Contoh: Fokus Tangani Pasien,">
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Headline Utama (Baris Atas Teks Putih)</label>
+                  <input type="text" id="hero_titleMain" data-path="hero.titleMain" class="admin-input">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-2">Headline Highlight (Baris Bawah Teks Gradient)</label>
-                  <input type="text" id="hero-titleHighlight" class="admin-input" placeholder="Contoh: Biar Borang PIDGI Kami yang Tuntaskan.">
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Headline Highlight (Teks Gradient)</label>
+                  <input type="text" id="hero_titleHighlight" data-path="hero.titleHighlight" class="admin-input">
                 </div>
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Paragraf Hero</label>
-                <textarea id="hero-description" rows="4" class="admin-input" placeholder="Masukkan deskripsi pembuka website..."></textarea>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Paragraf</label>
+                <textarea id="hero_description" data-path="hero.description" rows="3" class="admin-input"></textarea>
               </div>
             </div>
           </div>
 
           <div id="form-tentang" class="tab-content hidden space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-teal-400 flex items-center gap-2">
                 <i class="fas fa-info-circle"></i> <span>Tentang Kami</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur informasi profil, deskripsi layanan, dan komitmen layanan @jokiborangpidgi.</p>
             </div>
 
             <div class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
-                <input type="text" id="tentang-badge" class="admin-input" placeholder="Contoh: Tentang Layanan Kami">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <input type="text" id="tentang_badge" data-path="tentang.badge" class="admin-input">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
-                <input type="text" id="tentang-title" class="admin-input" placeholder="Contoh: Sahabat Administrasi Terbaik untuk Dokter Gigi Internsip">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <input type="text" id="tentang_title" data-path="tentang.title" class="admin-input">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Paragraf Pertama</label>
-                <textarea id="tentang-p1" rows="3" class="admin-input" placeholder="Masukkan paragraf pertama..."></textarea>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Pertama</label>
+                <textarea id="tentang_p1" data-path="tentang.p1" rows="3" class="admin-input"></textarea>
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Paragraf Kedua</label>
-                <textarea id="tentang-p2" rows="4" class="admin-input" placeholder="Masukkan paragraf kedua..."></textarea>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Kedua</label>
+                <textarea id="tentang_p2" data-path="tentang.p2" rows="3" class="admin-input"></textarea>
               </div>
             </div>
           </div>
 
           <div id="form-keunggulan" class="tab-content hidden space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">
-                <i class="fas fa-star"></i> <span>Header Section Keunggulan Utama</span>
+                <i class="fas fa-star"></i> <span>Keunggulan Utama</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul dan sub-deskripsi di atas 6 poin keunggulan utama.</p>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
-                <input type="text" id="keunggulan-badge" class="admin-input" placeholder="Contoh: Keunggulan Utama">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <input type="text" id="keunggulan_badge" data-path="keunggulan.badge" class="admin-input">
               </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <input type="text" id="keunggulan_title" data-path="keunggulan.title" class="admin-input">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <textarea id="keunggulan_desc" data-path="keunggulan.desc" rows="2" class="admin-input"></textarea>
+              </div>
+            </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
-                <input type="text" id="keunggulan-title" class="admin-input" placeholder="Contoh: Mengapa Memilih @jokiborangpidgi?">
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
-                <textarea id="keunggulan-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat keunggulan..."></textarea>
-              </div>
+            <div class="mt-8 border-t border-white/10 pt-6">
+              <h4 class="text-sm font-bold text-white mb-4">Daftar Keunggulan (Card Item)</h4>
+              <div id="keunggulan-container" class="space-y-3"></div>
+              <button type="button" class="add-btn mt-4" onclick="addArrayItem('keunggulan')">
+                <i class="fas fa-plus"></i> Tambah Item Keunggulan
+              </button>
             </div>
           </div>
 
           <div id="form-layanan" class="tab-content hidden space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
-                <i class="fas fa-layer-group"></i> <span>Header Section Layanan & Modul</span>
+                <i class="fas fa-layer-group"></i> <span>Layanan & Modul Cakupan</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul header pembuka stase Puskesmas dan Rumah Sakit.</p>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
-                <input type="text" id="layanan-badge" class="admin-input" placeholder="Contoh: Modul & Cakupan">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <input type="text" id="layanan_badge" data-path="layanan.badge" class="admin-input">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
-                <input type="text" id="layanan-title" class="admin-input" placeholder="Contoh: Layanan Lengkap Logbook PIDGI">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <input type="text" id="layanan_title" data-path="layanan.title" class="admin-input">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
-                <textarea id="layanan-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat cakupan modul..."></textarea>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <textarea id="layanan_desc" data-path="layanan.desc" rows="2" class="admin-input"></textarea>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 border-t border-white/10 pt-6">
+              <div>
+                <h4 class="text-sm font-bold text-teal-400 mb-4">Daftar Modul Stase Puskesmas</h4>
+                <div id="layanan-pkm-container" class="space-y-3"></div>
+                <button type="button" class="add-btn mt-4" onclick="addArrayItem('layanan-pkm')">
+                  <i class="fas fa-plus"></i> Tambah Modul PKM
+                </button>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-cyan-400 mb-4">Daftar Modul Stase RS</h4>
+                <div id="layanan-rs-container" class="space-y-3"></div>
+                <button type="button" class="add-btn mt-4" onclick="addArrayItem('layanan-rs')">
+                  <i class="fas fa-plus"></i> Tambah Modul RS
+                </button>
               </div>
             </div>
           </div>
 
           <div id="form-testimoni" class="tab-content hidden space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
-                <i class="fas fa-comments"></i> <span>Header Section Testimoni Klien</span>
+                <i class="fas fa-comments"></i> <span>Ulasan / Testimoni Klien</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul header bagian animasi ulasan marquee berjalan horizontal.</p>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
-                <input type="text" id="testimoni-badge" class="admin-input" placeholder="Contoh: Ulasan Rekan Sejawat">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <input type="text" id="testimoni_badge" data-path="testimoni.badge" class="admin-input">
               </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <input type="text" id="testimoni_title" data-path="testimoni.title" class="admin-input">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <textarea id="testimoni_desc" data-path="testimoni.desc" rows="2" class="admin-input"></textarea>
+              </div>
+            </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
-                <input type="text" id="testimoni-title" class="admin-input" placeholder="Contoh: Apa Kata Klien Kami?">
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
-                <textarea id="testimoni-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat ulasan..."></textarea>
-              </div>
+            <div class="mt-8 border-t border-white/10 pt-6">
+              <h4 class="text-sm font-bold text-white mb-4">Daftar Testimoni (Animasi Berjalan)</h4>
+              <div id="testimoni-container" class="grid sm:grid-cols-2 gap-4"></div>
+              <button type="button" class="add-btn mt-6" onclick="addArrayItem('testimoni')">
+                <i class="fas fa-plus"></i> Tambah Testimoni Baru
+              </button>
             </div>
           </div>
 
           <div id="form-pricelist" class="tab-content hidden space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
-                <i class="fas fa-tags"></i> <span>Header Section Pricelist Transparan</span>
+                <i class="fas fa-tags"></i> <span>Daftar Harga / Pricelist</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul pembuka daftar tarif harga paket UKP, UKM, PKRS & Lapsus.</p>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
-                <input type="text" id="pricelist-badge" class="admin-input" placeholder="Contoh: Pricelist Transparan">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <input type="text" id="pricelist_badge" data-path="pricelist.badge" class="admin-input">
               </div>
-
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
-                <input type="text" id="pricelist-title" class="admin-input" placeholder="Contoh: Biaya Jasa / Pricelist Borang PIDGI">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <input type="text" id="pricelist_title" data-path="pricelist.title" class="admin-input">
               </div>
+            </div>
 
+            <div class="grid md:grid-cols-3 gap-6 border-t border-white/10 pt-6">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
-                <textarea id="pricelist-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat pricelist..."></textarea>
+                <h4 class="text-sm font-bold text-teal-400 mb-4">Paket UKM (Stase PKM)</h4>
+                <div id="pricelist-ukm-container" class="space-y-3"></div>
+                <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-ukm')"><i class="fas fa-plus"></i> Tambah UKM</button>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-cyan-400 mb-4">Paket PKRS & Manajemen</h4>
+                <div id="pricelist-pkrs-container" class="space-y-3"></div>
+                <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-pkrs')"><i class="fas fa-plus"></i> Tambah PKRS</button>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-indigo-400 mb-4">Paket Lapsus (Laporan Kasus)</h4>
+                <div id="pricelist-lapsus-container" class="space-y-3"></div>
+                <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-lapsus')"><i class="fas fa-plus"></i> Tambah Lapsus</button>
               </div>
             </div>
           </div>
 
           <div id="form-faq" class="tab-content hidden space-y-5">
-            <div class="border-b border-white/10 pb-4">
+            <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">
-                <i class="fas fa-question-circle"></i> <span>Header Section FAQ (Tanya Jawab)</span>
+                <i class="fas fa-question-circle"></i> <span>Tanya Jawab (FAQ)</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul header bagian pertanyaan umum klien.</p>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
-                <input type="text" id="faq-badge" class="admin-input" placeholder="Contoh: Tanya Jawab">
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <input type="text" id="faq_badge" data-path="faq.badge" class="admin-input">
               </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <input type="text" id="faq_title" data-path="faq.title" class="admin-input">
+              </div>
+            </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
-                <input type="text" id="faq-title" class="admin-input" placeholder="Contoh: Ada yang Ingin Ditanyakan?">
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
-                <textarea id="faq-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat FAQ..."></textarea>
-              </div>
+            <div class="mt-8 border-t border-white/10 pt-6">
+              <h4 class="text-sm font-bold text-white mb-4">Daftar Pertanyaan & Jawaban</h4>
+              <div id="faq-container" class="space-y-3"></div>
+              <button type="button" class="add-btn mt-4" onclick="addArrayItem('faq')">
+                <i class="fas fa-plus"></i> Tambah FAQ Baru
+              </button>
             </div>
           </div>
 
@@ -326,116 +427,191 @@
   </main>
 
   <script>
-    // 1. Injeksi Data JSON Konten Terbaru dari Server Backend (EJS)
-    const currentData = <%- JSON.stringify(content) %>;
+    // 1. Data Inisial dari Server EJS
+    let currentData = <%- JSON.stringify(content) %>;
     
-    // 2. Otomatis mengisi semua Input Form saat halaman dibuka
-    document.addEventListener('DOMContentLoaded', function() {
-      if (currentData) {
-        Object.keys(currentData).forEach(function(sectionKey) {
-          if (currentData[sectionKey] && typeof currentData[sectionKey] === 'object') {
-            Object.keys(currentData[sectionKey]).forEach(function(fieldKey) {
-              const elementId = sectionKey + '-' + fieldKey;
-              const inputElement = document.getElementById(elementId);
-              if (inputElement) {
-                inputElement.value = currentData[sectionKey][fieldKey] || '';
-              }
-            });
-          }
+    // Konfigurasi Skema Array untuk CRUD
+    const ARRAY_SCHEMAS = {
+      'keunggulan': { path: 'keunggulan.items', fields: [{id:'icon', label:'Ikon FontAwesome', placeholder:'fas fa-star'}, {id:'color', label:'Warna Class Tailwind', placeholder:'bg-teal-500/20 text-teal-400'}, {id:'title', label:'Judul Keunggulan', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
+      'layanan-pkm': { path: 'layanan.pkm.modules', fields: [{id:'name', label:'Nama Modul', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
+      'layanan-rs': { path: 'layanan.rs.modules', fields: [{id:'name', label:'Nama Modul', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
+      'testimoni': { path: 'testimoni.items', fields: [{id:'initials', label:'Inisial (Max 2 Huruf)', placeholder:'RD'}, {id:'name', label:'Nama Dokter', placeholder:'drg. Fulan'}, {id:'wahana', label:'Nama Wahana/RS/PKM', placeholder:''}, {id:'color', label:'Warna Tema (Tailwind)', placeholder:'bg-teal-500/20 text-teal-300'}, {id:'comment', label:'Komentar Ulasan', isTextarea:true}] },
+      'pricelist-ukm': { path: 'pricelist.ukm', fields: [{id:'name', label:'Nama Paket', placeholder:''}, {id:'price', label:'Harga', placeholder:'Rp 10.000'}, {id:'unit', label:'Unit (Opsional)', placeholder:'/laporan'}] },
+      'pricelist-pkrs': { path: 'pricelist.pkrs', fields: [{id:'name', label:'Nama Paket', placeholder:''}, {id:'price', label:'Harga', placeholder:'Rp 40.000'}, {id:'note', label:'Catatan Kecil (Opsional)', placeholder:''}] },
+      'pricelist-lapsus': { path: 'pricelist.lapsus', fields: [{id:'name', label:'Nama Paket', placeholder:''}, {id:'price', label:'Harga', placeholder:'Rp 100.000'}, {id:'note', label:'Catatan Kecil (Opsional)', placeholder:''}] },
+      'faq': { path: 'faq.items', fields: [{id:'q', label:'Pertanyaan (Q)', placeholder:'1. Apa itu...'}, {id:'a', label:'Jawaban (A)', isTextarea:true}] }
+    };
+
+    // 2. Fungsi Helper untuk resolve Object Path string (misal "hero.badge" -> obj["hero"]["badge"])
+    function resolvePath(obj, path) {
+      return path.split('.').reduce((o, i) => o ? o[i] : null, obj);
+    }
+    
+    function setPath(obj, path, value) {
+      const parts = path.split('.');
+      const last = parts.pop();
+      const target = parts.reduce((o, i) => o[i] = o[i] || {}, obj);
+      target[last] = value;
+    }
+
+    // 3. Render HTML untuk satu Item Array
+    function renderArrayItemHTML(type, index, itemData) {
+      const schema = ARRAY_SCHEMAS[type];
+      let html = `<div class="array-item-card" data-type="${type}" data-index="${index}">
+        <button type="button" onclick="removeArrayItem(this)" class="delete-btn" title="Hapus"><i class="fas fa-trash"></i></button>
+        <div class="space-y-3 pr-10">`; // Padding kanan agar tidak tertutup tombol hapus
+      
+      schema.fields.forEach(field => {
+        const val = itemData[field.id] || '';
+        const fieldId = `arr_${type}_${index}_${field.id}`;
+        
+        html += `<div><label class="block text-[10px] font-bold text-slate-400 mb-1">${field.label}</label>`;
+        if (field.isTextarea) {
+          html += `<textarea id="${fieldId}" data-arrayfield="${field.id}" rows="2" class="admin-input text-xs py-1.5">${val}</textarea>`;
+        } else {
+          html += `<input type="text" id="${fieldId}" data-arrayfield="${field.id}" value="${val}" placeholder="${field.placeholder || ''}" class="admin-input text-xs py-1.5">`;
+        }
+        html += `</div>`;
+      });
+      
+      html += `</div></div>`;
+      return html;
+    }
+
+    // 4. Render Seluruh Array Data saat Load Pertama
+    function initArrayRendering() {
+      Object.keys(ARRAY_SCHEMAS).forEach(type => {
+        const container = document.getElementById(`${type}-container`);
+        if (!container) return;
+        
+        container.innerHTML = '';
+        const dataArr = resolvePath(currentData, ARRAY_SCHEMAS[type].path) || [];
+        
+        dataArr.forEach((itemData, index) => {
+          container.insertAdjacentHTML('beforeend', renderArrayItemHTML(type, index, itemData));
         });
-      }
-    });
-
-    // 3. Fungsi berpindah Tab Form secara Visual
-    function switchTab(activeTabId) {
-      // Sembunyikan semua tab content
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(function(content) {
-        content.classList.add('hidden');
-        content.classList.remove('block');
       });
+    }
 
-      // Reset semua style tombol tab
-      const tabButtons = document.querySelectorAll('.tab-btn');
-      tabButtons.forEach(function(btn) {
-        btn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
-        btn.classList.add('hover:bg-white/5', 'text-slate-300', 'border-transparent');
-      });
+    // 5. Tambah Item Array Kosong (UI Level)
+    function addArrayItem(type) {
+      const container = document.getElementById(`${type}-container`);
+      const currentIndex = container.children.length; // Hitung element yang ada
+      
+      // Buat data kosong berdasarkan schema field
+      const emptyItem = {};
+      ARRAY_SCHEMAS[type].fields.forEach(f => emptyItem[f.id] = '');
+      
+      container.insertAdjacentHTML('beforeend', renderArrayItemHTML(type, currentIndex, emptyItem));
+    }
 
-      // Tampilkan tab yang dipilih
-      const targetForm = document.getElementById('form-' + activeTabId);
-      if (targetForm) {
-        targetForm.classList.remove('hidden');
-        targetForm.classList.add('block');
-      }
-
-      // Aktifkan style tombol tab yang dipilih
-      const activeBtn = document.getElementById('tab-' + activeTabId);
-      if (activeBtn) {
-        activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
-        activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+    // 6. Hapus Item Array (UI Level)
+    function removeArrayItem(buttonElement) {
+      if(confirm('Apakah Anda yakin ingin menghapus baris data ini?')) {
+        buttonElement.closest('.array-item-card').remove();
+        // Index attributes akan di-ignore saat saving karena kita looping DOM secara urut.
       }
     }
 
-    // 4. Fungsi Ambil Data dari Form dan Simpan Realtime ke Endpoint Backend Redis
+    // 7. Load Data Statis saat halaman dibuka
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load Simple Static Inputs
+      const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
+      staticInputs.forEach(input => {
+        const val = resolvePath(currentData, input.getAttribute('data-path'));
+        if (val !== undefined && val !== null) input.value = val;
+      });
+
+      // Load Array Inputs
+      initArrayRendering();
+    });
+
+    // 8. Visual Tab Switching
+    function switchTab(activeTabId) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden', 'block') && c.classList.remove('block'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+        btn.classList.add('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+      });
+      document.getElementById('form-' + activeTabId).classList.remove('hidden');
+      document.getElementById('form-' + activeTabId).classList.add('block');
+      const activeBtn = document.getElementById('tab-' + activeTabId);
+      activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+      activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+    }
+
+    // 9. LOGIKA UTAMA: Pengumpulan Data & Simpan ke REDIS
     document.getElementById('saveBtn').addEventListener('click', async function(e) {
       e.preventDefault();
-      
-      const saveBtn = document.getElementById('saveBtn');
-      const statusAlert = document.getElementById('statusAlert');
-      const statusIcon = document.getElementById('statusIcon');
-      const statusMessage = document.getElementById('statusMessage');
-      
+      const saveBtn = this;
       const originalBtnHTML = saveBtn.innerHTML;
       
-      // Ubah status tombol menjadi loading
+      // Indikator Loading
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan ke Redis...</span>';
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan & Ekstraksi Data...</span>';
 
-      // Clone struktur data asli agar struktur tetap utuh
-      const updatedData = JSON.parse(JSON.stringify(currentData));
+      // Deep Clone struktur original agar node struktur tidak hilang
+      let payloadData = JSON.parse(JSON.stringify(currentData));
 
-      // Loop dan ambil nilai terbaru dari setiap field input
-      Object.keys(updatedData).forEach(function(sectionKey) {
-        if (updatedData[sectionKey] && typeof updatedData[sectionKey] === 'object') {
-          Object.keys(updatedData[sectionKey]).forEach(function(fieldKey) {
-            const elementId = sectionKey + '-' + fieldKey;
-            const inputElement = document.getElementById(elementId);
-            if (inputElement) {
-              updatedData[sectionKey][fieldKey] = inputElement.value;
-            }
+      // 9.A: Extract Teks Statis (Input / Textarea dengan data-path)
+      const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
+      staticInputs.forEach(input => {
+        setPath(payloadData, input.getAttribute('data-path'), input.value);
+      });
+
+      // 9.B: Extract Array Dinamis (Iterasi setiap Container di DOM)
+      Object.keys(ARRAY_SCHEMAS).forEach(type => {
+        const schema = ARRAY_SCHEMAS[type];
+        const container = document.getElementById(`${type}-container`);
+        if (container) {
+          const newArray = [];
+          const cards = container.querySelectorAll('.array-item-card');
+          
+          cards.forEach(card => {
+            let itemObj = {};
+            schema.fields.forEach(field => {
+              const inputNode = card.querySelector(`[data-arrayfield="${field.id}"]`);
+              if (inputNode) {
+                itemObj[field.id] = inputNode.value;
+              }
+            });
+            newArray.push(itemObj);
           });
+          
+          // Timpa array lama di payload dengan array baru dari DOM
+          setPath(payloadData, schema.path, newArray);
         }
       });
 
+      // 9.C: Kirim ke Backend Node.js -> Vercel KV Redis
+      const statusAlert = document.getElementById('statusAlert');
+      const statusIcon = document.getElementById('statusIcon');
+      const statusMessage = document.getElementById('statusMessage');
+
       try {
-        // Kirim request POST ke route /admin/save di server.js
         const response = await fetch('/admin/save', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(updatedData)
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payloadData)
         });
 
         const result = await response.json();
-
         statusAlert.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/30', 'bg-rose-500/20', 'text-rose-300', 'border-rose-500/30');
 
         if (result.success) {
           statusAlert.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
           statusIcon.className = 'fas fa-check-circle text-base';
-          statusMessage.innerText = '✅ Perubahan berhasil disimpan ke Vercel Redis Database! Website otomatis terupdate.';
+          statusMessage.innerText = '✅ ' + result.message;
+          // Perbarui local state agar tidak perlu refresh halaman
+          currentData = payloadData; 
         } else {
-          statusAlert.classList.add('bg-rose-500/20', 'text-rose-300', 'border', 'border-rose-500/30');
-          statusIcon.className = 'fas fa-exclamation-triangle text-base';
-          statusMessage.innerText = '❌ Gagal menyimpan: ' + (result.message || 'Terjadi kesalahan pada server');
+          throw new Error(result.message);
         }
       } catch (err) {
         statusAlert.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/30');
         statusAlert.classList.add('bg-rose-500/20', 'text-rose-300', 'border', 'border-rose-500/30');
-        statusIcon.className = 'fas fa-wifi text-base';
-        statusMessage.innerText = '❌ Kesalahan Koneksi API: ' + err.message;
+        statusIcon.className = 'fas fa-exclamation-triangle text-base';
+        statusMessage.innerText = '❌ Gagal: ' + err.message;
       } finally {
         saveBtn.disabled = false;
         saveBtn.innerHTML = originalBtnHTML;
