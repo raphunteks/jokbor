@@ -1,9 +1,12 @@
 const express = require('express');
 const path = require('path');
-const { speedInsights } = require('@vercel/speed-insights/express');
+const { injectSpeedInsights } = require('@vercel/speed-insights'); // [UPGRADE] Import Vercel Speed Insights
+
 const app = express();
-speedInsights({ app });
 const PORT = process.env.PORT || 3000;
+
+// [UPGRADE] Mengaktifkan Vercel Speed Insights
+injectSpeedInsights();
 
 // Konfigurasi View Engine EJS
 app.set('view engine', 'ejs');
