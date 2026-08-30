@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard Admin CMS Joki Borang PIDGI">
   <title>Admin CMS Dashboard - Joki Borang PIDGI</title>
-  <!-- [UPGRADE] Favicon / Logo Web -->
+  
+  <!-- [UPGRADE] Favicon / Logo Web & Preconnect -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="icon" type="image/png" href="/img/jokiborang.png">
   <link rel="apple-touch-icon" href="/img/jokiborang.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- [UPGRADE] Performa CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
   <link rel="stylesheet" href="/css/main.css">
 
   <script>
@@ -101,21 +107,30 @@
       border-style: solid;
     }
   </style>
+
+  <!-- Vercel Speed Insights -->
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
 
-  <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+  <!-- Background Decorative (Hidden from screen readers) -->
+  <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10" aria-hidden="true">
     <div class="mesh-glow mesh-teal w-[500px] h-[500px] absolute top-[-100px] left-[-100px]"></div>
     <div class="mesh-glow mesh-cyan w-[400px] h-[400px] absolute bottom-[-50px] right-[-50px]"></div>
   </div>
 
-  <aside class="w-full md:w-72 glass-panel border-r border-white/10 md:min-h-screen flex flex-col sticky top-0 z-30 shadow-2xl">
+  <!-- [UPGRADE] Semantic <aside> dengan aria-label -->
+  <aside aria-label="Sidebar Menu Panel" class="w-full md:w-72 glass-panel border-r border-white/10 md:min-h-screen flex flex-col sticky top-0 z-30 shadow-2xl">
     
     <div class="p-6 border-b border-white/10 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20 shrink-0">
           <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
-            <img src="/img/jokiborang.png" alt="Logo Admin Dashboard" class="w-full h-full object-cover transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\\'text-xl\\'>⚙️</span>';">
+            <!-- [UPGRADE] fetchpriority="high" untuk aset prioritas atas -->
+            <img src="/img/jokiborang.png" alt="Logo Admin Dashboard" fetchpriority="high" decoding="async" class="w-full h-full object-cover transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\\'text-xl\\'>⚙️</span>';">
           </div>
         </div>
         <div class="flex flex-col">
@@ -126,60 +141,62 @@
         </div>
       </div>
       
-      <a href="/admin/logout" title="Logout" class="md:hidden w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 flex items-center justify-center border border-rose-500/20 transition">
-        <i class="fas fa-power-off text-sm"></i>
+      <a href="/admin/logout" title="Logout" aria-label="Logout Admin" class="md:hidden w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 flex items-center justify-center border border-rose-500/20 transition">
+        <i class="fas fa-power-off text-sm" aria-hidden="true"></i>
       </a>
     </div>
 
-    <nav class="flex-1 p-4 space-y-1.5 overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar">
-      <button type="button" onclick="switchTab('brand')" id="tab-brand" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-cog w-5 text-center"></i> <span>Info Utama Web</span>
+    <!-- [UPGRADE] Role tablist untuk Aksesibilitas -->
+    <nav aria-label="Navigasi Kategori Konten" class="flex-1 p-4 space-y-1.5 overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar" role="tablist">
+      <button type="button" role="tab" aria-selected="true" aria-controls="form-brand" onclick="switchTab('brand')" id="tab-brand" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-cog w-5 text-center" aria-hidden="true"></i> <span>Info Utama Web</span>
       </button>
 
-      <button type="button" onclick="switchTab('seo')" id="tab-seo" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-search w-5 text-center"></i> <span>Manajemen SEO Meta</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-seo" onclick="switchTab('seo')" id="tab-seo" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-search w-5 text-center" aria-hidden="true"></i> <span>Manajemen SEO Meta</span>
       </button>
 
-      <button type="button" onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-home w-5 text-center"></i> <span>1. Hero Section</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-hero" onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-home w-5 text-center" aria-hidden="true"></i> <span>1. Hero Section</span>
       </button>
 
-      <button type="button" onclick="switchTab('tentang')" id="tab-tentang" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-info-circle w-5 text-center"></i> <span>2. Tentang Kami</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-tentang" onclick="switchTab('tentang')" id="tab-tentang" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-info-circle w-5 text-center" aria-hidden="true"></i> <span>2. Tentang Kami</span>
       </button>
 
-      <button type="button" onclick="switchTab('keunggulan')" id="tab-keunggulan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-star w-5 text-center"></i> <span>3. Keunggulan (CRUD)</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-keunggulan" onclick="switchTab('keunggulan')" id="tab-keunggulan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-star w-5 text-center" aria-hidden="true"></i> <span>3. Keunggulan (CRUD)</span>
       </button>
 
-      <button type="button" onclick="switchTab('layanan')" id="tab-layanan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-layer-group w-5 text-center"></i> <span>4. Layanan Modul</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-layanan" onclick="switchTab('layanan')" id="tab-layanan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-layer-group w-5 text-center" aria-hidden="true"></i> <span>4. Layanan Modul</span>
       </button>
 
-      <button type="button" onclick="switchTab('testimoni')" id="tab-testimoni" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-comments w-5 text-center"></i> <span>5. Testimoni (CRUD)</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-testimoni" onclick="switchTab('testimoni')" id="tab-testimoni" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-comments w-5 text-center" aria-hidden="true"></i> <span>5. Testimoni (CRUD)</span>
       </button>
 
-      <button type="button" onclick="switchTab('pricelist')" id="tab-pricelist" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-tags w-5 text-center"></i> <span>6. Pricelist (CRUD)</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-pricelist" onclick="switchTab('pricelist')" id="tab-pricelist" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-tags w-5 text-center" aria-hidden="true"></i> <span>6. Pricelist (CRUD)</span>
       </button>
 
-      <button type="button" onclick="switchTab('faq')" id="tab-faq" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
-        <i class="fas fa-question-circle w-5 text-center"></i> <span>7. FAQ (CRUD)</span>
+      <button type="button" role="tab" aria-selected="false" aria-controls="form-faq" onclick="switchTab('faq')" id="tab-faq" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-question-circle w-5 text-center" aria-hidden="true"></i> <span>7. FAQ (CRUD)</span>
       </button>
     </nav>
 
     <div class="p-4 border-t border-white/10 hidden md:flex flex-col gap-2">
-      <a href="/" target="_blank" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold transition border border-white/10">
-        <i class="fas fa-external-link-alt text-cyan-400"></i> Lihat Website Utama
+      <a href="/" target="_blank" aria-label="Lihat Website Utama di Tab Baru" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold transition border border-white/10">
+        <i class="fas fa-external-link-alt text-cyan-400" aria-hidden="true"></i> Lihat Website Utama
       </a>
-      <a href="/admin/logout" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-bold transition border border-rose-500/20">
-        <i class="fas fa-power-off"></i> Logout Admin
+      <a href="/admin/logout" aria-label="Keluar dari Panel Admin" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-bold transition border border-rose-500/20">
+        <i class="fas fa-power-off" aria-hidden="true"></i> Logout Admin
       </a>
     </div>
   </aside>
 
-  <main class="flex-1 p-4 sm:p-6 md:p-10 overflow-y-auto relative z-10 w-full">
+  <!-- [UPGRADE] Semantic <main> landmark -->
+  <main id="main-content" class="flex-1 p-4 sm:p-6 md:p-10 overflow-y-auto relative z-10 w-full">
     <div class="max-w-5xl mx-auto space-y-6">
       
       <div class="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-white/10">
@@ -187,69 +204,70 @@
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
             <span>Management Content Studio</span>
           </h2>
-          <p class="text-slate-400 text-xs mt-1">
+          <!-- [UPGRADE] Peningkatan kontras teks pembantu -->
+          <p class="text-slate-300 text-xs mt-1">
             Sunting teks statis dan kelola daftar item (CRUD), lalu klik simpan untuk update realtime ke database Redis.
           </p>
         </div>
 
-        <button type="button" id="saveBtn" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 flex items-center justify-center gap-2 shrink-0">
-          <i class="fas fa-cloud-upload-alt text-base"></i>
+        <button type="button" id="saveBtn" aria-label="Simpan Perubahan Konten" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 flex items-center justify-center gap-2 shrink-0">
+          <i class="fas fa-cloud-upload-alt text-base" aria-hidden="true"></i>
           <span>Simpan Perubahan</span>
         </button>
       </div>
 
-      <div id="statusAlert" class="hidden p-4 rounded-2xl text-xs font-semibold flex items-center justify-between transition-all">
+      <div id="statusAlert" role="alert" aria-live="polite" class="hidden p-4 rounded-2xl text-xs font-semibold flex items-center justify-between transition-all">
         <div class="flex items-center gap-2.5">
-          <i id="statusIcon" class="fas fa-info-circle text-base"></i>
+          <i id="statusIcon" class="fas fa-info-circle text-base" aria-hidden="true"></i>
           <span id="statusMessage">Status message</span>
         </div>
-        <button onclick="document.getElementById('statusAlert').classList.add('hidden')" class="opacity-60 hover:opacity-100"><i class="fas fa-times"></i></button>
+        <button type="button" aria-label="Tutup Peringatan" onclick="document.getElementById('statusAlert').classList.add('hidden')" class="opacity-60 hover:opacity-100"><i class="fas fa-times" aria-hidden="true"></i></button>
       </div>
 
       <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 relative">
-        <form id="editorForm" onsubmit="return false;">
+        <form id="editorForm" onsubmit="return false;" aria-label="Form Editor Konten">
           
-          <div id="form-brand" class="tab-content block space-y-5">
+          <div id="form-brand" role="tabpanel" aria-labelledby="tab-brand" class="tab-content block space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                <i class="fas fa-cog text-cyan-400"></i> <span>Pengaturan Utama Website (Header & Footer)</span>
+                <i class="fas fa-cog text-cyan-400" aria-hidden="true"></i> <span>Pengaturan Utama Website (Header & Footer)</span>
               </h3>
             </div>
 
             <div class="space-y-4">
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Nama Brand/Web (Header)</label>
+                  <label for="brand_title" class="block text-xs font-bold text-slate-300 mb-1.5">Nama Brand/Web (Header)</label>
                   <input type="text" id="brand_title" data-path="brand.title" value="<%= content?.brand?.title || '' %>" class="admin-input">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Subtitle Brand (Header)</label>
+                  <label for="brand_subtitle" class="block text-xs font-bold text-slate-300 mb-1.5">Subtitle Brand (Header)</label>
                   <input type="text" id="brand_subtitle" data-path="brand.subtitle" value="<%= content?.brand?.subtitle || '' %>" class="admin-input">
                 </div>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol WhatsApp Utama</label>
+                  <label for="brand_ctaWhatsapp" class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol WhatsApp Utama</label>
                   <input type="text" id="brand_ctaWhatsapp" data-path="brand.ctaWhatsapp" value="<%= content?.brand?.ctaWhatsapp || '' %>" class="admin-input">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Link Instagram (Footer)</label>
+                  <label for="footer_instagram" class="block text-xs font-bold text-slate-300 mb-1.5">Link Instagram (Footer)</label>
                   <input type="text" id="footer_instagram" data-path="footer.instagram" value="<%= content?.footer?.instagram || '' %>" class="admin-input">
                 </div>
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Hak Cipta (Footer)</label>
+                <label for="footer_copyText" class="block text-xs font-bold text-slate-300 mb-1.5">Teks Hak Cipta (Footer)</label>
                 <textarea id="footer_copyText" data-path="footer.copyText" rows="2" class="admin-input"><%= content?.footer?.copyText || '' %></textarea>
               </div>
             </div>
           </div>
 
-          <div id="form-seo" class="tab-content hidden space-y-5">
+          <div id="form-seo" role="tabpanel" aria-labelledby="tab-seo" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                <i class="fas fa-search text-cyan-400"></i> <span>Manajemen Metadata SEO (Semua Halaman)</span>
+                <i class="fas fa-search text-cyan-400" aria-hidden="true"></i> <span>Manajemen Metadata SEO (Semua Halaman)</span>
               </h3>
-              <p class="text-[10px] text-slate-400 mt-1">Mengatur Meta Title, Description, dan Keywords untuk struktur Google Search Console di setiap halaman Clean URL.</p>
+              <p class="text-[10px] text-slate-300 mt-1">Mengatur Meta Title, Description, dan Keywords untuk struktur Google Search Console di setiap halaman Clean URL.</p>
             </div>
 
             <div class="space-y-8">
@@ -259,57 +277,57 @@
                   <h4 class="font-bold text-cyan-300 text-sm capitalize">Halaman: <%= page %></h4>
                   <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label class="block text-[10px] font-bold text-slate-400 mb-1">Meta Title</label>
-                      <input type="text" data-path="seo.<%= page %>.title" value="<%= content?.seo?.[page]?.title || '' %>" class="admin-input text-xs">
+                      <label for="seo_<%= page %>_title" class="block text-[10px] font-bold text-slate-300 mb-1">Meta Title</label>
+                      <input type="text" id="seo_<%= page %>_title" data-path="seo.<%= page %>.title" value="<%= content?.seo?.[page]?.title || '' %>" class="admin-input text-xs">
                     </div>
                     <div>
-                      <label class="block text-[10px] font-bold text-slate-400 mb-1">Keywords</label>
-                      <input type="text" data-path="seo.<%= page %>.keywords" value="<%= content?.seo?.[page]?.keywords || '' %>" class="admin-input text-xs">
+                      <label for="seo_<%= page %>_keywords" class="block text-[10px] font-bold text-slate-300 mb-1">Keywords</label>
+                      <input type="text" id="seo_<%= page %>_keywords" data-path="seo.<%= page %>.keywords" value="<%= content?.seo?.[page]?.keywords || '' %>" class="admin-input text-xs">
                     </div>
                   </div>
                   <div>
-                    <label class="block text-[10px] font-bold text-slate-400 mb-1">Meta Description</label>
-                    <textarea data-path="seo.<%= page %>.description" rows="2" class="admin-input text-xs"><%= content?.seo?.[page]?.description || '' %></textarea>
+                    <label for="seo_<%= page %>_description" class="block text-[10px] font-bold text-slate-300 mb-1">Meta Description</label>
+                    <textarea id="seo_<%= page %>_description" data-path="seo.<%= page %>.description" rows="2" class="admin-input text-xs"><%= content?.seo?.[page]?.description || '' %></textarea>
                   </div>
                 </div>
               <% }); %>
             </div>
           </div>
 
-          <div id="form-hero" class="tab-content hidden space-y-5">
+          <div id="form-hero" role="tabpanel" aria-labelledby="tab-hero" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
-                <i class="fas fa-home"></i> <span>Hero Section (Halaman Depan Utama)</span>
+                <i class="fas fa-home" aria-hidden="true"></i> <span>Hero Section (Halaman Depan Utama)</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur badge promosi, headline utama, dan paragraf pembuka di bagian paling atas.</p>
+              <p class="text-xs text-slate-300 mt-0.5">Mengatur badge promosi, headline utama, dan paragraf pembuka di bagian paling atas.</p>
             </div>
 
             <div class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Promosi (Teks Kecil Atas)</label>
+                <label for="hero_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Promosi (Teks Kecil Atas)</label>
                 <input type="text" id="hero_badge" data-path="hero.badge" value="<%= content?.hero?.badge || '' %>" class="admin-input">
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Headline Utama (Baris Atas Teks Putih)</label>
+                  <label for="hero_titleMain" class="block text-xs font-bold text-slate-300 mb-1.5">Headline Utama (Baris Atas Teks Putih)</label>
                   <input type="text" id="hero_titleMain" data-path="hero.titleMain" value="<%= content?.hero?.titleMain || '' %>" class="admin-input">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Headline Highlight (Teks Gradient)</label>
+                  <label for="hero_titleHighlight" class="block text-xs font-bold text-slate-300 mb-1.5">Headline Highlight (Teks Gradient)</label>
                   <input type="text" id="hero_titleHighlight" data-path="hero.titleHighlight" value="<%= content?.hero?.titleHighlight || '' %>" class="admin-input">
                 </div>
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Paragraf</label>
+                <label for="hero_description" class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Paragraf</label>
                 <textarea id="hero_description" data-path="hero.description" rows="3" class="admin-input"><%= content?.hero?.description || '' %></textarea>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Harga</label>
+                  <label for="hero_ctaPrice" class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Harga</label>
                   <input type="text" id="hero_ctaPrice" data-path="hero.ctaPrice" value="<%= content?.hero?.ctaPrice || '' %>" class="admin-input">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Layanan</label>
+                  <label for="hero_ctaService" class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Layanan</label>
                   <input type="text" id="hero_ctaService" data-path="hero.ctaService" value="<%= content?.hero?.ctaService || '' %>" class="admin-input">
                 </div>
               </div>
@@ -318,32 +336,32 @@
             <div class="mt-8 border-t border-white/10 pt-6">
               <h4 class="text-sm font-bold text-cyan-400 mb-4">Statistik Card Bawah</h4>
               <div id="heroStats-container" class="grid sm:grid-cols-2 gap-4"></div>
-              <button type="button" class="add-btn mt-4" onclick="addArrayItem('heroStats')"><i class="fas fa-plus"></i> Tambah Stats Baru</button>
+              <button type="button" class="add-btn mt-4" aria-label="Tambah Statistik Hero" onclick="addArrayItem('heroStats')"><i class="fas fa-plus" aria-hidden="true"></i> Tambah Stats Baru</button>
             </div>
           </div>
 
-          <div id="form-tentang" class="tab-content hidden space-y-5">
+          <div id="form-tentang" role="tabpanel" aria-labelledby="tab-tentang" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-teal-400 flex items-center gap-2">
-                <i class="fas fa-info-circle"></i> <span>Tentang Kami</span>
+                <i class="fas fa-info-circle" aria-hidden="true"></i> <span>Tentang Kami</span>
               </h3>
             </div>
 
             <div class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <label for="tentang_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
                 <input type="text" id="tentang_badge" data-path="tentang.badge" value="<%= content?.tentang?.badge || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <label for="tentang_title" class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="tentang_title" data-path="tentang.title" value="<%= content?.tentang?.title || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Pertama</label>
+                <label for="tentang_p1" class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Pertama</label>
                 <textarea id="tentang_p1" data-path="tentang.p1" rows="3" class="admin-input"><%= content?.tentang?.p1 || '' %></textarea>
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Kedua</label>
+                <label for="tentang_p2" class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Kedua</label>
                 <textarea id="tentang_p2" data-path="tentang.p2" rows="3" class="admin-input"><%= content?.tentang?.p2 || '' %></textarea>
               </div>
             </div>
@@ -352,47 +370,47 @@
               <h4 class="text-sm font-bold text-teal-400 mb-4">Info Kartu Profil Kanan</h4>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Nama Handle (@)</label>
+                  <label for="tentang_handle" class="block text-[10px] font-bold text-slate-300 mb-1">Nama Handle (@)</label>
                   <input type="text" id="tentang_handle" data-path="tentang.profileCard.handle" value="<%= content?.tentang?.profileCard?.handle || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
-                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Sub-title Profesi</label>
+                  <label for="tentang_subhandle" class="block text-[10px] font-bold text-slate-300 mb-1">Sub-title Profesi</label>
                   <input type="text" id="tentang_subhandle" data-path="tentang.profileCard.subhandle" value="<%= content?.tentang?.profileCard?.subhandle || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
-                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Target Pelayanan (Value)</label>
+                  <label for="tentang_target" class="block text-[10px] font-bold text-slate-300 mb-1">Target Pelayanan (Value)</label>
                   <input type="text" id="tentang_target" data-path="tentang.profileCard.targetVal" value="<%= content?.tentang?.profileCard?.targetVal || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
-                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Kecepatan Respon (Value)</label>
+                  <label for="tentang_speed" class="block text-[10px] font-bold text-slate-300 mb-1">Kecepatan Respon (Value)</label>
                   <input type="text" id="tentang_speed" data-path="tentang.profileCard.speedVal" value="<%= content?.tentang?.profileCard?.speedVal || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
-                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Privasi (Value)</label>
+                  <label for="tentang_privacy" class="block text-[10px] font-bold text-slate-300 mb-1">Privasi (Value)</label>
                   <input type="text" id="tentang_privacy" data-path="tentang.profileCard.privacyVal" value="<%= content?.tentang?.profileCard?.privacyVal || '' %>" class="admin-input text-xs">
                 </div>
               </div>
             </div>
           </div>
 
-          <div id="form-keunggulan" class="tab-content hidden space-y-5">
+          <div id="form-keunggulan" role="tabpanel" aria-labelledby="tab-keunggulan" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">
-                <i class="fas fa-star"></i> <span>Keunggulan Utama</span>
+                <i class="fas fa-star" aria-hidden="true"></i> <span>Keunggulan Utama</span>
               </h3>
             </div>
 
             <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <label for="keunggulan_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
                 <input type="text" id="keunggulan_badge" data-path="keunggulan.badge" value="<%= content?.keunggulan?.badge || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <label for="keunggulan_title" class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="keunggulan_title" data-path="keunggulan.title" value="<%= content?.keunggulan?.title || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <label for="keunggulan_desc" class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
                 <textarea id="keunggulan_desc" data-path="keunggulan.desc" rows="2" class="admin-input"><%= content?.keunggulan?.desc || '' %></textarea>
               </div>
             </div>
@@ -400,30 +418,30 @@
             <div class="mt-8 border-t border-white/10 pt-6">
               <h4 class="text-sm font-bold text-white mb-4">Daftar Keunggulan (Card Item)</h4>
               <div id="keunggulan-container" class="space-y-3"></div>
-              <button type="button" class="add-btn mt-4" onclick="addArrayItem('keunggulan')">
-                <i class="fas fa-plus"></i> Tambah Item Keunggulan
+              <button type="button" class="add-btn mt-4" aria-label="Tambah Item Keunggulan" onclick="addArrayItem('keunggulan')">
+                <i class="fas fa-plus" aria-hidden="true"></i> Tambah Item Keunggulan
               </button>
             </div>
           </div>
 
-          <div id="form-layanan" class="tab-content hidden space-y-5">
+          <div id="form-layanan" role="tabpanel" aria-labelledby="tab-layanan" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
-                <i class="fas fa-layer-group"></i> <span>Layanan & Modul Cakupan</span>
+                <i class="fas fa-layer-group" aria-hidden="true"></i> <span>Layanan & Modul Cakupan</span>
               </h3>
             </div>
 
             <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <label for="layanan_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
                 <input type="text" id="layanan_badge" data-path="layanan.badge" value="<%= content?.layanan?.badge || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <label for="layanan_title" class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="layanan_title" data-path="layanan.title" value="<%= content?.layanan?.title || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <label for="layanan_desc" class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
                 <textarea id="layanan_desc" data-path="layanan.desc" rows="2" class="admin-input"><%= content?.layanan?.desc || '' %></textarea>
               </div>
             </div>
@@ -432,38 +450,38 @@
               <div>
                 <h4 class="text-sm font-bold text-teal-400 mb-4">Daftar Modul Stase Puskesmas</h4>
                 <div id="layanan-pkm-container" class="space-y-3"></div>
-                <button type="button" class="add-btn mt-4" onclick="addArrayItem('layanan-pkm')">
-                  <i class="fas fa-plus"></i> Tambah Modul PKM
+                <button type="button" class="add-btn mt-4" aria-label="Tambah Modul Puskesmas" onclick="addArrayItem('layanan-pkm')">
+                  <i class="fas fa-plus" aria-hidden="true"></i> Tambah Modul PKM
                 </button>
               </div>
               <div>
                 <h4 class="text-sm font-bold text-cyan-400 mb-4">Daftar Modul Stase RS</h4>
                 <div id="layanan-rs-container" class="space-y-3"></div>
-                <button type="button" class="add-btn mt-4" onclick="addArrayItem('layanan-rs')">
-                  <i class="fas fa-plus"></i> Tambah Modul RS
+                <button type="button" class="add-btn mt-4" aria-label="Tambah Modul Rumah Sakit" onclick="addArrayItem('layanan-rs')">
+                  <i class="fas fa-plus" aria-hidden="true"></i> Tambah Modul RS
                 </button>
               </div>
             </div>
           </div>
 
-          <div id="form-testimoni" class="tab-content hidden space-y-5">
+          <div id="form-testimoni" role="tabpanel" aria-labelledby="tab-testimoni" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
-                <i class="fas fa-comments"></i> <span>Ulasan / Testimoni Klien</span>
+                <i class="fas fa-comments" aria-hidden="true"></i> <span>Ulasan / Testimoni Klien</span>
               </h3>
             </div>
 
             <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <label for="testimoni_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
                 <input type="text" id="testimoni_badge" data-path="testimoni.badge" value="<%= content?.testimoni?.badge || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <label for="testimoni_title" class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="testimoni_title" data-path="testimoni.title" value="<%= content?.testimoni?.title || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <label for="testimoni_desc" class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
                 <textarea id="testimoni_desc" data-path="testimoni.desc" rows="2" class="admin-input"><%= content?.testimoni?.desc || '' %></textarea>
               </div>
             </div>
@@ -471,30 +489,30 @@
             <div class="mt-8 border-t border-white/10 pt-6">
               <h4 class="text-sm font-bold text-amber-400 mb-4">Daftar Testimoni (Animasi Berjalan)</h4>
               <div id="testimoni-container" class="grid sm:grid-cols-2 gap-4"></div>
-              <button type="button" class="add-btn mt-6" onclick="addArrayItem('testimoni')">
-                <i class="fas fa-plus"></i> Tambah Testimoni Baru
+              <button type="button" class="add-btn mt-6" aria-label="Tambah Testimoni" onclick="addArrayItem('testimoni')">
+                <i class="fas fa-plus" aria-hidden="true"></i> Tambah Testimoni Baru
               </button>
             </div>
           </div>
 
-          <div id="form-pricelist" class="tab-content hidden space-y-5">
+          <div id="form-pricelist" role="tabpanel" aria-labelledby="tab-pricelist" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
-                <i class="fas fa-tags"></i> <span>Daftar Harga / Pricelist</span>
+                <i class="fas fa-tags" aria-hidden="true"></i> <span>Daftar Harga / Pricelist</span>
               </h3>
             </div>
 
             <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <label for="pricelist_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
                 <input type="text" id="pricelist_badge" data-path="pricelist.badge" value="<%= content?.pricelist?.badge || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <label for="pricelist_title" class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="pricelist_title" data-path="pricelist.title" value="<%= content?.pricelist?.title || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <label for="pricelist_desc" class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
                 <textarea id="pricelist_desc" data-path="pricelist.desc" rows="2" class="admin-input"><%= content?.pricelist?.desc || '' %></textarea>
               </div>
             </div>
@@ -503,45 +521,45 @@
               <div>
                 <h4 class="text-sm font-bold text-teal-400 mb-4">Paket UKM (Stase PKM)</h4>
                 <div id="pricelist-ukm-container" class="space-y-3"></div>
-                <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-ukm')"><i class="fas fa-plus"></i> Tambah UKM</button>
+                <button type="button" class="add-btn mt-4" aria-label="Tambah Paket UKM" onclick="addArrayItem('pricelist-ukm')"><i class="fas fa-plus" aria-hidden="true"></i> Tambah UKM</button>
               </div>
               <div>
                 <h4 class="text-sm font-bold text-cyan-400 mb-4">Paket PKRS & Manajemen</h4>
                 <div id="pricelist-pkrs-container" class="space-y-3"></div>
-                <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-pkrs')"><i class="fas fa-plus"></i> Tambah PKRS</button>
+                <button type="button" class="add-btn mt-4" aria-label="Tambah Paket PKRS" onclick="addArrayItem('pricelist-pkrs')"><i class="fas fa-plus" aria-hidden="true"></i> Tambah PKRS</button>
               </div>
               <div>
                 <h4 class="text-sm font-bold text-indigo-400 mb-4">Paket Lapsus (Laporan Kasus)</h4>
                 <div id="pricelist-lapsus-container" class="space-y-3"></div>
-                <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-lapsus')"><i class="fas fa-plus"></i> Tambah Lapsus</button>
+                <button type="button" class="add-btn mt-4" aria-label="Tambah Paket Lapsus" onclick="addArrayItem('pricelist-lapsus')"><i class="fas fa-plus" aria-hidden="true"></i> Tambah Lapsus</button>
               </div>
             </div>
             
             <div class="mt-8 border-t border-white/10 pt-6">
                <h4 class="text-sm font-bold text-white mb-4">Pengaturan Schema.org / Katalog Offer Vercel Analytics</h4>
                <div id="offers-container" class="grid sm:grid-cols-2 gap-4"></div>
-               <button type="button" class="add-btn mt-4" onclick="addArrayItem('offers')"><i class="fas fa-plus"></i> Tambah Schema Offer (Background SEO)</button>
+               <button type="button" class="add-btn mt-4" aria-label="Tambah Schema Offer SEO" onclick="addArrayItem('offers')"><i class="fas fa-plus" aria-hidden="true"></i> Tambah Schema Offer (Background SEO)</button>
             </div>
           </div>
 
-          <div id="form-faq" class="tab-content hidden space-y-5">
+          <div id="form-faq" role="tabpanel" aria-labelledby="tab-faq" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">
-                <i class="fas fa-question-circle"></i> <span>Tanya Jawab (FAQ)</span>
+                <i class="fas fa-question-circle" aria-hidden="true"></i> <span>Tanya Jawab (FAQ)</span>
               </h3>
             </div>
 
             <div class="space-y-4 mb-8">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
+                <label for="faq_badge" class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
                 <input type="text" id="faq_badge" data-path="faq.badge" value="<%= content?.faq?.badge || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
+                <label for="faq_title" class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="faq_title" data-path="faq.title" value="<%= content?.faq?.title || '' %>" class="admin-input">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <label for="faq_desc" class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
                 <textarea id="faq_desc" data-path="faq.desc" rows="2" class="admin-input"><%= content?.faq?.desc || '' %></textarea>
               </div>
             </div>
@@ -549,8 +567,8 @@
             <div class="mt-8 border-t border-white/10 pt-6">
               <h4 class="text-sm font-bold text-white mb-4">Daftar Pertanyaan & Jawaban</h4>
               <div id="faq-container" class="space-y-3"></div>
-              <button type="button" class="add-btn mt-4" onclick="addArrayItem('faq')">
-                <i class="fas fa-plus"></i> Tambah FAQ Baru
+              <button type="button" class="add-btn mt-4" aria-label="Tambah Pertanyaan FAQ" onclick="addArrayItem('faq')">
+                <i class="fas fa-plus" aria-hidden="true"></i> Tambah FAQ Baru
               </button>
             </div>
           </div>
@@ -595,14 +613,14 @@
     function renderArrayItemHTML(type, index, itemData) {
       const schema = ARRAY_SCHEMAS[type];
       let html = `<div class="array-item-card" data-type="${type}" data-index="${index}">
-        <button type="button" onclick="removeArrayItem(this)" class="delete-btn" title="Hapus"><i class="fas fa-trash"></i></button>
+        <button type="button" aria-label="Hapus Item" onclick="removeArrayItem(this)" class="delete-btn" title="Hapus"><i class="fas fa-trash" aria-hidden="true"></i></button>
         <div class="space-y-3 pr-10">`; 
       
       schema.fields.forEach(field => {
         const val = itemData[field.id] || '';
         const fieldId = `arr_${type}_${index}_${field.id}`;
         
-        html += `<div><label class="block text-[10px] font-bold text-slate-400 mb-1">${field.label}</label>`;
+        html += `<div><label for="${fieldId}" class="block text-[10px] font-bold text-slate-300 mb-1">${field.label}</label>`;
         if (field.isTextarea) {
           html += `<textarea id="${fieldId}" data-arrayfield="${field.id}" rows="2" class="admin-input text-xs py-1.5">${val}</textarea>`;
         } else {
@@ -650,24 +668,32 @@
 
     // 7. Load Data Statis Pertama Kali saat halaman terbuka
     document.addEventListener('DOMContentLoaded', function() {
-      // Data terisi oleh EJS value tag (Pre-populated HTML)
-      // Kode JavaScript DOMContentLoaded untuk statik tidak lagi menimpa data
       initArrayRendering();
     });
 
-    // 8. Tampilan Berpindah Tab Menu
+    // 8. Tampilan Berpindah Tab Menu [UPGRADED ARIA STATES]
     function switchTab(activeTabId) {
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden', 'block') && c.classList.remove('block'));
+      document.querySelectorAll('.tab-content').forEach(c => {
+        c.classList.add('hidden', 'block');
+        c.classList.remove('block');
+      });
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
         btn.classList.add('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+        btn.setAttribute('aria-selected', 'false');
       });
-      document.getElementById('form-' + activeTabId).classList.remove('hidden');
-      document.getElementById('form-' + activeTabId).classList.add('block');
+      
+      const targetForm = document.getElementById('form-' + activeTabId);
+      if(targetForm) {
+        targetForm.classList.remove('hidden');
+        targetForm.classList.add('block');
+      }
+      
       const activeBtn = document.getElementById('tab-' + activeTabId);
       if(activeBtn) {
         activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
         activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+        activeBtn.setAttribute('aria-selected', 'true');
       }
     }
 
@@ -678,7 +704,7 @@
       const originalBtnHTML = saveBtn.innerHTML;
       
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan ke Database...</span>';
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base" aria-hidden="true"></i> <span>Menyimpan ke Database...</span>';
 
       // Deep Clone Struktur JSON original
       let payloadData = JSON.parse(JSON.stringify(currentData));
@@ -746,6 +772,6 @@
       }
     });
   </script>
-  <script src="/js/protect-devtools.js"></script>
+  <script defer src="/js/protect-devtools.js"></script>
 </body>
 </html>
