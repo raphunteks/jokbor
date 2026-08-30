@@ -69,7 +69,7 @@
       border-radius: 0.5rem;
       display: flex;
       align-items: center;
-      justify-center: center;
+      justify-content: center;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -128,8 +128,12 @@
       </a>
     </div>
 
-    <nav class="flex-1 p-4 space-y-1.5 overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar">
-      <button type="button" onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+    <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar">
+      <button type="button" onclick="switchTab('brand')" id="tab-brand" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-cog w-5 text-center"></i> <span>Info Utama Web</span>
+      </button>
+
+      <button type="button" onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
         <i class="fas fa-home w-5 text-center"></i> <span>1. Hero Section</span>
       </button>
 
@@ -198,11 +202,47 @@
       <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 relative">
         <form id="editorForm" onsubmit="return false;">
           
-          <div id="form-hero" class="tab-content block space-y-5">
+          <div id="form-brand" class="tab-content block space-y-5">
+            <div class="border-b border-white/10 pb-4 mb-6">
+              <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fas fa-cog text-cyan-400"></i> <span>Pengaturan Utama Website (Header & Footer)</span>
+              </h3>
+            </div>
+
+            <div class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Nama Brand/Web (Header)</label>
+                  <input type="text" id="brand_title" data-path="brand.title" class="admin-input">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Subtitle Brand (Header)</label>
+                  <input type="text" id="brand_subtitle" data-path="brand.subtitle" class="admin-input">
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol WhatsApp Utama</label>
+                  <input type="text" id="brand_ctaWhatsapp" data-path="brand.ctaWhatsapp" class="admin-input">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Link Instagram (Footer)</label>
+                  <input type="text" id="footer_instagram" data-path="footer.instagram" class="admin-input">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Hak Cipta (Footer)</label>
+                <textarea id="footer_copyText" data-path="footer.copyText" rows="2" class="admin-input"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div id="form-hero" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
                 <i class="fas fa-home"></i> <span>Hero Section (Halaman Depan Utama)</span>
               </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur badge promosi, headline utama, paragraf pembuka, dan statistik singkat di bagian paling atas.</p>
             </div>
 
             <div class="space-y-4">
@@ -224,6 +264,21 @@
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Paragraf</label>
                 <textarea id="hero_description" data-path="hero.description" rows="3" class="admin-input"></textarea>
               </div>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Harga</label>
+                  <input type="text" id="hero_ctaPrice" data-path="hero.ctaPrice" class="admin-input">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Layanan</label>
+                  <input type="text" id="hero_ctaService" data-path="hero.ctaService" class="admin-input">
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 border-t border-white/10 pt-6">
+              <h4 class="text-sm font-bold text-cyan-400 mb-4">Statistik Card Bawah (Max 4 Card)</h4>
+              <div id="heroStats-container" class="grid sm:grid-cols-2 gap-4"></div>
             </div>
           </div>
 
@@ -252,6 +307,28 @@
                 <textarea id="tentang_p2" data-path="tentang.p2" rows="3" class="admin-input"></textarea>
               </div>
             </div>
+
+            <div class="mt-8 border-t border-white/10 pt-6 space-y-4">
+              <h4 class="text-sm font-bold text-teal-400 mb-4">Info Kartu Profil Kanan</h4>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Nama Handle (@)</label>
+                  <input type="text" id="tentang_handle" data-path="tentang.profileCard.handle" class="admin-input text-xs">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Sub-title Profesi</label>
+                  <input type="text" id="tentang_subhandle" data-path="tentang.profileCard.subhandle" class="admin-input text-xs">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Target Pelayanan (Value)</label>
+                  <input type="text" id="tentang_target" data-path="tentang.profileCard.targetVal" class="admin-input text-xs">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Kecepatan Respon (Value)</label>
+                  <input type="text" id="tentang_speed" data-path="tentang.profileCard.speedVal" class="admin-input text-xs">
+                </div>
+              </div>
+            </div>
           </div>
 
           <div id="form-keunggulan" class="tab-content hidden space-y-5">
@@ -277,7 +354,7 @@
             </div>
 
             <div class="mt-8 border-t border-white/10 pt-6">
-              <h4 class="text-sm font-bold text-white mb-4">Daftar Keunggulan (Card Item)</h4>
+              <h4 class="text-sm font-bold text-indigo-400 mb-4">Daftar Keunggulan (Card Item)</h4>
               <div id="keunggulan-container" class="space-y-3"></div>
               <button type="button" class="add-btn mt-4" onclick="addArrayItem('keunggulan')">
                 <i class="fas fa-plus"></i> Tambah Item Keunggulan
@@ -348,7 +425,7 @@
             </div>
 
             <div class="mt-8 border-t border-white/10 pt-6">
-              <h4 class="text-sm font-bold text-white mb-4">Daftar Testimoni (Animasi Berjalan)</h4>
+              <h4 class="text-sm font-bold text-amber-400 mb-4">Daftar Testimoni (Animasi Berjalan)</h4>
               <div id="testimoni-container" class="grid sm:grid-cols-2 gap-4"></div>
               <button type="button" class="add-btn mt-6" onclick="addArrayItem('testimoni')">
                 <i class="fas fa-plus"></i> Tambah Testimoni Baru
@@ -371,6 +448,10 @@
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="pricelist_title" data-path="pricelist.title" class="admin-input">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <textarea id="pricelist_desc" data-path="pricelist.desc" rows="2" class="admin-input"></textarea>
               </div>
             </div>
 
@@ -409,10 +490,14 @@
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
                 <input type="text" id="faq_title" data-path="faq.title" class="admin-input">
               </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
+                <textarea id="faq_desc" data-path="faq.desc" rows="2" class="admin-input"></textarea>
+              </div>
             </div>
 
             <div class="mt-8 border-t border-white/10 pt-6">
-              <h4 class="text-sm font-bold text-white mb-4">Daftar Pertanyaan & Jawaban</h4>
+              <h4 class="text-sm font-bold text-rose-400 mb-4">Daftar Pertanyaan & Jawaban</h4>
               <div id="faq-container" class="space-y-3"></div>
               <button type="button" class="add-btn mt-4" onclick="addArrayItem('faq')">
                 <i class="fas fa-plus"></i> Tambah FAQ Baru
@@ -430,8 +515,9 @@
     // 1. Data Inisial dari Server EJS
     let currentData = <%- JSON.stringify(content) %>;
     
-    // Konfigurasi Skema Array untuk CRUD
+    // Konfigurasi Skema Array untuk Form Editor Dinamis
     const ARRAY_SCHEMAS = {
+      'heroStats': { path: 'hero.stats', fields: [{id:'value', label:'Nilai Utama (Cth: 100%)', placeholder:''}, {id:'label', label:'Teks Deskripsi', placeholder:''}, {id:'color', label:'Warna Class Tailwind', placeholder:'text-cyan-400'}] },
       'keunggulan': { path: 'keunggulan.items', fields: [{id:'icon', label:'Ikon FontAwesome', placeholder:'fas fa-star'}, {id:'color', label:'Warna Class Tailwind', placeholder:'bg-teal-500/20 text-teal-400'}, {id:'title', label:'Judul Keunggulan', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
       'layanan-pkm': { path: 'layanan.pkm.modules', fields: [{id:'name', label:'Nama Modul', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
       'layanan-rs': { path: 'layanan.rs.modules', fields: [{id:'name', label:'Nama Modul', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
@@ -442,7 +528,7 @@
       'faq': { path: 'faq.items', fields: [{id:'q', label:'Pertanyaan (Q)', placeholder:'1. Apa itu...'}, {id:'a', label:'Jawaban (A)', isTextarea:true}] }
     };
 
-    // 2. Fungsi Helper untuk resolve Object Path string (misal "hero.badge" -> obj["hero"]["badge"])
+    // 2. Fungsi Helper (Mengatur Nilai Nested Object secara Dinamis)
     function resolvePath(obj, path) {
       return path.split('.').reduce((o, i) => o ? o[i] : null, obj);
     }
@@ -454,7 +540,7 @@
       target[last] = value;
     }
 
-    // 3. Render HTML untuk satu Item Array
+    // 3. Merender DOM HTML untuk satu Item Data List (CRUD Card)
     function renderArrayItemHTML(type, index, itemData) {
       const schema = ARRAY_SCHEMAS[type];
       let html = `<div class="array-item-card" data-type="${type}" data-index="${index}">
@@ -478,7 +564,7 @@
       return html;
     }
 
-    // 4. Render Seluruh Array Data saat Load Pertama
+    // 4. Memuat Seluruh Array/List ke dalam Editor
     function initArrayRendering() {
       Object.keys(ARRAY_SCHEMAS).forEach(type => {
         const container = document.getElementById(`${type}-container`);
@@ -493,40 +579,36 @@
       });
     }
 
-    // 5. Tambah Item Array Kosong (UI Level)
+    // 5. Action: Menambah Row Kosong Baru di Array (CRUD)
     function addArrayItem(type) {
       const container = document.getElementById(`${type}-container`);
-      const currentIndex = container.children.length; // Hitung element yang ada
+      const currentIndex = container.children.length; // Hitung elemen yang ada
       
-      // Buat data kosong berdasarkan schema field
       const emptyItem = {};
       ARRAY_SCHEMAS[type].fields.forEach(f => emptyItem[f.id] = '');
       
       container.insertAdjacentHTML('beforeend', renderArrayItemHTML(type, currentIndex, emptyItem));
     }
 
-    // 6. Hapus Item Array (UI Level)
+    // 6. Action: Menghapus Row dari DOM (CRUD)
     function removeArrayItem(buttonElement) {
       if(confirm('Apakah Anda yakin ingin menghapus baris data ini?')) {
         buttonElement.closest('.array-item-card').remove();
-        // Index attributes akan di-ignore saat saving karena kita looping DOM secara urut.
       }
     }
 
-    // 7. Load Data Statis saat halaman dibuka
+    // 7. Load Data Statis Pertama Kali saat halaman terbuka
     document.addEventListener('DOMContentLoaded', function() {
-      // Load Simple Static Inputs
       const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
       staticInputs.forEach(input => {
         const val = resolvePath(currentData, input.getAttribute('data-path'));
         if (val !== undefined && val !== null) input.value = val;
       });
 
-      // Load Array Inputs
       initArrayRendering();
     });
 
-    // 8. Visual Tab Switching
+    // 8. Tampilan Berpindah Tab Menu
     function switchTab(activeTabId) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden', 'block') && c.classList.remove('block'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -540,26 +622,25 @@
       activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
     }
 
-    // 9. LOGIKA UTAMA: Pengumpulan Data & Simpan ke REDIS
+    // 9. LOGIKA UTAMA: Pengumpulan (Ekstraksi) Seluruh Form HTML & Simpan ke REDIS Backend
     document.getElementById('saveBtn').addEventListener('click', async function(e) {
       e.preventDefault();
       const saveBtn = this;
       const originalBtnHTML = saveBtn.innerHTML;
       
-      // Indikator Loading
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan & Ekstraksi Data...</span>';
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan ke Database...</span>';
 
-      // Deep Clone struktur original agar node struktur tidak hilang
+      // Deep Clone Struktur JSON original
       let payloadData = JSON.parse(JSON.stringify(currentData));
 
-      // 9.A: Extract Teks Statis (Input / Textarea dengan data-path)
+      // 9.A: Rekam semua nilai Input yang bersfat Statis
       const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
       staticInputs.forEach(input => {
         setPath(payloadData, input.getAttribute('data-path'), input.value);
       });
 
-      // 9.B: Extract Array Dinamis (Iterasi setiap Container di DOM)
+      // 9.B: Rekam dan Susun Ulang Semua Field Array / Loop
       Object.keys(ARRAY_SCHEMAS).forEach(type => {
         const schema = ARRAY_SCHEMAS[type];
         const container = document.getElementById(`${type}-container`);
@@ -578,12 +659,11 @@
             newArray.push(itemObj);
           });
           
-          // Timpa array lama di payload dengan array baru dari DOM
-          setPath(payloadData, schema.path, newArray);
+          setPath(payloadData, schema.path, newArray); // Timpa node Array lama
         }
       });
 
-      // 9.C: Kirim ke Backend Node.js -> Vercel KV Redis
+      // 9.C: Pengiriman Fetch API ke Backend Node.JS (Upstash)
       const statusAlert = document.getElementById('statusAlert');
       const statusIcon = document.getElementById('statusIcon');
       const statusMessage = document.getElementById('statusMessage');
@@ -602,8 +682,7 @@
           statusAlert.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
           statusIcon.className = 'fas fa-check-circle text-base';
           statusMessage.innerText = '✅ ' + result.message;
-          // Perbarui local state agar tidak perlu refresh halaman
-          currentData = payloadData; 
+          currentData = payloadData; // Update lokal (tanpa direfresh)
         } else {
           throw new Error(result.message);
         }
