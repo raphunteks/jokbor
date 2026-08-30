@@ -18,8 +18,8 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Trust Proxy untuk deployment Vercel / Serverless
 app.enable('trust proxy');
@@ -31,58 +31,245 @@ const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '6285338922586';
 const PRODUCTION_DOMAIN = process.env.PRODUCTION_DOMAIN || 'https://jokiborangpidgi.vercel.app';
 
 // ========================================================================
-// [DATABASE] KONFIGURASI VERCEL KV (UPSTASH REDIS) & ADMIN DASHBOARD
+// [DATABASE REDIS] KONFIGURASI VERCEL KV / UPSTASH REDIS & FALLBACK CONTENT
 // ========================================================================
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Ganti di ENV Vercel
-const KV_REST_API_URL = process.env.KV_REST_API_URL || '';
-const KV_REST_API_TOKEN = process.env.KV_REST_API_TOKEN || '';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Ganti via Environment Variable Vercel
+const KV_REST_API_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
+const KV_REST_API_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
 
-// Default Content Fallback (Jika Redis Kosong/Error, Web Tetap Jalan Normal)
+/**
+ * SUPER BIG STRUCTURE DEFAULT SITE CONTENT
+ * Memuat SELURUH teks, array list, dan komponen dari index.ejs (Top to Bottom)
+ */
 const DEFAULT_SITE_CONTENT = {
+  // BRAND & NAVIGATION
+  brand: {
+    title: "jokiborangpidgi",
+    subtitle: "PIDGI Assistance",
+    ctaWhatsapp: "Hubungi Kami"
+  },
+
+  // 1. HERO SECTION
   hero: {
     badge: "Jasa Administrasi & Input Logbook PIDGI No. 1 di Indonesia",
     titleMain: "Fokus Tangani Pasien,",
     titleHighlight: "Biar Borang PIDGI Kami yang Tuntaskan.",
-    description: "Solusi terpercaya pengisian e-logbook harian, stase Puskesmas, dan Rumah Sakit. Dari koding UKP, laporan UKM lapangan, hingga penyusunan PKRS & Laporan Kasus tuntas tanpa pusing."
+    description: "Solusi terpercaya pengisian e-logbook harian, stase Puskesmas, dan Rumah Sakit. Dari koding UKP, laporan UKM lapangan, hingga penyusunan PKRS & Laporan Kasus tuntas tanpa pusing.",
+    ctaPrice: "Lihat Daftar Harga (Pricelist)",
+    ctaService: "Pelajari Layanan Modul",
+    stats: [
+      { value: "100%", label: "Kerahasiaan Akun", color: "text-cyan-400" },
+      { value: "ICD-10", label: "Kode ICD-10 Tepat", color: "text-teal-400" },
+      { value: "1 Hari", label: "Opsi Express Kilat", color: "text-indigo-400" },
+      { value: "Valid", label: "Garansi Approval DP", color: "text-pink-400" }
+    ]
   },
+
+  // 2. TENTANG KAMI SECTION
   tentang: {
     badge: "Tentang Layanan Kami",
     title: "Sahabat Administrasi Terbaik untuk Dokter Gigi Internsip",
     p1: "@jokiborangpidgi didirikan untuk memberikan solusi nyata bagi rekan-rekan sejawat dokter gigi yang tengah menjalani Program Internsip Dokter Gigi Indonesia (PIDGI).",
-    p2: "Kami menyadari padatnya jadwal pelayanan poli gigi, ekstraksi serial, jaga instalasi gawat darurat, hingga kegiatan lapangan UKGS/UKGMD yang menyita tenaga dan waktu istirahat Anda. Kami hadir mendampingi beban administratif Anda dengan pengerjaan logbook yang terstruktur, akurat, dan sesuai pedoman resmi Kemenkes."
+    p2: "Kami menyadari padatnya jadwal pelayanan poli gigi, ekstraksi serial, jaga instalasi gawat darurat, hingga kegiatan lapangan UKGS/UKGMD yang menyita tenaga dan waktu istirahat Anda. Kami hadir mendampingi beban administratif Anda dengan pengerjaan logbook yang terstruktur, akurat, dan sesuai pedoman resmi Kemenkes.",
+    highlights: ["Standar SOAP Klinis", "Format Laporan Terstandar", "Garansi Revisi"],
+    profileCard: {
+      handle: "@jokiborangpidgi",
+      subhandle: "Asisten Logbook Terpercaya",
+      targetVal: "Stase RS & PKM",
+      speedVal: "< 15 Menit",
+      privacyVal: "Terenkripsi 100%"
+    }
   },
+
+  // 3. KEUNGGULAN SECTION
   keunggulan: {
     badge: "Keunggulan Utama",
     title: "Mengapa Memilih @jokiborangpidgi?",
-    desc: "Standar pengerjaan profesional yang mengutamakan ketelitian medis dan kenyamanan klien."
+    desc: "Standar pengerjaan profesional yang mengutamakan ketelitian medis dan kenyamanan klien.",
+    items: [
+      {
+        icon: "fas fa-tooth",
+        color: "bg-teal-500/20 text-teal-400",
+        title: "Paham Istilah & Kode ICD-10 Gigi",
+        desc: "Tidak asal ketik. Kami memahami terminologi odontologi, penulisan status lokalis, prosedur konservasi, bedah mulut, serta kode ICD-10 gigi yang valid."
+      },
+      {
+        icon: "fas fa-user-shield",
+        color: "bg-cyan-500/20 text-cyan-400",
+        title: "Kerahasiaan Data 100%",
+        desc: "Privasi akun e-Logbook, nama wahana, nomor registrasi pasien, dan identitas dokter internsip dijamin aman dengan protokol pembersihan data berkala."
+      },
+      {
+        icon: "fas fa-bolt",
+        color: "bg-indigo-500/20 text-indigo-400",
+        title: "Pengerjaan Tepat Waktu",
+        desc: "Komitmen deadline ketat. Tersedia opsi Reguler (3-5 hari) hingga layanan Express (1x24 jam) saat menghadapi batas akhir monev bulanan."
+      },
+      {
+        icon: "fas fa-clipboard-check",
+        color: "bg-emerald-500/20 text-emerald-400",
+        title: "Format Standar Approval DP",
+        desc: "Penyusunan format SOAP, kegiatan promkes, dan laporan evaluasi telah disesuaikan agar mudah diverifikasi dan disetujui Dokter Pendamping."
+      },
+      {
+        icon: "fas fa-tags",
+        color: "bg-amber-500/20 text-amber-400",
+        title: "Biaya Fleksibel & Transparan",
+        desc: "Tersedia skema per kasus, paket mingguan, bulanan, hingga paket combo 6 bulan all-in dengan transparansi harga tanpa biaya tersembunyi."
+      },
+      {
+        icon: "fas fa-headset",
+        color: "bg-pink-500/20 text-pink-400",
+        title: "Konsultasi Ramah & Responsif",
+        desc: "Komunikasi mudah melalui WhatsApp langsung dengan admin yang mengerti alur sistem internsip dokter gigi di berbagai wahana Indonesia."
+      }
+    ]
   },
+
+  // 4. LAYANAN MODUL SECTION
   layanan: {
     badge: "Modul & Cakupan",
     title: "Layanan Lengkap Logbook PIDGI",
-    desc: "Kami menangani seluruh pembagian stase Puskesmas dan Rumah Sakit secara menyeluruh."
+    desc: "Kami menangani seluruh pembagian stase Puskesmas dan Rumah Sakit secara menyeluruh.",
+    pkm: {
+      title: "Logbook Stase Puskesmas",
+      subtitle: "Poli Gigi, Posyandu, & Pelayanan Masyarakat",
+      desc: "Pengelolaan menyeluruh untuk pemenuhan kuota tindakan di poli gigi puskesmas serta pelaporan kegiatan terpadu lintas sektor.",
+      modules: [
+        { name: "UKP (Upaya Kesehatan Perseorangan)", desc: "Input logbook kasus harian poli: ekstraksi, tumpatan (GIC/Komposit), scalling, premedikasi, serta edukasi pasien (KIE)." },
+        { name: "UKM (Upaya Kesehatan Masyarakat)", desc: "Penyusunan laporan Promkes lapangan, program UKGS di sekolah, penyuluhan posyandu, dan laporan evaluasi program puskesmas." },
+        { name: "Laporan Kasus (Lapsus) Puskesmas", desc: "Penyusunan makalah laporan kasus komprehensif dari pasien poli gigi puskesmas lengkap dengan tinjauan teori terkini." }
+      ]
+    },
+    rs: {
+      title: "Logbook Stase Rumah Sakit",
+      subtitle: "Poli Spesialis, IGD, Manajemen & Penunjang",
+      desc: "Penyusunan administrasi klinis rumah sakit terintegrasi, laporan divisi manajemen mutu pelayanan, serta presentasi edukasi pasien.",
+      modules: [
+        { name: "UKP Rumah Sakit", desc: "Input kasus poli gigi RS, asistensi tindakan bedah minor (odontektomi/alveolektomi), serta penanganan kasus kegawatdaruratan gigi di IGD." },
+        { name: "UKM Stase RS", desc: "Kegiatan edukasi dan penyuluhan kesehatan gigi untuk pasien rawat jalan / keluarga penunggu pasien di area Rumah Sakit." },
+        { name: "Manajemen & PKRS", desc: "Laporan manajemen RS, serta pembuatan dokumen Word & Slide Presentasi PPT Promosi Kesehatan Rumah Sakit (PKRS)." },
+        { name: "Laporan Kasus (Lapsus) RS", desc: "Penulisan ilmiah laporan kasus spesialistik RS disertai dokumentasi foto klinis, rontgen panoramik, dan pembahasan jurnal." }
+      ]
+    }
   },
+
+  // 5. TESTIMONI SECTION (LENGKAP 22 REKAN DOKTER GIGI)
   testimoni: {
     badge: "Ulasan Rekan Sejawat",
     title: "Apa Kata Klien Kami?",
-    desc: "100% Trusted. Testimoni nyata dari ratusan rekan dokter gigi internsip di seluruh wahana se-Indonesia."
+    desc: "100% Trusted. Testimoni nyata dari ratusan rekan dokter gigi internsip di seluruh wahana se-Indonesia.",
+    items: [
+      { initials: "RD", name: "drg. Ro*** De*****", wahana: "RSAD TK IV dr. R. Ismoyo Kendari", color: "bg-teal-500/20 text-teal-300", comment: "Pelayanan luar biasa cepat. Kasus stase RS saya terinput sempurna, sangat membantu saat jadwal IGD padat!" },
+      { initials: "US", name: "drg. Ul**** Sy*****", wahana: "RSUD Kota Kendari", color: "bg-cyan-500/20 text-cyan-300", comment: "Sangat profesional! Laporan manajemen RS dan PKRS disusun sangat rapi, DP langsung approve tanpa revisi sedikitpun." },
+      { initials: "NK", name: "drg. Nu*** Kh****", wahana: "PKM Lepo-Lepo", color: "bg-indigo-500/20 text-indigo-300", comment: "Gak perlu pusing lagi mikirin laporan Promkes. Semua tuntas dikerjakan dengan baik dan tepat waktu. Mantap!" },
+      { initials: "MT", name: "drg. Mu***** Th***", wahana: "PKM Perumnas", color: "bg-pink-500/20 text-pink-300", comment: "Borang harian terisi dengan kode ICD-10 yang valid. Beban kerja di poli jadi jauh lebih ringan berkat JokiBorangPIDGI." },
+      { initials: "NA", name: "drg. Nur*** Ar****", wahana: "RSU Sayang Rakyat", color: "bg-emerald-500/20 text-emerald-300", comment: "Penyelamat banget di akhir bulan! Lapsus dibuat sangat detail dengan referensi jurnal terbaru. Highly recommended!" },
+      { initials: "LJ", name: "drg. L** J****", wahana: "PKM Kaluku Bodoa", color: "bg-amber-500/20 text-amber-300", comment: "Sangat amanah dan terpercaya. Privasi akun logbook saya benar-benar dijaga. Bakal langganan sampai internsip selesai." },
+      { initials: "AI", name: "drg. Ai** In***", wahana: "PKM Sudiang", color: "bg-teal-500/20 text-teal-300", comment: "Adminnya ramah dan responsif. Konsultasi gampang, pengerjaannya cepat, harganya juga sangat pas di kantong internsip." },
+      { initials: "AF", name: "drg. An*** Fi*****", wahana: "RSUD Undata Palu", color: "bg-cyan-500/20 text-cyan-300", comment: "Sangat membantu di tengah jadwal stase RS yang padat. Logbook selesai tepat waktu tanpa ada hari yang terlewat." },
+      { initials: "RM", name: "drg. Ri** Ma*****", wahana: "PKM Tamalanrea Makassar", color: "bg-indigo-500/20 text-indigo-300", comment: "Pusing mikirin laporan UKM hilang seketika! Laporan penyuluhan dan evaluasinya sangat terstruktur. Recommended banget!" },
+      { initials: "FN", name: "drg. Fa*** No****", wahana: "RSUD Kota Mataram", color: "bg-pink-500/20 text-pink-300", comment: "Kerjanya cepat dan rapi. Kode ICD-10 untuk kasus bedah mulut tepat semua. DP saya langsung acc tanpa babibu." },
+      { initials: "DP", name: "drg. Di** Pr*****", wahana: "PKM Kuta Selatan", color: "bg-emerald-500/20 text-emerald-300", comment: "Jujur awalnya ragu, tapi setelah coba paket 1 bulan langsung berlangganan full stase! Aman 100% dan terpercaya." },
+      { initials: "HW", name: "drg. He*** Wi****", wahana: "RSUD dr. Doris Sylvanus", color: "bg-teal-500/20 text-teal-300", comment: "Lapsus saya dikerjakan dengan sangat baik. Tinjauan pustakanya up-to-date dan PPT presentasinya keren abis." },
+      { initials: "MS", name: "drg. Me** Sa****", wahana: "PKM Sekip Palembang", color: "bg-cyan-500/20 text-cyan-300", comment: "Adminnya ramah banget, fast respon. Pasien poli numpuk jadi nggak beban lagi mikirin ngetik borang malem-malem." },
+      { initials: "YA", name: "drg. Yo** Ad*****", wahana: "RSUD Tarakan Jakarta", color: "bg-indigo-500/20 text-indigo-300", comment: "Privasi benar-benar dijaga. Pengerjaan rapi dan sesuai format resmi Kemenkes. Sukses terus Jokiborangpidgi!" },
+      { initials: "CL", name: "drg. Ch*** Li***", wahana: "PKM Denpasar Barat", color: "bg-pink-500/20 text-pink-300", comment: "Gak nyangka bisa secepat ini, pesan paket express malam hari, besok paginya udah beres semua. Gokil mantap!" },
+      { initials: "BS", name: "drg. Bu** Sa*****", wahana: "RSUP dr. Sardjito", color: "bg-emerald-500/20 text-emerald-300", comment: "Presentasi PKRS saya dipuji sama konsulen. Materinya berbobot dan desainnya elegan. Terima kasih banyak tim!" },
+      { initials: "AK", name: "drg. An*** Ku*****", wahana: "PKM Banjarmasin Indah", color: "bg-amber-500/20 text-amber-300", comment: "Layanan asisten logbook PIDGI paling the best! Harganya masuk akal untuk kualitas dan garansi yang diberikan." },
+      { initials: "SN", name: "drg. Si** Nu*****", wahana: "RSUD Arifin Achmad", color: "bg-teal-500/20 text-teal-300", comment: "Kasus konservasi dan pedo diinput dengan rapi, catatan SOAP-nya detail banget. Sangat profesional kerjanya." },
+      { initials: "ER", name: "drg. Ek* Ra*****", wahana: "PKM Pontianak Kota", color: "bg-cyan-500/20 text-cyan-300", comment: "Beneran ngebantu buat dokter internsip yang kewalahan bagi waktu istirahat antara jaga malam IGD dan poli gigi." },
+      { initials: "RO", name: "drg. Re** Ok*****", wahana: "RSUD dr. Zainoel Abidin", color: "bg-indigo-500/20 text-indigo-300", comment: "Garansi revisinya beneran jalan. Ada sedikit koreksi format dari DP dan langsung diperbaiki hari itu juga. Keren!" },
+      { initials: "VA", name: "drg. Vi** Am*****", wahana: "PKM Sukajadi Bandung", color: "bg-pink-500/20 text-pink-300", comment: "Borang bulanan aman terkendali. Saya bisa lebih fokus melayani pasien dan punya waktu cukup buat belajar." },
+      { initials: "GH", name: "drg. Gu*** He****", wahana: "RSUD Jayapura", color: "bg-emerald-500/20 text-emerald-300", comment: "Layanan sangat amanah. Awalnya takut data bocor, tapi ternyata sistem mereka sangat secure. 100% Trusted!" }
+    ]
   },
+
+  // 6. BIAYA / PRICELIST SECTION
   pricelist: {
     badge: "Pricelist Transparan",
     title: "Biaya Jasa / Pricelist Borang PIDGI",
-    desc: "Tarif transparan, hemat, dan dapat disesuaikan dengan kebutuhan masa stase Anda."
+    desc: "Tarif transparan, hemat, dan dapat disesuaikan dengan kebutuhan masa stase Anda.",
+    ukpPkm: {
+      tag: "Stase Puskesmas (PKM)",
+      type: "Reguler (3-5 Hari Kerja)",
+      price: "Rp 5.000",
+      unit: "/ kasus",
+      features: [
+        { label: "Paket 1 Minggu", val: "Rp 250.000" },
+        { label: "All-in 1 Bulan PKM", val: "Rp 900.000" },
+        { label: "All-in 3 Bulan PKM", val: "Rp 2.500.000" }
+      ]
+    },
+    ukpRs: {
+      tag: "Stase Rumah Sakit (RS)",
+      type: "Reguler (3-5 Hari Kerja)",
+      price: "Rp 5.000",
+      unit: "/ kasus",
+      features: [
+        { label: "Paket 1 Minggu", val: "Rp 150.000" },
+        { label: "All-in 1 Bulan RS", val: "Rp 500.000" },
+        { label: "All-in 3 Bulan RS", val: "Rp 1.800.000" }
+      ]
+    },
+    expressCombo: {
+      tag: "Express & Paket Combo",
+      type: "Pengerjaan 1x24 Jam Kilat",
+      price: "Rp 7.000",
+      unit: "/ kasus",
+      discount: "⚡ Diskon 10% pemesanan > 100 kasus",
+      comboTitle: "🔥 COMBO FULL 6 BULAN (RS + PKM)",
+      comboPrice: "Rp 4.000.000",
+      comboSub: "Solusi tenang tuntas satu masa internsip penuh"
+    },
+    ukm: [
+      { name: "Laporan Promkes", price: "Rp 10.000", unit: "/laporan" },
+      { name: "Laporan Evaluasi", price: "Rp 35.000", unit: "/laporan" },
+      { name: "All-in 3 Lap Evaluasi", price: "Rp 100.000", unit: "" }
+    ],
+    pkrs: [
+      { name: "PKRS Dokumen Word", price: "Rp 40.000", note: "" },
+      { name: "PKRS Slide PPT", price: "Rp 60.000", note: "*Materi teks dlm Word" },
+      { name: "Paket Hemat (Word+PPT)", price: "Rp 100.000", note: "" },
+      { name: "Laporan Manajemen RS", price: "Rp 10.000", note: "/lap" }
+    ],
+    lapsus: [
+      { name: "Lapsus Dokumen Word", price: "Rp 100.000", note: "10 hal, +5rb/hal berikutnya" },
+      { name: "Lapsus Slide PPT", price: "Rp 150.000", note: "" },
+      { name: "Paket Hemat (Word+PPT)", price: "Rp 200.000", note: "" }
+    ]
   },
+
+  // 7. FAQ SECTION
   faq: {
     badge: "Tanya Jawab",
     title: "Ada yang Ingin Ditanyakan?",
-    desc: "Pertanyaan umum mengenai alur pemesanan dan durasi pengerjaan borang."
+    desc: "Pertanyaan umum mengenai alur pemesanan dan durasi pengerjaan borang.",
+    items: [
+      { q: "1. Berapa lama estimasi pengerjaan logbook UKP?", a: "Untuk paket reguler stase RS maupun Puskesmas estimasi pengerjaan adalah 3-5 hari kerja. Jika Anda membutuhkan pengerjaan mendesak sebelum monev atau rotasi stase, Anda dapat memilih paket Express dengan jaminan selesai dalam kurun waktu 1x24 jam." },
+      { q: "2. Berapa lama pengerjaan modul UKM Puskesmas?", a: "Laporan Promkes dan Laporan Evaluasi UKM diselesaikan rata-rata dalam 1-3 hari kerja sejak data dasar, topik kegiatan, atau materi penyuluhan dikirimkan kepada tim kami." },
+      { q: "3. Berapa lama pengerjaan Laporan Manajemen & PKRS?", a: "Laporan PKRS (baik dokumen Word maupun slide presentasi PowerPoint) dan laporan manajemen RS memakan waktu pengerjaan 2-3 hari kerja. Desain PPT kami rancang secara visual, profesional, dan siap dipresentasikan di hadapan Dokter Pendamping." },
+      { q: "4. Bagaimana alur pengerjaan Laporan Kasus (Lapsus)?", a: "Pengerjaan Lapsus membutuhkan waktu 3-5 hari kerja. Laporan disusun secara komprehensif mulai dari tinjauan pustaka, anamnesis, pemeriksaan klinis, rencana perawatan, hingga pembahasan ilmiah yang dilengkapi sitasi jurnal kedokteran gigi terkini." },
+      { q: "5. Apakah data akun dan rekam medis pasien dijamin aman?", a: "Kami menjamin 100% kerahasiaan. Kredensial akun portal e-logbook hanya digunakan selama proses penginputan dan langsung dihapus dari perangkat kami setelah transaksi selesai. Identitas pasien dan wahana Anda dijaga secara ketat." },
+      { q: "6. Bagaimana jika terdapat revisi dari Dokter Pendamping?", a: "Kami memberikan garansi revisi gratis sampai borang dan laporan Anda dinyatakan valid dan disetujui oleh Dokter Pendamping (DP) wahana Anda." }
+    ]
+  },
+
+  // FOOTER & COPYRIGHT
+  footer: {
+    copyText: "@jokiborangpidgi. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.",
+    instagram: "https://instagram.com/jokiborangpidgi"
   }
 };
 
-// Sistem Caching In-Memory (Menghemat request ke Redis API)
+// Caching In-Memory (Menghemat Kuota Request Redis Upstash)
 let contentCache = null;
 let lastCacheTime = 0;
-const CACHE_DURATION = 60000; // Cache 1 Menit
+const CACHE_DURATION = 60000; // 1 Menit
 
+/**
+ * FUNGSI BACA DATA REDIS DATABASE
+ */
 async function getSiteContent() {
   if (contentCache && (Date.now() - lastCacheTime < CACHE_DURATION)) {
     return contentCache;
@@ -106,22 +293,25 @@ async function getSiteContent() {
   return DEFAULT_SITE_CONTENT;
 }
 
+/**
+ * FUNGSI SIMPAN DATA REDIS DATABASE
+ */
 async function saveSiteContent(newContent) {
-  if (!KV_REST_API_URL || !KV_REST_API_TOKEN) throw new Error("Vercel KV ENV variables are missing");
+  if (!KV_REST_API_URL || !KV_REST_API_TOKEN) throw new Error("Upstash Redis / Vercel KV ENV API Key belum dipasang");
   const response = await fetch(`${KV_REST_API_URL}/set/site_content`, {
     method: 'POST',
     headers: { 
       Authorization: `Bearer ${KV_REST_API_TOKEN}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(JSON.stringify(newContent)) // Upstash REST API requires stringified JSON string
+    body: JSON.stringify(JSON.stringify(newContent)) // Upstash REST API memerlukan stringified JSON string
   });
-  if (!response.ok) throw new Error("Gagal menyimpan ke Redis");
+  if (!response.ok) throw new Error("Gagal menyimpan data ke Vercel Redis Database");
   contentCache = newContent;
   lastCacheTime = Date.now();
 }
 
-// Middleware Autentikasi Admin via Cookie
+// Middleware Autentikasi Login Admin Panel via Cookie
 function checkAdminAuth(req, res, next) {
   const cookieHeader = req.headers.cookie || '';
   if (cookieHeader.includes('admin_auth=true') || process.env.NODE_ENV !== 'production') {
@@ -131,19 +321,19 @@ function checkAdminAuth(req, res, next) {
 }
 
 // ========================================================================
-// [ROUTES ADMIN] LOGIN, LOGOUT & CMS DASHBOARD
+// [ROUTES ADMIN] LOGIN, LOGOUT, & CMS MANAGEMENT
 // ========================================================================
 app.get('/admin/login', (req, res) => {
   res.send(`
-    <!DOCTYPE html><html lang="id"><head><title>Admin Login - Joki Borang</title><script src="https://cdn.tailwindcss.com"></script></head>
+    <!DOCTYPE html><html lang="id"><head><title>Admin Login - Joki Borang PIDGI</title><script src="https://cdn.tailwindcss.com"></script></head>
     <body class="bg-slate-900 h-screen flex items-center justify-center text-white font-sans">
       <div class="bg-slate-800 p-8 rounded-2xl shadow-xl w-96 border border-slate-700">
         <div class="text-center mb-6">
-          <h2 class="text-2xl font-bold text-cyan-400">Panel Admin</h2>
-          <p class="text-xs text-slate-400 mt-1">Sistem Manajemen Database</p>
+          <h2 class="text-2xl font-bold text-cyan-400">Panel Admin CMS</h2>
+          <p class="text-xs text-slate-400 mt-1">Sistem Database Realtime Redis</p>
         </div>
         <form method="POST" action="/admin/login" class="flex flex-col gap-4">
-          <input type="password" name="password" placeholder="Masukkan Password" required class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-cyan-500 text-sm">
+          <input type="password" name="password" placeholder="Masukkan Password Admin" required class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-cyan-500 text-sm">
           <button type="submit" class="bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform shadow-lg shadow-cyan-500/20">Login Sekarang</button>
         </form>
       </div>
@@ -156,7 +346,7 @@ app.post('/admin/login', (req, res) => {
     res.setHeader('Set-Cookie', 'admin_auth=true; HttpOnly; Path=/; Max-Age=86400');
     res.redirect('/admin');
   } else {
-    res.send('<script>alert("Password Salah!"); window.location.href="/admin/login";</script>');
+    res.send('<script>alert("Password Admin Salah!"); window.location.href="/admin/login";</script>');
   }
 });
 
@@ -165,22 +355,24 @@ app.get('/admin/logout', (req, res) => {
   res.redirect('/admin/login');
 });
 
+// Route Tampilan Admin CMS Dashboard (Mendapatkan Seluruh Object Konten)
 app.get('/admin', checkAdminAuth, async (req, res) => {
   const content = await getSiteContent();
-  res.render('admin-dashboard', { content }); // Membutuhkan admin-dashboard.ejs
+  res.render('admin-dashboard', { content });
 });
 
+// Endpoint API Simpan / Update Content
 app.post('/admin/save', checkAdminAuth, async (req, res) => {
   try {
     await saveSiteContent(req.body);
-    res.json({ success: true, message: 'Data berhasil disimpan!' });
+    res.json({ success: true, message: 'Seluruh data konten berhasil diupdate ke Redis Database secara Realtime!' });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 });
 
 // ========================================================================
-// [SEO REGISTRY] BAWAAN (TIDAK ADA YANG DIUBAH)
+// [SEO REGISTRY] DYNAMIC SSR SEO payload & SCHEMA GRAPH (GSC GOLD STANDARD)
 // ========================================================================
 /**
  * Metadata Registry untuk Dynamic SSR SEO (GSC Gold Standard)
