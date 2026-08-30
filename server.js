@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const { Redis } = require('@upstash/redis'); // [UPGRADE] Import SDK Upstash Redis
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,11 +19,23 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Trust Proxy untuk deployment Vercel / Serverless
 app.enable('trust proxy');
+
+// ========================================================================
+// [UPGRADE] SUPER BIG UPGRADE: ANTI-CACHE UNTUK ENDPOINT API
+// Memastikan request API realtime tidak di-cache oleh browser/Vercel
+// ========================================================================
+app.use('/api', (req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
+    next();
+});
 
 // Nomor Kontak WhatsApp Resmi Admin (Support ENV Vercel)
 const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '6285338922586';
@@ -31,15 +44,41 @@ const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '6285338922586';
 const PRODUCTION_DOMAIN = process.env.PRODUCTION_DOMAIN || 'https://jokiborangpidgi.vercel.app';
 
 // ========================================================================
-// [DATABASE REDIS] KONFIGURASI VERCEL KV / UPSTASH REDIS & FALLBACK CONTENT
+// [DATABASE REDIS] KONFIGURASI VERCEL KV / UPSTASH REDIS SDK
 // ========================================================================
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Ganti via Environment Variable Vercel
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 const KV_REST_API_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
 const KV_REST_API_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
 
+// [UPGRADE] Inisiasi Koneksi Resmi Menggunakan @upstash/redis
+let redis = null;
+try {
+    if (KV_REST_API_URL && KV_REST_API_TOKEN) {
+        redis = new Redis({ 
+            url: KV_REST_API_URL, 
+            token: KV_REST_API_TOKEN 
+        });
+        console.log("✅ Sistem Database Upstash Redis Berhasil Terkoneksi. (REALTIME SDK MODE)");
+    } else {
+        console.warn("⚠️ Peringatan: URL/Token Redis tidak ditemukan di ENV. Berjalan di Mode Offline/Fallback.");
+    }
+} catch (error) {
+    console.error("⚠️ Peringatan: Redis gagal inisiasi.", error.message);
+}
+
+// [UPGRADE] Utility: Safe JSON Parser (Anti-Crash Server)
+const safeParse = (data, fallbackData) => {
+    if (!data) return fallbackData;
+    try {
+        return typeof data === 'string' ? JSON.parse(data) : data;
+    } catch (error) {
+        console.error("⚠️ Data terdeteksi korup saat diurai, menggunakan fallback data.");
+        return fallbackData;
+    }
+};
+
 /**
  * SUPER BIG STRUCTURE DEFAULT SITE CONTENT
- * Memuat SELURUH teks, array list, dan komponen dari index.ejs (Top to Bottom)
  */
 const DEFAULT_SITE_CONTENT = {
   // BRAND & NAVIGATION
@@ -256,7 +295,7 @@ const DEFAULT_SITE_CONTENT = {
   },
 
   // ==========================================
-  // [NEW UPGRADE] FOOTER & SEO META REGISTRY
+  // FOOTER & SEO META REGISTRY
   // ==========================================
   footer: {
     copyText: "@jokiborangpidgi. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.",
@@ -280,34 +319,24 @@ let lastCacheTime = 0;
 const CACHE_DURATION = 60000; // 1 Menit
 
 /**
- * FUNGSI BACA DATA REDIS DATABASE
- * Memiliki Auto-Heal (Merge) jika Data Redis Lama Belum Memiliki Key Baru
+ * FUNGSI BACA DATA REDIS DATABASE [UPGRADED WITH SDK]
  */
 async function getSiteContent() {
   if (contentCache && (Date.now() - lastCacheTime < CACHE_DURATION)) {
     return contentCache;
   }
   
-  if (!KV_REST_API_URL || !KV_REST_API_TOKEN) {
+  if (!redis) {
     return DEFAULT_SITE_CONTENT;
   }
 
   try {
-    const response = await fetch(`${KV_REST_API_URL}/get/site_content`, {
-      headers: { Authorization: `Bearer ${KV_REST_API_TOKEN}` }
-    });
-    const data = await response.json();
+    const data = await redis.get('site_content');
     
-    if (data && data.result) {
-      let parsedData;
-      try {
-        parsedData = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
-      } catch(e) {
-        parsedData = data.result; 
-      }
+    if (data) {
+      let parsedData = safeParse(data, DEFAULT_SITE_CONTENT);
       
       // AUTO-HEAL: Gabungkan data Redis dengan DEFAULT_SITE_CONTENT
-      // Mencegah error 'undefined' jika ada struktur JSON baru (seperti seo, footer) yang belum ada di database lama
       const finalData = { ...DEFAULT_SITE_CONTENT, ...parsedData };
       
       // Pastikan sub-object nested juga aman digabungkan
@@ -328,21 +357,13 @@ async function getSiteContent() {
 }
 
 /**
- * FUNGSI SIMPAN DATA REDIS DATABASE
+ * FUNGSI SIMPAN DATA REDIS DATABASE [UPGRADED WITH SDK]
  */
 async function saveSiteContent(newContent) {
-  if (!KV_REST_API_URL || !KV_REST_API_TOKEN) throw new Error("Upstash Redis / Vercel KV ENV API Key belum dipasang");
+  if (!redis) throw new Error("Sistem Database Redis Sedang Offline. Gagal menyimpan ke server.");
   
-  const response = await fetch(`${KV_REST_API_URL}/set/site_content`, {
-    method: 'POST',
-    headers: { 
-      Authorization: `Bearer ${KV_REST_API_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(JSON.stringify(newContent)) 
-  });
-
-  if (!response.ok) throw new Error("Gagal menyimpan data ke Vercel Redis Database");
+  await redis.set('site_content', JSON.stringify(newContent));
+  
   contentCache = newContent;
   lastCacheTime = Date.now();
 }
@@ -405,6 +426,18 @@ app.post('/admin/save', checkAdminAuth, async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
+});
+
+// ========================================================================
+// [API JSON REST] SUPER UPGRADE: CMS Content API untuk keperluan Fetch
+// ========================================================================
+app.get('/api/content', async (req, res) => {
+    try {
+        const content = await getSiteContent();
+        res.status(200).json({ success: true, data: content });
+    } catch (e) {
+        res.status(500).json({ success: false, message: "Gagal memuat API Content." });
+    }
 });
 
 // ========================================================================
@@ -860,8 +893,8 @@ function buildSeoPayload(req, sectionKey = 'home', siteContent = null) {
 // ========================================================================
 // ROUTE 1: Landing Page Root (/)
 app.get('/', async (req, res) => {
-  const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
-  const seoData = buildSeoPayload(req, 'home', siteContent); // <-- Sertakan payload Redis ke Generator SEO
+  const siteContent = await getSiteContent();
+  const seoData = buildSeoPayload(req, 'home', siteContent);
   
   res.render('index', {
     pageTitle: seoData.title,
@@ -883,8 +916,8 @@ app.get('/:tabName', async (req, res, next) => {
   }
 
   if (SEO_REGISTRY[tabName]) {
-    const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
-    const seoData = buildSeoPayload(req, tabName, siteContent); // <-- Sertakan payload Redis ke Generator SEO
+    const siteContent = await getSiteContent();
+    const seoData = buildSeoPayload(req, tabName, siteContent);
     
     return res.render('index', {
       pageTitle: seoData.title,
