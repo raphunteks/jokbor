@@ -269,23 +269,44 @@ const CACHE_DURATION = 60000; // 1 Menit
 
 /**
  * FUNGSI BACA DATA REDIS DATABASE
+ * Memiliki sistem Fallback jika Data belum ada di Redis
  */
 async function getSiteContent() {
   if (contentCache && (Date.now() - lastCacheTime < CACHE_DURATION)) {
     return contentCache;
   }
+  
   if (!KV_REST_API_URL || !KV_REST_API_TOKEN) {
+    console.log("[SERVER] KV_REST_API variables missing. Fallback to default.");
     return DEFAULT_SITE_CONTENT;
   }
+
   try {
     const response = await fetch(`${KV_REST_API_URL}/get/site_content`, {
       headers: { Authorization: `Bearer ${KV_REST_API_TOKEN}` }
     });
     const data = await response.json();
-    if (data.result) {
-      contentCache = JSON.parse(data.result);
+    
+    // Jika data ada dan format JSON-nya benar
+    if (data && data.result) {
+      // Vercel KV stringifies strings double times depending on set method. Handling parsing carefully.
+      let parsedData;
+      try {
+        parsedData = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+      } catch(e) {
+        parsedData = data.result; 
+      }
+      
+      // Auto-Heal Validation: Pastikan format brand & seo tidak hilang dari Redis lama
+      const finalData = { ...DEFAULT_SITE_CONTENT, ...parsedData }; 
+      
+      contentCache = finalData;
       lastCacheTime = Date.now();
       return contentCache;
+    } else {
+      // Jika data tidak ada (null) di Redis, simpan DEFAULT_SITE_CONTENT secara otomatis
+      await saveSiteContent(DEFAULT_SITE_CONTENT);
+      return DEFAULT_SITE_CONTENT;
     }
   } catch (error) {
     console.error("[REDIS GET ERROR]", error);
@@ -298,14 +319,17 @@ async function getSiteContent() {
  */
 async function saveSiteContent(newContent) {
   if (!KV_REST_API_URL || !KV_REST_API_TOKEN) throw new Error("Upstash Redis / Vercel KV ENV API Key belum dipasang");
+  
   const response = await fetch(`${KV_REST_API_URL}/set/site_content`, {
     method: 'POST',
     headers: { 
       Authorization: `Bearer ${KV_REST_API_TOKEN}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(JSON.stringify(newContent)) // Upstash REST API memerlukan stringified JSON string
+    // Vercel KV Upstash REST req body needs stringified JSON for SET commands
+    body: JSON.stringify(JSON.stringify(newContent)) 
   });
+
   if (!response.ok) throw new Error("Gagal menyimpan data ke Vercel Redis Database");
   contentCache = newContent;
   lastCacheTime = Date.now();
@@ -376,7 +400,6 @@ app.post('/admin/save', checkAdminAuth, async (req, res) => {
 // ========================================================================
 /**
  * Metadata Registry untuk Dynamic SSR SEO (GSC Gold Standard)
- * SCRIPT ASLI ANDA TETAP UTUH DI SINI SEBAGAI FALLBACK/BASE
  */
 const SEO_REGISTRY = {
   home: {
