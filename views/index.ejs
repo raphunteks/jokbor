@@ -113,19 +113,21 @@
 </head>
 <body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white relative overflow-x-hidden max-w-[100vw] w-full">
 
-  <!-- Background Decorative -->
+  <!-- Background Decorative (Disembunyikan dari pembaca layar agar tidak mengganggu Aksesibilitas) -->
   <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10" aria-hidden="true">
     <div class="mesh-glow mesh-teal w-[600px] h-[600px] absolute top-[-100px] left-[-150px]"></div>
     <div class="mesh-glow mesh-cyan w-[500px] h-[500px] absolute top-[40%] right-[-100px]"></div>
     <div class="mesh-glow mesh-indigo w-[700px] h-[700px] absolute bottom-[10%] left-[10%]"></div>
   </div>
 
-  <header class="fixed top-0 left-0 w-full z-50 glass-nav">
+  <!-- [SUPER UPGRADE] Aksesibilitas: Menggunakan tag semantic <header> dengan aria-label & SOLID BACKGROUND -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-brand-dark/95 backdrop-blur-xl border-b border-white/10 shadow-lg transition-all duration-300">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between" aria-label="Navigasi Utama">
       
       <a href="/" class="flex items-center gap-3 group" title="Beranda <%= content?.brand?.title || 'Joki Borang PIDGI' %>" aria-label="Beranda <%= content?.brand?.title || '' %>">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20 shrink-0">
           <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
+            <!-- [SUPER UPGRADE] Performa LCP: fetchpriority="high" untuk Hero Image/Logo -->
             <img src="/img/jokiborang.png" alt="Logo <%= content?.brand?.title || 'jokiborangpidgi' %>" fetchpriority="high" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
           </div>
         </div>
@@ -147,6 +149,7 @@
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
+        <!-- [SUPER UPGRADE] Aksesibilitas Kontras WCAG: from-teal-500 -> from-teal-700 untuk kontras tulisan putih -->
         <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi via WhatsApp" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-700 to-cyan-700 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
           <i class="fab fa-whatsapp text-sm" aria-hidden="true"></i>
           <span><%= content?.brand?.ctaWhatsapp || 'Hubungi Kami' %></span>
@@ -159,7 +162,7 @@
 
     </nav>
 
-    <!-- [SUPER UPGRADE] Perbaikan UI Mobile Menu: Menambahkan bg-brand-dark/95 & absolute w-full agar background solid dan menutupi konten hero -->
+    <!-- Menu Mobile Dropdown -->
     <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-brand-dark/95 backdrop-blur-2xl border-b border-white/10 px-4 sm:px-6 py-4 sm:py-6 transition-all duration-300 shadow-2xl overflow-y-auto max-h-[85vh]">
       <div class="flex flex-col gap-2.5 text-sm font-medium">
         <a href="/tentang" class="flex items-center justify-between px-4 py-3 rounded-xl transition duration-200 <%= currentSection === 'tentang' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-bold' : 'text-slate-200 hover:bg-white/5 hover:text-cyan-400' %>">
@@ -187,6 +190,7 @@
           <i class="fas fa-chevron-right text-xs opacity-50" aria-hidden="true"></i>
         </a>
 
+        <!-- [SUPER UPGRADE] Aksesibilitas Kontras WCAG Mobile CTA -->
         <div class="pt-3 mt-2 border-t border-white/10 sm:hidden">
           <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi WhatsApp Sekarang" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-700 to-cyan-700 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
             <i class="fab fa-whatsapp text-base" aria-hidden="true"></i>
