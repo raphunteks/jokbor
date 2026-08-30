@@ -21,12 +21,16 @@
   <meta name="language" content="Indonesian">
   <meta http-equiv="content-language" content="id">
 
-  <!-- [SUPER UPGRADE] Performa FCP & LCP: Preconnect ke CDN penyumbang Payload Terbesar -->
+  <!-- [SUPER UPGRADE] Agentic WebMCP Link (Lulus Audit Agentic 3/3) -->
+  <link rel="alternate" type="application/llms+txt" href="/llms.txt">
+
+  <!-- [SUPER UPGRADE] Performa FCP & LCP Desktop: Preconnect & Preload Script -->
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="preload" href="/img/jokiborang.png" as="image" type="image/png" fetchpriority="high">
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
 
   <link rel="icon" type="image/png" href="/img/jokiborang.png">
   <link rel="shortcut icon" type="image/png" href="/img/jokiborang.png">
@@ -61,14 +65,7 @@
   <%- JSON.stringify(seo?.schemaJson || {}) %>
   </script>
 
-  <!-- Tailwind Script Loader -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- [UPGRADE] Performa: Defer non-critical CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="/css/main.css">
-
+  <!-- [SUPER UPGRADE] Performa Desktop: Config harus di-load SEBELUM script CDN agar TBT (Total Blocking Time) menurun -->
   <script>
     tailwind.config = {
       theme: {
@@ -100,6 +97,13 @@
       }
     }
   </script>
+  <!-- Tailwind Script Loader -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- [UPGRADE] Performa: Defer non-critical CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/css/main.css">
 
   <!-- Vercel Speed Insights -->
   <script>
@@ -143,7 +147,8 @@
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi via WhatsApp" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
+        <!-- [SUPER UPGRADE] Aksesibilitas Kontras WCAG: from-teal-500 -> from-teal-700 untuk kontras tulisan putih -->
+        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi via WhatsApp" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-700 to-cyan-700 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
           <i class="fab fa-whatsapp text-sm" aria-hidden="true"></i>
           <span><%= content?.brand?.ctaWhatsapp || 'Hubungi Kami' %></span>
         </a>
@@ -182,8 +187,9 @@
           <i class="fas fa-chevron-right text-xs opacity-50" aria-hidden="true"></i>
         </a>
 
+        <!-- [SUPER UPGRADE] Aksesibilitas Kontras WCAG Mobile CTA -->
         <div class="pt-3 mt-2 border-t border-white/10 sm:hidden">
-          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi WhatsApp" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi WhatsApp Sekarang" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-700 to-cyan-700 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
             <i class="fab fa-whatsapp text-base" aria-hidden="true"></i>
             <span><%= content?.brand?.ctaWhatsapp || 'Konsultasi WhatsApp Sekarang' %></span>
           </a>
@@ -192,7 +198,6 @@
     </div>
   </header>
 
-  <!-- [SUPER UPGRADE] SSR Hardening dengan Optional Chaining & Fallbacks -->
   <main id="main-content" class="w-full">
     
     <section id="hero" aria-labelledby="hero-heading" class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-4 sm:px-6 z-10 w-full">
@@ -214,8 +219,9 @@
           <%= content?.hero?.description || '' %>
         </p>
 
+        <!-- [SUPER UPGRADE] Aksesibilitas Kontras WCAG Hero CTA -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full px-4 sm:px-0">
-          <a href="/biaya" aria-label="Lihat Daftar Harga Layanan" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-teal-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition duration-200">
+          <a href="/biaya" aria-label="Lihat Daftar Harga Layanan" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-teal-700 to-cyan-700 text-white font-bold text-xs sm:text-sm shadow-xl shadow-teal-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition duration-200">
             <i class="fas fa-tags mr-2" aria-hidden="true"></i> <%= content?.hero?.ctaPrice || '' %>
           </a>
           <a href="/layanan" aria-label="Pelajari Modul Layanan" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl glass-card text-slate-100 font-semibold text-xs sm:text-sm hover:bg-white/10 hover:text-white transition duration-200">
@@ -786,8 +792,9 @@
     </div>
   </footer>
 
+  <!-- [SUPER UPGRADE] Aksesibilitas Kontras WCAG: bg-emerald-500 -> bg-emerald-700 -->
   <aside aria-label="Kontak Cepat Floating" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50">
-    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp Admin Cepat" class="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
+    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp Admin Cepat" class="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
       <i class="fab fa-whatsapp text-base sm:text-lg" aria-hidden="true"></i>
       <span class="hidden sm:inline"><%= content?.brand?.ctaWhatsapp || 'Chat Admin Sekarang' %></span>
     </a>
