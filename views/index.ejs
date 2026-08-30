@@ -10,7 +10,7 @@
   <title><%= seo.title %></title>
   <meta name="description" content="<%= seo.description %>">
   <meta name="keywords" content="<%= seo.keywords %>">
-  <meta name="author" content="<%= content.brand.title %>">
+  <meta name="author" content="<%= content?.brand?.title || 'jokiborangpidgi' %>">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -37,8 +37,8 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
-  <meta property="og:image:alt" content="<%= content.brand.title %> - Layanan Input Logbook Dokter Gigi Internsip">
-  <meta property="og:site_name" content="<%= content.brand.title %>">
+  <meta property="og:image:alt" content="<%= content?.brand?.title || 'Joki Borang PIDGI' %> - Layanan Input Logbook Dokter Gigi Internsip">
+  <meta property="og:site_name" content="<%= content?.brand?.title || 'jokiborangpidgi' %>">
   <meta property="og:locale" content="id_ID">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
   <meta name="twitter:title" content="<%= seo.title %>">
   <meta name="twitter:description" content="<%= seo.description %>">
   <meta name="twitter:image" content="<%= seo.ogImage %>">
-  <meta name="twitter:image:alt" content="Logo <%= content.brand.title %>">
+  <meta name="twitter:image:alt" content="<%= content?.brand?.title || 'Joki Borang PIDGI' %> Logo">
   <meta name="twitter:site" content="@jokiborangpidgi">
   <meta name="twitter:creator" content="@jokiborangpidgi">
 
@@ -101,17 +101,17 @@
   <nav class="fixed top-0 left-0 w-full z-50 glass-nav">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       
-      <a href="/" class="flex items-center gap-3 group" title="Beranda <%= content.brand.title %>">
+      <a href="/" class="flex items-center gap-3 group" title="Beranda <%= content?.brand?.title || 'Joki Borang PIDGI' %>">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20 shrink-0">
           <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
-            <img src="/img/jokiborang.png" alt="Logo <%= content.brand.title %>" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
+            <img src="/img/jokiborang.png" alt="Logo <%= content?.brand?.title || 'jokiborangpidgi' %>" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
           </div>
         </div>
         <div class="flex flex-col">
           <span class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-teal-300 via-cyan-200 to-white bg-clip-text text-transparent truncate">
-            <%= content.brand.title %>
+            <%= content?.brand?.title || 'jokiborangpidgi' %>
           </span>
-          <span class="text-[9px] sm:text-[10px] text-cyan-400 font-semibold tracking-wider uppercase"><%= content.brand.subtitle %></span>
+          <span class="text-[9px] sm:text-[10px] text-cyan-400 font-semibold tracking-wider uppercase"><%= content?.brand?.subtitle || 'PIDGI Assistance' %></span>
         </div>
       </a>
 
@@ -125,9 +125,9 @@
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= content.brand.title %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
+        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
           <i class="fab fa-whatsapp text-sm"></i>
-          <span><%= content.brand.ctaWhatsapp %></span>
+          <span><%= content?.brand?.ctaWhatsapp || 'Hubungi Kami' %></span>
         </a>
 
         <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" aria-expanded="false" class="lg:hidden w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl glass-card flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 active:scale-95 transition duration-200 focus:outline-none shadow-lg shadow-cyan-500/10">
@@ -165,9 +165,9 @@
         </a>
 
         <div class="pt-3 mt-2 border-t border-white/10 sm:hidden">
-          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= content.brand.title %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
             <i class="fab fa-whatsapp text-base"></i>
-            <span><%= content.brand.ctaWhatsapp %></span>
+            <span><%= content?.brand?.ctaWhatsapp || 'Konsultasi WhatsApp Sekarang' %></span>
           </a>
         </div>
       </div>
@@ -251,7 +251,7 @@
               <div class="text-center pb-4 border-b border-white/10">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[2px] mb-3 shadow-lg shadow-cyan-500/30">
                   <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                    <img src="/img/jokiborang.png" alt="Profile <%= content.brand.title %>" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
+                    <img src="/img/jokiborang.png" alt="Profile <%= content?.brand?.title || 'Joki Borang PIDGI' %>" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
                   </div>
                 </div>
                 <h3 class="font-bold text-white text-sm sm:text-base"><%= content.tentang.profileCard.handle %></h3>
@@ -739,18 +739,18 @@
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[1px]">
           <div class="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
-            <img src="/img/jokiborang.png" alt="Logo <%= content.brand.title %>" class="w-full h-full object-cover rounded-[11px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-lg\'>🦷</span>';">
+            <img src="/img/jokiborang.png" alt="Logo <%= content?.brand?.title || 'jokiborangpidgi' %>" class="w-full h-full object-cover rounded-[11px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-lg\'>🦷</span>';">
           </div>
         </div>
-        <span class="font-extrabold text-sm tracking-tight text-white"><%= content.brand.title %></span>
+        <span class="font-extrabold text-sm tracking-tight text-white"><%= content?.brand?.title || 'jokiborangpidgi' %></span>
       </div>
 
       <div class="text-[10px] sm:text-xs text-slate-400 text-center px-4 md:px-0 leading-relaxed">
-        &copy; <%= currentYear %> <strong><%= content.footer.copyText %></strong>
+        <div class="text-[10px] sm:text-xs text-slate-400 text-center px-4 md:px-0 leading-relaxed">&copy; <%= currentYear %> <strong><%= content?.footer?.copyText || '@jokiborangpidgi. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.' %></strong></div>
       </div>
 
       <div class="flex items-center gap-4 text-slate-400 text-sm">
-        <a href="<%= content.footer.instagram %>" target="_blank" rel="noopener noreferrer" aria-label="Instagram <%= content.brand.title %>" class="hover:text-pink-400 transition-colors">
+        <a href="<%= content?.footer?.instagram || 'https://instagram.com/jokiborangpidgi' %>" target="_blank" rel="noopener noreferrer" aria-label="Instagram <%= content?.brand?.title || 'jokiborangpidgi' %>" class="hover:text-pink-400 transition-colors">
           <i class="fab fa-instagram text-lg sm:text-xl"></i>
         </a>
         <a href="https://wa.me/<%= whatsappNumber %>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Admin" class="hover:text-emerald-400 transition-colors">
@@ -762,9 +762,9 @@
   </footer>
 
   <aside aria-label="Kontak Cepat" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50">
-    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content.brand.title) %>,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
+    <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20ingin%20tanya%20jasa%20borang" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition duration-200">
       <i class="fab fa-whatsapp text-base sm:text-lg"></i>
-      <span class="hidden sm:inline"><%= content.brand.ctaWhatsapp %></span>
+      <span class="hidden sm:inline"><%= content?.brand?.ctaWhatsapp || 'Chat Admin Sekarang' %></span>
     </a>
   </aside>
 
