@@ -128,9 +128,13 @@
       </a>
     </div>
 
-    <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar">
+    <nav class="flex-1 p-4 space-y-1.5 overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar">
       <button type="button" onclick="switchTab('brand')" id="tab-brand" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
         <i class="fas fa-cog w-5 text-center"></i> <span>Info Utama Web</span>
+      </button>
+
+      <button type="button" onclick="switchTab('seo')" id="tab-seo" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-search w-5 text-center"></i> <span>Manajemen SEO Meta</span>
       </button>
 
       <button type="button" onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
@@ -237,12 +241,44 @@
             </div>
           </div>
 
+          <div id="form-seo" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4 mb-6">
+              <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fas fa-search text-cyan-400"></i> <span>Manajemen Metadata SEO (Semua Halaman)</span>
+              </h3>
+              <p class="text-[10px] text-slate-400 mt-1">Mengatur Meta Title, Description, dan Keywords untuk struktur Google Search Console di setiap halaman Clean URL.</p>
+            </div>
+
+            <div class="space-y-8">
+              <% const pages = ['home', 'tentang', 'keunggulan', 'layanan', 'testimoni', 'biaya', 'faq']; %>
+              <% pages.forEach(page => { %>
+                <div class="p-4 rounded-xl border border-white/10 bg-white/5 space-y-3">
+                  <h4 class="font-bold text-cyan-300 text-sm capitalize">Halaman: <%= page %></h4>
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-[10px] font-bold text-slate-400 mb-1">Meta Title</label>
+                      <input type="text" data-path="seo.<%= page %>.title" class="admin-input text-xs">
+                    </div>
+                    <div>
+                      <label class="block text-[10px] font-bold text-slate-400 mb-1">Keywords</label>
+                      <input type="text" data-path="seo.<%= page %>.keywords" class="admin-input text-xs">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-400 mb-1">Meta Description</label>
+                    <textarea data-path="seo.<%= page %>.description" rows="2" class="admin-input text-xs"></textarea>
+                  </div>
+                </div>
+              <% }); %>
+            </div>
+          </div>
+
           <div id="form-hero" class="tab-content hidden space-y-5">
             <div class="border-b border-white/10 pb-4 mb-6">
               <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
                 <i class="fas fa-home"></i> <span>Hero Section (Halaman Depan Utama)</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Mengatur badge promosi, headline utama, paragraf pembuka, dan statistik singkat di bagian paling atas.</p>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur badge promosi, headline utama, dan paragraf pembuka di bagian paling atas.</p>
             </div>
 
             <div class="space-y-4">
@@ -277,8 +313,9 @@
             </div>
 
             <div class="mt-8 border-t border-white/10 pt-6">
-              <h4 class="text-sm font-bold text-cyan-400 mb-4">Statistik Card Bawah (Max 4 Card)</h4>
+              <h4 class="text-sm font-bold text-cyan-400 mb-4">Statistik Card Bawah</h4>
               <div id="heroStats-container" class="grid sm:grid-cols-2 gap-4"></div>
+              <button type="button" class="add-btn mt-4" onclick="addArrayItem('heroStats')"><i class="fas fa-plus"></i> Tambah Stats Baru</button>
             </div>
           </div>
 
@@ -327,6 +364,10 @@
                   <label class="block text-[10px] font-bold text-slate-400 mb-1">Kecepatan Respon (Value)</label>
                   <input type="text" id="tentang_speed" data-path="tentang.profileCard.speedVal" class="admin-input text-xs">
                 </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 mb-1">Privasi (Value)</label>
+                  <input type="text" id="tentang_privacy" data-path="tentang.profileCard.privacyVal" class="admin-input text-xs">
+                </div>
               </div>
             </div>
           </div>
@@ -354,7 +395,7 @@
             </div>
 
             <div class="mt-8 border-t border-white/10 pt-6">
-              <h4 class="text-sm font-bold text-indigo-400 mb-4">Daftar Keunggulan (Card Item)</h4>
+              <h4 class="text-sm font-bold text-white mb-4">Daftar Keunggulan (Card Item)</h4>
               <div id="keunggulan-container" class="space-y-3"></div>
               <button type="button" class="add-btn mt-4" onclick="addArrayItem('keunggulan')">
                 <i class="fas fa-plus"></i> Tambah Item Keunggulan
@@ -472,6 +513,12 @@
                 <button type="button" class="add-btn mt-4" onclick="addArrayItem('pricelist-lapsus')"><i class="fas fa-plus"></i> Tambah Lapsus</button>
               </div>
             </div>
+            
+            <div class="mt-8 border-t border-white/10 pt-6">
+               <h4 class="text-sm font-bold text-white mb-4">Pengaturan Schema.org / Katalog Offer Vercel Analytics</h4>
+               <div id="offers-container" class="grid sm:grid-cols-2 gap-4"></div>
+               <button type="button" class="add-btn mt-4" onclick="addArrayItem('offers')"><i class="fas fa-plus"></i> Tambah Schema Offer (Background SEO)</button>
+            </div>
           </div>
 
           <div id="form-faq" class="tab-content hidden space-y-5">
@@ -497,7 +544,7 @@
             </div>
 
             <div class="mt-8 border-t border-white/10 pt-6">
-              <h4 class="text-sm font-bold text-rose-400 mb-4">Daftar Pertanyaan & Jawaban</h4>
+              <h4 class="text-sm font-bold text-white mb-4">Daftar Pertanyaan & Jawaban</h4>
               <div id="faq-container" class="space-y-3"></div>
               <button type="button" class="add-btn mt-4" onclick="addArrayItem('faq')">
                 <i class="fas fa-plus"></i> Tambah FAQ Baru
@@ -515,7 +562,7 @@
     // 1. Data Inisial dari Server EJS
     let currentData = <%- JSON.stringify(content) %>;
     
-    // Konfigurasi Skema Array untuk Form Editor Dinamis
+    // Konfigurasi Skema Array untuk CRUD Dinamis
     const ARRAY_SCHEMAS = {
       'heroStats': { path: 'hero.stats', fields: [{id:'value', label:'Nilai Utama (Cth: 100%)', placeholder:''}, {id:'label', label:'Teks Deskripsi', placeholder:''}, {id:'color', label:'Warna Class Tailwind', placeholder:'text-cyan-400'}] },
       'keunggulan': { path: 'keunggulan.items', fields: [{id:'icon', label:'Ikon FontAwesome', placeholder:'fas fa-star'}, {id:'color', label:'Warna Class Tailwind', placeholder:'bg-teal-500/20 text-teal-400'}, {id:'title', label:'Judul Keunggulan', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
@@ -525,10 +572,11 @@
       'pricelist-ukm': { path: 'pricelist.ukm', fields: [{id:'name', label:'Nama Paket', placeholder:''}, {id:'price', label:'Harga', placeholder:'Rp 10.000'}, {id:'unit', label:'Unit (Opsional)', placeholder:'/laporan'}] },
       'pricelist-pkrs': { path: 'pricelist.pkrs', fields: [{id:'name', label:'Nama Paket', placeholder:''}, {id:'price', label:'Harga', placeholder:'Rp 40.000'}, {id:'note', label:'Catatan Kecil (Opsional)', placeholder:''}] },
       'pricelist-lapsus': { path: 'pricelist.lapsus', fields: [{id:'name', label:'Nama Paket', placeholder:''}, {id:'price', label:'Harga', placeholder:'Rp 100.000'}, {id:'note', label:'Catatan Kecil (Opsional)', placeholder:''}] },
+      'offers': { path: 'offers', fields: [{id:'name', label:'Nama Offer', placeholder:''}, {id:'price', label:'Harga Int (Misal: 5000)', placeholder:''}, {id:'description', label:'Deskripsi Meta', placeholder:''}] },
       'faq': { path: 'faq.items', fields: [{id:'q', label:'Pertanyaan (Q)', placeholder:'1. Apa itu...'}, {id:'a', label:'Jawaban (A)', isTextarea:true}] }
     };
 
-    // 2. Fungsi Helper (Mengatur Nilai Nested Object secara Dinamis)
+    // 2. Fungsi Helper untuk resolve Object Path
     function resolvePath(obj, path) {
       return path.split('.').reduce((o, i) => o ? o[i] : null, obj);
     }
@@ -540,12 +588,12 @@
       target[last] = value;
     }
 
-    // 3. Merender DOM HTML untuk satu Item Data List (CRUD Card)
+    // 3. Render HTML untuk Array Item
     function renderArrayItemHTML(type, index, itemData) {
       const schema = ARRAY_SCHEMAS[type];
       let html = `<div class="array-item-card" data-type="${type}" data-index="${index}">
         <button type="button" onclick="removeArrayItem(this)" class="delete-btn" title="Hapus"><i class="fas fa-trash"></i></button>
-        <div class="space-y-3 pr-10">`; // Padding kanan agar tidak tertutup tombol hapus
+        <div class="space-y-3 pr-10">`; 
       
       schema.fields.forEach(field => {
         const val = itemData[field.id] || '';
@@ -564,7 +612,7 @@
       return html;
     }
 
-    // 4. Memuat Seluruh Array/List ke dalam Editor
+    // 4. Render Seluruh Array Data
     function initArrayRendering() {
       Object.keys(ARRAY_SCHEMAS).forEach(type => {
         const container = document.getElementById(`${type}-container`);
@@ -579,10 +627,10 @@
       });
     }
 
-    // 5. Action: Menambah Row Kosong Baru di Array (CRUD)
+    // 5. Menambah Row Baru
     function addArrayItem(type) {
       const container = document.getElementById(`${type}-container`);
-      const currentIndex = container.children.length; // Hitung elemen yang ada
+      const currentIndex = container.children.length; 
       
       const emptyItem = {};
       ARRAY_SCHEMAS[type].fields.forEach(f => emptyItem[f.id] = '');
@@ -590,14 +638,14 @@
       container.insertAdjacentHTML('beforeend', renderArrayItemHTML(type, currentIndex, emptyItem));
     }
 
-    // 6. Action: Menghapus Row dari DOM (CRUD)
+    // 6. Menghapus Row
     function removeArrayItem(buttonElement) {
       if(confirm('Apakah Anda yakin ingin menghapus baris data ini?')) {
         buttonElement.closest('.array-item-card').remove();
       }
     }
 
-    // 7. Load Data Statis Pertama Kali saat halaman terbuka
+    // 7. Load Data Awal
     document.addEventListener('DOMContentLoaded', function() {
       const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
       staticInputs.forEach(input => {
@@ -608,7 +656,7 @@
       initArrayRendering();
     });
 
-    // 8. Tampilan Berpindah Tab Menu
+    // 8. Visual Tab Switching
     function switchTab(activeTabId) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden', 'block') && c.classList.remove('block'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -618,11 +666,13 @@
       document.getElementById('form-' + activeTabId).classList.remove('hidden');
       document.getElementById('form-' + activeTabId).classList.add('block');
       const activeBtn = document.getElementById('tab-' + activeTabId);
-      activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
-      activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+      if(activeBtn) {
+        activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+        activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+      }
     }
 
-    // 9. LOGIKA UTAMA: Pengumpulan (Ekstraksi) Seluruh Form HTML & Simpan ke REDIS Backend
+    // 9. LOGIKA UTAMA EKSTRAKSI FORM & SIMPAN KE REDIS
     document.getElementById('saveBtn').addEventListener('click', async function(e) {
       e.preventDefault();
       const saveBtn = this;
@@ -631,16 +681,15 @@
       saveBtn.disabled = true;
       saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan ke Database...</span>';
 
-      // Deep Clone Struktur JSON original
       let payloadData = JSON.parse(JSON.stringify(currentData));
 
-      // 9.A: Rekam semua nilai Input yang bersfat Statis
+      // Extract Static Inputs
       const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
       staticInputs.forEach(input => {
         setPath(payloadData, input.getAttribute('data-path'), input.value);
       });
 
-      // 9.B: Rekam dan Susun Ulang Semua Field Array / Loop
+      // Extract Arrays
       Object.keys(ARRAY_SCHEMAS).forEach(type => {
         const schema = ARRAY_SCHEMAS[type];
         const container = document.getElementById(`${type}-container`);
@@ -659,11 +708,10 @@
             newArray.push(itemObj);
           });
           
-          setPath(payloadData, schema.path, newArray); // Timpa node Array lama
+          setPath(payloadData, schema.path, newArray);
         }
       });
 
-      // 9.C: Pengiriman Fetch API ke Backend Node.JS (Upstash)
       const statusAlert = document.getElementById('statusAlert');
       const statusIcon = document.getElementById('statusIcon');
       const statusMessage = document.getElementById('statusMessage');
@@ -682,7 +730,7 @@
           statusAlert.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
           statusIcon.className = 'fas fa-check-circle text-base';
           statusMessage.innerText = '✅ ' + result.message;
-          currentData = payloadData; // Update lokal (tanpa direfresh)
+          currentData = payloadData; 
         } else {
           throw new Error(result.message);
         }
