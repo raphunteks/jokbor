@@ -255,10 +255,22 @@ const DEFAULT_SITE_CONTENT = {
     ]
   },
 
-  // FOOTER & COPYRIGHT
+  // ==========================================
+  // [NEW UPGRADE] FOOTER & SEO META REGISTRY
+  // ==========================================
   footer: {
     copyText: "@jokiborangpidgi. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.",
     instagram: "https://instagram.com/jokiborangpidgi"
+  },
+
+  seo: {
+    home: { title: "Joki Borang PIDGI | Solusi Tuntas Logbook Dokter Gigi Internsip", description: "Jasa Joki Input Borang & E-Logbook Dokter Gigi Internsip (PIDGI) Terpercaya. Handle UKP, UKM, Lapsus, Manajemen & PKRS Stase RS dan Puskesmas.", keywords: "joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs, kode icd 10 gigi, jasa borang dokter gigi, logbook kemenkes pidgi" },
+    tentang: { title: "Tentang Kami - Joki Borang PIDGI | Asisten Administrasi Dokter Gigi", description: "Kenali layanan asisten administrasi klinis PIDGI terpercaya. Kami membantu input borang SOAP, laporan kasus, dan tugas stase dokter gigi di seluruh wahana Indonesia.", keywords: "tentang joki borang pidgi, profil joki borang, dokter gigi internsip indonesia, asisten administrasi klinik gigi, rekan logbook pidgi" },
+    keunggulan: { title: "Keunggulan Layanan - Joki Borang PIDGI | Cepat, Rapi & Bergaransi", description: "Kenapa memilih @jokiborangpidgi? Paham kode ICD-10 gigi, data terenkripsi 100%, opsi pengerjaan kilat 1 hari, dan garansi revisi sampai approval Dokter Pendamping.", keywords: "keunggulan joki borang pidgi, joki logbook aman, joki borang cepat express, garansi approval dokter pendamping, kerahasiaan data pidgi, kode icd 10 gigi" },
+    layanan: { title: "Modul Layanan Lengkap - Joki Borang PIDGI | Stase RS & Puskesmas", description: "Layanan terintegrasi borang PIDGI: UKP Poli Gigi, Laporan Promkes & Evaluasi UKM, PKRS Word/PPT, Laporan Manajemen, hingga Lapsus Spesialistik.", keywords: "layanan joki borang, modul ukp pkm, modul ukm puskesmas, lapsus stase rs, modul pkrs manajemen rs, logbook puskesmas dokter gigi" },
+    testimoni: { title: "Testimoni Dokter Gigi Internsip - Joki Borang PIDGI", description: "Lihat ulasan dan kepuasan rekan sejawat dokter gigi PIDGI di berbagai wahana Jawa, Sumatera, dan Sulawesi yang telah terbantu oleh layanan kami.", keywords: "testimoni joki borang pidgi, review joki logbook gigi, pengalaman dokship pidgi, rekomendasi joki borang, rating jasa borang pidgi" },
+    biaya: { title: "Daftar Harga / Pricelist Joki Borang PIDGI | Mulai 5rb/kasus", description: "Pricelist transparan jasa borang PIDGI: UKP mulai Rp 5.000/kasus, Paket All-in Bulanan, Laporan UKM 10rb, Slide PKRS, Lapsus, & Paket Hemat Combo 6 Bulan.", keywords: "harga joki borang pidgi, pricelist joki logbook dokter gigi, paket all in pidgi, jasa buat ppt pkrs, lapsus dokter gigi, combo 6 bulan pidgi, biaya joki logbook" },
+    faq: { title: "FAQ - Pertanyaan Umum Jasa Joki Borang PIDGI", description: "Informasi durasi pengerjaan UKP, laporan UKM, manajemen RS, Lapsus, keamanan akun portal, serta garansi revisi sampai validasi DP.", keywords: "faq joki borang pidgi, lama pengerjaan borang gigi, jaminan privasi logbook pidgi, revisi borang pidgi, tanya jawab joki pidgi" }
   }
 };
 
@@ -269,7 +281,7 @@ const CACHE_DURATION = 60000; // 1 Menit
 
 /**
  * FUNGSI BACA DATA REDIS DATABASE
- * Memiliki sistem Fallback jika Data belum ada di Redis
+ * Memiliki Auto-Heal (Merge) jika Data Redis Lama Belum Memiliki Key Baru
  */
 async function getSiteContent() {
   if (contentCache && (Date.now() - lastCacheTime < CACHE_DURATION)) {
@@ -277,7 +289,6 @@ async function getSiteContent() {
   }
   
   if (!KV_REST_API_URL || !KV_REST_API_TOKEN) {
-    console.log("[SERVER] KV_REST_API variables missing. Fallback to default.");
     return DEFAULT_SITE_CONTENT;
   }
 
@@ -287,9 +298,7 @@ async function getSiteContent() {
     });
     const data = await response.json();
     
-    // Jika data ada dan format JSON-nya benar
     if (data && data.result) {
-      // Vercel KV stringifies strings double times depending on set method. Handling parsing carefully.
       let parsedData;
       try {
         parsedData = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
@@ -297,14 +306,18 @@ async function getSiteContent() {
         parsedData = data.result; 
       }
       
-      // Auto-Heal Validation: Pastikan format brand & seo tidak hilang dari Redis lama
-      const finalData = { ...DEFAULT_SITE_CONTENT, ...parsedData }; 
+      // AUTO-HEAL: Gabungkan data Redis dengan DEFAULT_SITE_CONTENT
+      // Mencegah error 'undefined' jika ada struktur JSON baru (seperti seo, footer) yang belum ada di database lama
+      const finalData = { ...DEFAULT_SITE_CONTENT, ...parsedData };
       
+      // Pastikan sub-object nested juga aman digabungkan
+      if (parsedData.seo) finalData.seo = { ...DEFAULT_SITE_CONTENT.seo, ...parsedData.seo };
+      if (parsedData.footer) finalData.footer = { ...DEFAULT_SITE_CONTENT.footer, ...parsedData.footer };
+
       contentCache = finalData;
       lastCacheTime = Date.now();
       return contentCache;
     } else {
-      // Jika data tidak ada (null) di Redis, simpan DEFAULT_SITE_CONTENT secara otomatis
       await saveSiteContent(DEFAULT_SITE_CONTENT);
       return DEFAULT_SITE_CONTENT;
     }
@@ -326,7 +339,6 @@ async function saveSiteContent(newContent) {
       Authorization: `Bearer ${KV_REST_API_TOKEN}`,
       'Content-Type': 'application/json'
     },
-    // Vercel KV Upstash REST req body needs stringified JSON for SET commands
     body: JSON.stringify(JSON.stringify(newContent)) 
   });
 
@@ -379,7 +391,7 @@ app.get('/admin/logout', (req, res) => {
   res.redirect('/admin/login');
 });
 
-// Route Tampilan Admin CMS Dashboard (Mendapatkan Seluruh Object Konten)
+// Route Tampilan Admin CMS Dashboard
 app.get('/admin', checkAdminAuth, async (req, res) => {
   const content = await getSiteContent();
   res.render('admin-dashboard', { content });
@@ -399,7 +411,7 @@ app.post('/admin/save', checkAdminAuth, async (req, res) => {
 // [SEO REGISTRY] DYNAMIC SSR SEO payload & SCHEMA GRAPH (GSC GOLD STANDARD)
 // ========================================================================
 /**
- * Metadata Registry untuk Dynamic SSR SEO (GSC Gold Standard)
+ * Metadata Registry Base (TETAP UTUH, Digunakan sebagai dasar)
  */
 const SEO_REGISTRY = {
   home: {
@@ -480,11 +492,21 @@ function getBaseUrl(req) {
 }
 
 /**
- * Generator Dynamic SSR SEO Payload & Complete Schema.org JSON-LD Graph (GSC Gold Standard)
+ * Generator Dynamic SSR SEO Payload & Complete Schema.org JSON-LD Graph
  */
-function buildSeoPayload(req, sectionKey = 'home') {
+function buildSeoPayload(req, sectionKey = 'home', siteContent = null) {
   const baseUrl = getBaseUrl(req);
-  const config = SEO_REGISTRY[sectionKey] || SEO_REGISTRY.home;
+  
+  // Ambil basis SEO dari konstanta lama
+  let config = { ...(SEO_REGISTRY[sectionKey] || SEO_REGISTRY.home) };
+  
+  // OVERRIDE DENGAN DATA DARI REDIS JIKA ADA (Fungsi agar tab Admin SEO bekerja)
+  if (siteContent && siteContent.seo && siteContent.seo[sectionKey]) {
+    if (siteContent.seo[sectionKey].title) config.title = siteContent.seo[sectionKey].title;
+    if (siteContent.seo[sectionKey].description) config.description = siteContent.seo[sectionKey].description;
+    if (siteContent.seo[sectionKey].keywords) config.keywords = siteContent.seo[sectionKey].keywords;
+  }
+
   const currentUrl = config.route === '' ? `${baseUrl}/` : `${baseUrl}/${config.route}`;
   const logoUrl = `${baseUrl}/img/jokiborang.png`;
 
@@ -517,7 +539,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
     { name: "FAQ Tanya Jawab", url: `${baseUrl}/faq` }
   ];
 
-  // 3. ItemList / OfferCatalog for Services & Pricing (Updated Pricelist)
+  // 3. ItemList / OfferCatalog for Services & Pricing
   const offerCatalogItems = [
     {
       "@type": "Offer",
@@ -812,7 +834,7 @@ function buildSeoPayload(req, sectionKey = 'home') {
           "name": "Bagaimana jika terdapat revisi dari Dokter Pendamping?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Kami memberikan garansi revisi gratis sampai borang dan laporan dinyatakan valid serta disetujui oleh Dokter Pendamping (DP)."
+            "text": "Kami memberikan garansi revisi gratis sampai borang dan laporan dinyatakan valid serta disetujui oleh Dokter Pendamping (DP) wahana Anda."
           }
         }
       ]
@@ -838,8 +860,8 @@ function buildSeoPayload(req, sectionKey = 'home') {
 // ========================================================================
 // ROUTE 1: Landing Page Root (/)
 app.get('/', async (req, res) => {
-  const seoData = buildSeoPayload(req, 'home');
   const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
+  const seoData = buildSeoPayload(req, 'home', siteContent); // <-- Sertakan payload Redis ke Generator SEO
   
   res.render('index', {
     pageTitle: seoData.title,
@@ -847,7 +869,7 @@ app.get('/', async (req, res) => {
     currentSection: 'home',
     whatsappNumber: WHATSAPP_NUMBER,
     currentYear: new Date().getFullYear(),
-    content: siteContent // <-- Inject data Redis ke EJS View
+    content: siteContent
   });
 });
 
@@ -861,8 +883,8 @@ app.get('/:tabName', async (req, res, next) => {
   }
 
   if (SEO_REGISTRY[tabName]) {
-    const seoData = buildSeoPayload(req, tabName);
     const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
+    const seoData = buildSeoPayload(req, tabName, siteContent); // <-- Sertakan payload Redis ke Generator SEO
     
     return res.render('index', {
       pageTitle: seoData.title,
@@ -870,7 +892,7 @@ app.get('/:tabName', async (req, res, next) => {
       currentSection: tabName,
       whatsappNumber: WHATSAPP_NUMBER,
       currentYear: new Date().getFullYear(),
-      content: siteContent // <-- Inject data Redis ke EJS View
+      content: siteContent
     });
   }
 
