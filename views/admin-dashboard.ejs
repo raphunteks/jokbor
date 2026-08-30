@@ -111,8 +111,8 @@
     <div class="p-6 border-b border-white/10 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20 shrink-0">
-          <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center">
-            <span class="text-xl">⚙️</span>
+          <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
+            <img src="/img/jokiborang.png" alt="Logo Admin Dashboard" class="w-full h-full object-cover transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\\'text-xl\\'>⚙️</span>';">
           </div>
         </div>
         <div class="flex flex-col">
@@ -709,7 +709,6 @@
         }
       });
 
-      // 9.C: Pengiriman Fetch API ke Backend Node.JS (Upstash)
       const statusAlert = document.getElementById('statusAlert');
       const statusIcon = document.getElementById('statusIcon');
       const statusMessage = document.getElementById('statusMessage');
