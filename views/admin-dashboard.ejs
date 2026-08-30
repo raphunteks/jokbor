@@ -217,26 +217,26 @@
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Nama Brand/Web (Header)</label>
-                  <input type="text" id="brand_title" data-path="brand.title" class="admin-input">
+                  <input type="text" id="brand_title" data-path="brand.title" value="<%= content?.brand?.title || '' %>" class="admin-input">
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Subtitle Brand (Header)</label>
-                  <input type="text" id="brand_subtitle" data-path="brand.subtitle" class="admin-input">
+                  <input type="text" id="brand_subtitle" data-path="brand.subtitle" value="<%= content?.brand?.subtitle || '' %>" class="admin-input">
                 </div>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol WhatsApp Utama</label>
-                  <input type="text" id="brand_ctaWhatsapp" data-path="brand.ctaWhatsapp" class="admin-input">
+                  <input type="text" id="brand_ctaWhatsapp" data-path="brand.ctaWhatsapp" value="<%= content?.brand?.ctaWhatsapp || '' %>" class="admin-input">
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Link Instagram (Footer)</label>
-                  <input type="text" id="footer_instagram" data-path="footer.instagram" class="admin-input">
+                  <input type="text" id="footer_instagram" data-path="footer.instagram" value="<%= content?.footer?.instagram || '' %>" class="admin-input">
                 </div>
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Hak Cipta (Footer)</label>
-                <textarea id="footer_copyText" data-path="footer.copyText" rows="2" class="admin-input"></textarea>
+                <textarea id="footer_copyText" data-path="footer.copyText" rows="2" class="admin-input"><%= content?.footer?.copyText || '' %></textarea>
               </div>
             </div>
           </div>
@@ -257,16 +257,16 @@
                   <div class="grid md:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-[10px] font-bold text-slate-400 mb-1">Meta Title</label>
-                      <input type="text" data-path="seo.<%= page %>.title" class="admin-input text-xs">
+                      <input type="text" data-path="seo.<%= page %>.title" value="<%= content?.seo?.[page]?.title || '' %>" class="admin-input text-xs">
                     </div>
                     <div>
                       <label class="block text-[10px] font-bold text-slate-400 mb-1">Keywords</label>
-                      <input type="text" data-path="seo.<%= page %>.keywords" class="admin-input text-xs">
+                      <input type="text" data-path="seo.<%= page %>.keywords" value="<%= content?.seo?.[page]?.keywords || '' %>" class="admin-input text-xs">
                     </div>
                   </div>
                   <div>
                     <label class="block text-[10px] font-bold text-slate-400 mb-1">Meta Description</label>
-                    <textarea data-path="seo.<%= page %>.description" rows="2" class="admin-input text-xs"></textarea>
+                    <textarea data-path="seo.<%= page %>.description" rows="2" class="admin-input text-xs"><%= content?.seo?.[page]?.description || '' %></textarea>
                   </div>
                 </div>
               <% }); %>
@@ -284,30 +284,30 @@
             <div class="space-y-4">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Promosi (Teks Kecil Atas)</label>
-                <input type="text" id="hero_badge" data-path="hero.badge" class="admin-input">
+                <input type="text" id="hero_badge" data-path="hero.badge" value="<%= content?.hero?.badge || '' %>" class="admin-input">
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Headline Utama (Baris Atas Teks Putih)</label>
-                  <input type="text" id="hero_titleMain" data-path="hero.titleMain" class="admin-input">
+                  <input type="text" id="hero_titleMain" data-path="hero.titleMain" value="<%= content?.hero?.titleMain || '' %>" class="admin-input">
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Headline Highlight (Teks Gradient)</label>
-                  <input type="text" id="hero_titleHighlight" data-path="hero.titleHighlight" class="admin-input">
+                  <input type="text" id="hero_titleHighlight" data-path="hero.titleHighlight" value="<%= content?.hero?.titleHighlight || '' %>" class="admin-input">
                 </div>
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Paragraf</label>
-                <textarea id="hero_description" data-path="hero.description" rows="3" class="admin-input"></textarea>
+                <textarea id="hero_description" data-path="hero.description" rows="3" class="admin-input"><%= content?.hero?.description || '' %></textarea>
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Harga</label>
-                  <input type="text" id="hero_ctaPrice" data-path="hero.ctaPrice" class="admin-input">
+                  <input type="text" id="hero_ctaPrice" data-path="hero.ctaPrice" value="<%= content?.hero?.ctaPrice || '' %>" class="admin-input">
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-300 mb-1.5">Teks Tombol CTA Layanan</label>
-                  <input type="text" id="hero_ctaService" data-path="hero.ctaService" class="admin-input">
+                  <input type="text" id="hero_ctaService" data-path="hero.ctaService" value="<%= content?.hero?.ctaService || '' %>" class="admin-input">
                 </div>
               </div>
             </div>
@@ -329,19 +329,19 @@
             <div class="space-y-4">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
-                <input type="text" id="tentang_badge" data-path="tentang.badge" class="admin-input">
+                <input type="text" id="tentang_badge" data-path="tentang.badge" value="<%= content?.tentang?.badge || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
-                <input type="text" id="tentang_title" data-path="tentang.title" class="admin-input">
+                <input type="text" id="tentang_title" data-path="tentang.title" value="<%= content?.tentang?.title || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Pertama</label>
-                <textarea id="tentang_p1" data-path="tentang.p1" rows="3" class="admin-input"></textarea>
+                <textarea id="tentang_p1" data-path="tentang.p1" rows="3" class="admin-input"><%= content?.tentang?.p1 || '' %></textarea>
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Paragraf Kedua</label>
-                <textarea id="tentang_p2" data-path="tentang.p2" rows="3" class="admin-input"></textarea>
+                <textarea id="tentang_p2" data-path="tentang.p2" rows="3" class="admin-input"><%= content?.tentang?.p2 || '' %></textarea>
               </div>
             </div>
 
@@ -350,23 +350,23 @@
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-[10px] font-bold text-slate-400 mb-1">Nama Handle (@)</label>
-                  <input type="text" id="tentang_handle" data-path="tentang.profileCard.handle" class="admin-input text-xs">
+                  <input type="text" id="tentang_handle" data-path="tentang.profileCard.handle" value="<%= content?.tentang?.profileCard?.handle || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
                   <label class="block text-[10px] font-bold text-slate-400 mb-1">Sub-title Profesi</label>
-                  <input type="text" id="tentang_subhandle" data-path="tentang.profileCard.subhandle" class="admin-input text-xs">
+                  <input type="text" id="tentang_subhandle" data-path="tentang.profileCard.subhandle" value="<%= content?.tentang?.profileCard?.subhandle || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
                   <label class="block text-[10px] font-bold text-slate-400 mb-1">Target Pelayanan (Value)</label>
-                  <input type="text" id="tentang_target" data-path="tentang.profileCard.targetVal" class="admin-input text-xs">
+                  <input type="text" id="tentang_target" data-path="tentang.profileCard.targetVal" value="<%= content?.tentang?.profileCard?.targetVal || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
                   <label class="block text-[10px] font-bold text-slate-400 mb-1">Kecepatan Respon (Value)</label>
-                  <input type="text" id="tentang_speed" data-path="tentang.profileCard.speedVal" class="admin-input text-xs">
+                  <input type="text" id="tentang_speed" data-path="tentang.profileCard.speedVal" value="<%= content?.tentang?.profileCard?.speedVal || '' %>" class="admin-input text-xs">
                 </div>
                 <div>
                   <label class="block text-[10px] font-bold text-slate-400 mb-1">Privasi (Value)</label>
-                  <input type="text" id="tentang_privacy" data-path="tentang.profileCard.privacyVal" class="admin-input text-xs">
+                  <input type="text" id="tentang_privacy" data-path="tentang.profileCard.privacyVal" value="<%= content?.tentang?.profileCard?.privacyVal || '' %>" class="admin-input text-xs">
                 </div>
               </div>
             </div>
@@ -382,15 +382,15 @@
             <div class="space-y-4 mb-8">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
-                <input type="text" id="keunggulan_badge" data-path="keunggulan.badge" class="admin-input">
+                <input type="text" id="keunggulan_badge" data-path="keunggulan.badge" value="<%= content?.keunggulan?.badge || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
-                <input type="text" id="keunggulan_title" data-path="keunggulan.title" class="admin-input">
+                <input type="text" id="keunggulan_title" data-path="keunggulan.title" value="<%= content?.keunggulan?.title || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
-                <textarea id="keunggulan_desc" data-path="keunggulan.desc" rows="2" class="admin-input"></textarea>
+                <textarea id="keunggulan_desc" data-path="keunggulan.desc" rows="2" class="admin-input"><%= content?.keunggulan?.desc || '' %></textarea>
               </div>
             </div>
 
@@ -413,15 +413,15 @@
             <div class="space-y-4 mb-8">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
-                <input type="text" id="layanan_badge" data-path="layanan.badge" class="admin-input">
+                <input type="text" id="layanan_badge" data-path="layanan.badge" value="<%= content?.layanan?.badge || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
-                <input type="text" id="layanan_title" data-path="layanan.title" class="admin-input">
+                <input type="text" id="layanan_title" data-path="layanan.title" value="<%= content?.layanan?.title || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
-                <textarea id="layanan_desc" data-path="layanan.desc" rows="2" class="admin-input"></textarea>
+                <textarea id="layanan_desc" data-path="layanan.desc" rows="2" class="admin-input"><%= content?.layanan?.desc || '' %></textarea>
               </div>
             </div>
 
@@ -453,15 +453,15 @@
             <div class="space-y-4 mb-8">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
-                <input type="text" id="testimoni_badge" data-path="testimoni.badge" class="admin-input">
+                <input type="text" id="testimoni_badge" data-path="testimoni.badge" value="<%= content?.testimoni?.badge || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
-                <input type="text" id="testimoni_title" data-path="testimoni.title" class="admin-input">
+                <input type="text" id="testimoni_title" data-path="testimoni.title" value="<%= content?.testimoni?.title || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
-                <textarea id="testimoni_desc" data-path="testimoni.desc" rows="2" class="admin-input"></textarea>
+                <textarea id="testimoni_desc" data-path="testimoni.desc" rows="2" class="admin-input"><%= content?.testimoni?.desc || '' %></textarea>
               </div>
             </div>
 
@@ -484,15 +484,15 @@
             <div class="space-y-4 mb-8">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
-                <input type="text" id="pricelist_badge" data-path="pricelist.badge" class="admin-input">
+                <input type="text" id="pricelist_badge" data-path="pricelist.badge" value="<%= content?.pricelist?.badge || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
-                <input type="text" id="pricelist_title" data-path="pricelist.title" class="admin-input">
+                <input type="text" id="pricelist_title" data-path="pricelist.title" value="<%= content?.pricelist?.title || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
-                <textarea id="pricelist_desc" data-path="pricelist.desc" rows="2" class="admin-input"></textarea>
+                <textarea id="pricelist_desc" data-path="pricelist.desc" rows="2" class="admin-input"><%= content?.pricelist?.desc || '' %></textarea>
               </div>
             </div>
 
@@ -531,15 +531,15 @@
             <div class="space-y-4 mb-8">
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Badge Section</label>
-                <input type="text" id="faq_badge" data-path="faq.badge" class="admin-input">
+                <input type="text" id="faq_badge" data-path="faq.badge" value="<%= content?.faq?.badge || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Judul Section</label>
-                <input type="text" id="faq_title" data-path="faq.title" class="admin-input">
+                <input type="text" id="faq_title" data-path="faq.title" value="<%= content?.faq?.title || '' %>" class="admin-input">
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-300 mb-1.5">Deskripsi Singkat</label>
-                <textarea id="faq_desc" data-path="faq.desc" rows="2" class="admin-input"></textarea>
+                <textarea id="faq_desc" data-path="faq.desc" rows="2" class="admin-input"><%= content?.faq?.desc || '' %></textarea>
               </div>
             </div>
 
@@ -562,7 +562,7 @@
     // 1. Data Inisial dari Server EJS
     let currentData = <%- JSON.stringify(content) %>;
     
-    // Konfigurasi Skema Array untuk CRUD Dinamis
+    // Konfigurasi Skema Array untuk Form Editor Dinamis
     const ARRAY_SCHEMAS = {
       'heroStats': { path: 'hero.stats', fields: [{id:'value', label:'Nilai Utama (Cth: 100%)', placeholder:''}, {id:'label', label:'Teks Deskripsi', placeholder:''}, {id:'color', label:'Warna Class Tailwind', placeholder:'text-cyan-400'}] },
       'keunggulan': { path: 'keunggulan.items', fields: [{id:'icon', label:'Ikon FontAwesome', placeholder:'fas fa-star'}, {id:'color', label:'Warna Class Tailwind', placeholder:'bg-teal-500/20 text-teal-400'}, {id:'title', label:'Judul Keunggulan', placeholder:''}, {id:'desc', label:'Deskripsi', isTextarea:true}] },
@@ -576,7 +576,7 @@
       'faq': { path: 'faq.items', fields: [{id:'q', label:'Pertanyaan (Q)', placeholder:'1. Apa itu...'}, {id:'a', label:'Jawaban (A)', isTextarea:true}] }
     };
 
-    // 2. Fungsi Helper untuk resolve Object Path
+    // 2. Fungsi Helper (Mengatur Nilai Nested Object secara Dinamis)
     function resolvePath(obj, path) {
       return path.split('.').reduce((o, i) => o ? o[i] : null, obj);
     }
@@ -588,7 +588,7 @@
       target[last] = value;
     }
 
-    // 3. Render HTML untuk Array Item
+    // 3. Merender DOM HTML untuk satu Item Data List (CRUD Card)
     function renderArrayItemHTML(type, index, itemData) {
       const schema = ARRAY_SCHEMAS[type];
       let html = `<div class="array-item-card" data-type="${type}" data-index="${index}">
@@ -612,7 +612,7 @@
       return html;
     }
 
-    // 4. Render Seluruh Array Data
+    // 4. Memuat Seluruh Array/List ke dalam Editor
     function initArrayRendering() {
       Object.keys(ARRAY_SCHEMAS).forEach(type => {
         const container = document.getElementById(`${type}-container`);
@@ -627,7 +627,7 @@
       });
     }
 
-    // 5. Menambah Row Baru
+    // 5. Action: Menambah Row Kosong Baru di Array (CRUD)
     function addArrayItem(type) {
       const container = document.getElementById(`${type}-container`);
       const currentIndex = container.children.length; 
@@ -638,25 +638,21 @@
       container.insertAdjacentHTML('beforeend', renderArrayItemHTML(type, currentIndex, emptyItem));
     }
 
-    // 6. Menghapus Row
+    // 6. Action: Menghapus Row dari DOM (CRUD)
     function removeArrayItem(buttonElement) {
       if(confirm('Apakah Anda yakin ingin menghapus baris data ini?')) {
         buttonElement.closest('.array-item-card').remove();
       }
     }
 
-    // 7. Load Data Awal
+    // 7. Load Data Statis Pertama Kali saat halaman terbuka
     document.addEventListener('DOMContentLoaded', function() {
-      const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
-      staticInputs.forEach(input => {
-        const val = resolvePath(currentData, input.getAttribute('data-path'));
-        if (val !== undefined && val !== null) input.value = val;
-      });
-
+      // Data terisi oleh EJS value tag (Pre-populated HTML)
+      // Kode JavaScript DOMContentLoaded untuk statik tidak lagi menimpa data
       initArrayRendering();
     });
 
-    // 8. Visual Tab Switching
+    // 8. Tampilan Berpindah Tab Menu
     function switchTab(activeTabId) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden', 'block') && c.classList.remove('block'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -672,7 +668,7 @@
       }
     }
 
-    // 9. LOGIKA UTAMA EKSTRAKSI FORM & SIMPAN KE REDIS
+    // 9. LOGIKA UTAMA: Pengumpulan (Ekstraksi) Seluruh Form HTML & Simpan ke REDIS Backend
     document.getElementById('saveBtn').addEventListener('click', async function(e) {
       e.preventDefault();
       const saveBtn = this;
@@ -681,15 +677,16 @@
       saveBtn.disabled = true;
       saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan ke Database...</span>';
 
+      // Deep Clone Struktur JSON original
       let payloadData = JSON.parse(JSON.stringify(currentData));
 
-      // Extract Static Inputs
+      // 9.A: Rekam semua nilai Input yang bersfat Statis
       const staticInputs = document.querySelectorAll('input[data-path], textarea[data-path]');
       staticInputs.forEach(input => {
         setPath(payloadData, input.getAttribute('data-path'), input.value);
       });
 
-      // Extract Arrays
+      // 9.B: Rekam dan Susun Ulang Semua Field Array / Loop
       Object.keys(ARRAY_SCHEMAS).forEach(type => {
         const schema = ARRAY_SCHEMAS[type];
         const container = document.getElementById(`${type}-container`);
@@ -708,10 +705,11 @@
             newArray.push(itemObj);
           });
           
-          setPath(payloadData, schema.path, newArray);
+          setPath(payloadData, schema.path, newArray); // Timpa node Array lama
         }
       });
 
+      // 9.C: Pengiriman Fetch API ke Backend Node.JS (Upstash)
       const statusAlert = document.getElementById('statusAlert');
       const statusIcon = document.getElementById('statusIcon');
       const statusMessage = document.getElementById('statusMessage');
@@ -730,7 +728,7 @@
           statusAlert.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
           statusIcon.className = 'fas fa-check-circle text-base';
           statusMessage.innerText = '✅ ' + result.message;
-          currentData = payloadData; 
+          currentData = payloadData; // Update lokal (tanpa direfresh)
         } else {
           throw new Error(result.message);
         }
