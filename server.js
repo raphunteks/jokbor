@@ -24,12 +24,164 @@ app.use(express.urlencoded({ extended: true }));
 // Trust Proxy untuk deployment Vercel / Serverless
 app.enable('trust proxy');
 
-// Nomor Kontak WhatsApp Resmi Admin
-const WHATSAPP_NUMBER = '6285338922586';
+// Nomor Kontak WhatsApp Resmi Admin (Support ENV Vercel)
+const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '6285338922586';
 
-// Production Domain Resmi
-const PRODUCTION_DOMAIN = 'https://jokiborangpidgi.vercel.app';
+// Production Domain Resmi (Support ENV Vercel)
+const PRODUCTION_DOMAIN = process.env.PRODUCTION_DOMAIN || 'https://jokiborangpidgi.vercel.app';
 
+// ========================================================================
+// [DATABASE] KONFIGURASI VERCEL KV (UPSTASH REDIS) & ADMIN DASHBOARD
+// ========================================================================
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Ganti di ENV Vercel
+const KV_REST_API_URL = process.env.KV_REST_API_URL || '';
+const KV_REST_API_TOKEN = process.env.KV_REST_API_TOKEN || '';
+
+// Default Content Fallback (Jika Redis Kosong/Error, Web Tetap Jalan Normal)
+const DEFAULT_SITE_CONTENT = {
+  hero: {
+    badge: "Jasa Administrasi & Input Logbook PIDGI No. 1 di Indonesia",
+    titleMain: "Fokus Tangani Pasien,",
+    titleHighlight: "Biar Borang PIDGI Kami yang Tuntaskan.",
+    description: "Solusi terpercaya pengisian e-logbook harian, stase Puskesmas, dan Rumah Sakit. Dari koding UKP, laporan UKM lapangan, hingga penyusunan PKRS & Laporan Kasus tuntas tanpa pusing."
+  },
+  tentang: {
+    badge: "Tentang Layanan Kami",
+    title: "Sahabat Administrasi Terbaik untuk Dokter Gigi Internsip",
+    p1: "@jokiborangpidgi didirikan untuk memberikan solusi nyata bagi rekan-rekan sejawat dokter gigi yang tengah menjalani Program Internsip Dokter Gigi Indonesia (PIDGI).",
+    p2: "Kami menyadari padatnya jadwal pelayanan poli gigi, ekstraksi serial, jaga instalasi gawat darurat, hingga kegiatan lapangan UKGS/UKGMD yang menyita tenaga dan waktu istirahat Anda. Kami hadir mendampingi beban administratif Anda dengan pengerjaan logbook yang terstruktur, akurat, dan sesuai pedoman resmi Kemenkes."
+  },
+  keunggulan: {
+    badge: "Keunggulan Utama",
+    title: "Mengapa Memilih @jokiborangpidgi?",
+    desc: "Standar pengerjaan profesional yang mengutamakan ketelitian medis dan kenyamanan klien."
+  },
+  layanan: {
+    badge: "Modul & Cakupan",
+    title: "Layanan Lengkap Logbook PIDGI",
+    desc: "Kami menangani seluruh pembagian stase Puskesmas dan Rumah Sakit secara menyeluruh."
+  },
+  testimoni: {
+    badge: "Ulasan Rekan Sejawat",
+    title: "Apa Kata Klien Kami?",
+    desc: "100% Trusted. Testimoni nyata dari ratusan rekan dokter gigi internsip di seluruh wahana se-Indonesia."
+  },
+  pricelist: {
+    badge: "Pricelist Transparan",
+    title: "Biaya Jasa / Pricelist Borang PIDGI",
+    desc: "Tarif transparan, hemat, dan dapat disesuaikan dengan kebutuhan masa stase Anda."
+  },
+  faq: {
+    badge: "Tanya Jawab",
+    title: "Ada yang Ingin Ditanyakan?",
+    desc: "Pertanyaan umum mengenai alur pemesanan dan durasi pengerjaan borang."
+  }
+};
+
+// Sistem Caching In-Memory (Menghemat request ke Redis API)
+let contentCache = null;
+let lastCacheTime = 0;
+const CACHE_DURATION = 60000; // Cache 1 Menit
+
+async function getSiteContent() {
+  if (contentCache && (Date.now() - lastCacheTime < CACHE_DURATION)) {
+    return contentCache;
+  }
+  if (!KV_REST_API_URL || !KV_REST_API_TOKEN) {
+    return DEFAULT_SITE_CONTENT;
+  }
+  try {
+    const response = await fetch(`${KV_REST_API_URL}/get/site_content`, {
+      headers: { Authorization: `Bearer ${KV_REST_API_TOKEN}` }
+    });
+    const data = await response.json();
+    if (data.result) {
+      contentCache = JSON.parse(data.result);
+      lastCacheTime = Date.now();
+      return contentCache;
+    }
+  } catch (error) {
+    console.error("[REDIS GET ERROR]", error);
+  }
+  return DEFAULT_SITE_CONTENT;
+}
+
+async function saveSiteContent(newContent) {
+  if (!KV_REST_API_URL || !KV_REST_API_TOKEN) throw new Error("Vercel KV ENV variables are missing");
+  const response = await fetch(`${KV_REST_API_URL}/set/site_content`, {
+    method: 'POST',
+    headers: { 
+      Authorization: `Bearer ${KV_REST_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(JSON.stringify(newContent)) // Upstash REST API requires stringified JSON string
+  });
+  if (!response.ok) throw new Error("Gagal menyimpan ke Redis");
+  contentCache = newContent;
+  lastCacheTime = Date.now();
+}
+
+// Middleware Autentikasi Admin via Cookie
+function checkAdminAuth(req, res, next) {
+  const cookieHeader = req.headers.cookie || '';
+  if (cookieHeader.includes('admin_auth=true') || process.env.NODE_ENV !== 'production') {
+    return next();
+  }
+  res.redirect('/admin/login');
+}
+
+// ========================================================================
+// [ROUTES ADMIN] LOGIN, LOGOUT & CMS DASHBOARD
+// ========================================================================
+app.get('/admin/login', (req, res) => {
+  res.send(`
+    <!DOCTYPE html><html lang="id"><head><title>Admin Login - Joki Borang</title><script src="https://cdn.tailwindcss.com"></script></head>
+    <body class="bg-slate-900 h-screen flex items-center justify-center text-white font-sans">
+      <div class="bg-slate-800 p-8 rounded-2xl shadow-xl w-96 border border-slate-700">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-cyan-400">Panel Admin</h2>
+          <p class="text-xs text-slate-400 mt-1">Sistem Manajemen Database</p>
+        </div>
+        <form method="POST" action="/admin/login" class="flex flex-col gap-4">
+          <input type="password" name="password" placeholder="Masukkan Password" required class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-cyan-500 text-sm">
+          <button type="submit" class="bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform shadow-lg shadow-cyan-500/20">Login Sekarang</button>
+        </form>
+      </div>
+    </body></html>
+  `);
+});
+
+app.post('/admin/login', (req, res) => {
+  if (req.body.password === ADMIN_PASSWORD) {
+    res.setHeader('Set-Cookie', 'admin_auth=true; HttpOnly; Path=/; Max-Age=86400');
+    res.redirect('/admin');
+  } else {
+    res.send('<script>alert("Password Salah!"); window.location.href="/admin/login";</script>');
+  }
+});
+
+app.get('/admin/logout', (req, res) => {
+  res.setHeader('Set-Cookie', 'admin_auth=; HttpOnly; Path=/; Max-Age=0');
+  res.redirect('/admin/login');
+});
+
+app.get('/admin', checkAdminAuth, async (req, res) => {
+  const content = await getSiteContent();
+  res.render('admin-dashboard', { content }); // Membutuhkan admin-dashboard.ejs
+});
+
+app.post('/admin/save', checkAdminAuth, async (req, res) => {
+  try {
+    await saveSiteContent(req.body);
+    res.json({ success: true, message: 'Data berhasil disimpan!' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// ========================================================================
+// [SEO REGISTRY] BAWAAN (TIDAK ADA YANG DIUBAH)
+// ========================================================================
 /**
  * Metadata Registry untuk Dynamic SSR SEO (GSC Gold Standard)
  */
@@ -465,20 +617,26 @@ function buildSeoPayload(req, sectionKey = 'home') {
   };
 }
 
+// ========================================================================
+// [ROUTE UTAMA CLIENT / FRONTEND] MENDAPATKAN INJEKSI KONTEN REDIS
+// ========================================================================
 // ROUTE 1: Landing Page Root (/)
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const seoData = buildSeoPayload(req, 'home');
+  const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
+  
   res.render('index', {
     pageTitle: seoData.title,
     seo: seoData,
     currentSection: 'home',
     whatsappNumber: WHATSAPP_NUMBER,
-    currentYear: new Date().getFullYear()
+    currentYear: new Date().getFullYear(),
+    content: siteContent // <-- Inject data Redis ke EJS View
   });
 });
 
 // ROUTE 2: Direct Clean URLs SSR (/tentang, /keunggulan, /layanan, /testimoni, /biaya, /faq)
-app.get('/:tabName', (req, res, next) => {
+app.get('/:tabName', async (req, res, next) => {
   const tabName = req.params.tabName.toLowerCase();
   
   // Lewatkan file statis (ekstensi .png, .css, dll)
@@ -488,12 +646,15 @@ app.get('/:tabName', (req, res, next) => {
 
   if (SEO_REGISTRY[tabName]) {
     const seoData = buildSeoPayload(req, tabName);
+    const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
+    
     return res.render('index', {
       pageTitle: seoData.title,
       seo: seoData,
       currentSection: tabName,
       whatsappNumber: WHATSAPP_NUMBER,
-      currentYear: new Date().getFullYear()
+      currentYear: new Date().getFullYear(),
+      content: siteContent // <-- Inject data Redis ke EJS View
     });
   }
 
@@ -529,13 +690,14 @@ ${sitemapUrls.map(u => `  <url>
   res.send(sitemapXml);
 });
 
-// ROUTE 4: ROBOTS.TXT Dinamis
+// ROUTE 4: ROBOTS.TXT Dinamis (Menutup Akses Crawler ke Halaman Admin)
 app.get('/robots.txt', (req, res) => {
   const baseUrl = getBaseUrl(req);
 
   const robotsTxt = `User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin/
 
 Sitemap: ${baseUrl}/sitemap.xml`;
 
