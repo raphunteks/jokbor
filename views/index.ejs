@@ -21,10 +21,12 @@
   <meta name="language" content="Indonesian">
   <meta http-equiv="content-language" content="id">
 
-  <!-- [UPGRADE] Performa FCP & LCP: Preconnect & Preload Assets Utama -->
+  <!-- [SUPER UPGRADE] Performa FCP & LCP: Preconnect ke CDN penyumbang Payload Terbesar -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" href="/img/jokiborang.png" as="image" type="image/png">
+  <link rel="preload" href="/img/jokiborang.png" as="image" type="image/png" fetchpriority="high">
 
   <link rel="icon" type="image/png" href="/img/jokiborang.png">
   <link rel="shortcut icon" type="image/png" href="/img/jokiborang.png">
@@ -59,11 +61,12 @@
   <%- JSON.stringify(seo.schemaJson) %>
   </script>
 
+  <!-- Tailwind Script Loader -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <!-- [UPGRADE] Performa: Defer non-critical CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-  
   <link rel="stylesheet" href="/css/main.css">
 
   <script>
@@ -106,20 +109,21 @@
 </head>
 <body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white relative overflow-x-hidden max-w-[100vw] w-full">
 
+  <!-- Background Decorative (Disembunyikan dari pembaca layar agar tidak mengganggu Aksesibilitas) -->
   <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10" aria-hidden="true">
     <div class="mesh-glow mesh-teal w-[600px] h-[600px] absolute top-[-100px] left-[-150px]"></div>
     <div class="mesh-glow mesh-cyan w-[500px] h-[500px] absolute top-[40%] right-[-100px]"></div>
     <div class="mesh-glow mesh-indigo w-[700px] h-[700px] absolute bottom-[10%] left-[10%]"></div>
   </div>
 
-  <!-- [UPGRADE] Aksesibilitas: Menggunakan tag semantic <header> -->
+  <!-- [SUPER UPGRADE] Aksesibilitas: Menggunakan tag semantic <header> dengan aria-label -->
   <header class="fixed top-0 left-0 w-full z-50 glass-nav">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between" aria-label="Navigasi Utama">
       
-      <a href="/" class="flex items-center gap-3 group" title="Beranda <%= content?.brand?.title || 'Joki Borang PIDGI' %>" aria-label="Halaman Beranda <%= content?.brand?.title %>">
+      <a href="/" class="flex items-center gap-3 group" title="Beranda <%= content?.brand?.title || 'Joki Borang PIDGI' %>" aria-label="Beranda <%= content?.brand?.title %>">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20 shrink-0">
           <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center overflow-hidden">
-            <!-- [UPGRADE] Performa LCP: fetchpriority="high" -->
+            <!-- [SUPER UPGRADE] Performa LCP: fetchpriority="high" untuk Hero Image/Logo -->
             <img src="/img/jokiborang.png" alt="Logo <%= content?.brand?.title || 'jokiborangpidgi' %>" fetchpriority="high" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-xl\'>🦷</span>';">
           </div>
         </div>
@@ -141,8 +145,8 @@
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- [UPGRADE] Aksesibilitas Agentic: aria-label & rel attr -->
-        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via WhatsApp" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
+        <!-- [SUPER UPGRADE] Aksesibilitas & Agentic: aria-label yang jelas -->
+        <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi via WhatsApp" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
           <i class="fab fa-whatsapp text-sm" aria-hidden="true"></i>
           <span><%= content?.brand?.ctaWhatsapp || 'Hubungi Kami' %></span>
         </a>
@@ -182,7 +186,7 @@
         </a>
 
         <div class="pt-3 mt-2 border-t border-white/10 sm:hidden">
-          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi WhatsApp" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+          <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20<%= encodeURIComponent(content?.brand?.title || 'jokiborangpidgi') %>,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi WhatsApp Sekarang" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
             <i class="fab fa-whatsapp text-base" aria-hidden="true"></i>
             <span><%= content?.brand?.ctaWhatsapp || 'Konsultasi WhatsApp Sekarang' %></span>
           </a>
@@ -191,9 +195,11 @@
     </div>
   </header>
 
-  <!-- [UPGRADE] Aksesibilitas: Menggunakan tag <main> untuk Penanda Utama Dokumen (Landmark) -->
+  <!-- [SUPER UPGRADE] Aksesibilitas Agentic: Menggunakan tag <main> untuk Penanda Landmark -->
   <main id="main-content" class="w-full">
-    <section id="hero" class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-4 sm:px-6 z-10 w-full">
+    
+    <!-- [UPGRADE] aria-labelledby menyambungkan section dengan Title H1/H2 di dalamnya -->
+    <section id="hero" aria-labelledby="hero-heading" class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-4 sm:px-6 z-10 w-full">
       <div class="max-w-6xl mx-auto text-center w-full">
         
         <div class="inline-flex items-center gap-2.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card border border-teal-500/30 text-teal-300 text-[10px] sm:text-xs font-semibold mb-6 sm:mb-8 shadow-inner max-w-full overflow-hidden">
@@ -201,23 +207,23 @@
           <span class="truncate"><%= content.hero.badge %></span>
         </div>
 
-        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.2] sm:leading-[1.15] mb-6 sm:mb-8 px-2 sm:px-0">
+        <h1 id="hero-heading" class="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.2] sm:leading-[1.15] mb-6 sm:mb-8 px-2 sm:px-0">
           <%= content.hero.titleMain %> <br class="hidden sm:inline" />
           <span class="bg-gradient-to-r from-teal-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
             <%= content.hero.titleHighlight %>
           </span>
         </h1>
 
-        <!-- [UPGRADE] Aksesibilitas Kontras: text-slate-300 ke text-slate-200 -->
+        <!-- [UPGRADE] Kontras: text-slate-300 -> text-slate-200 -->
         <p class="text-slate-200 text-sm sm:text-base lg:text-xl max-w-3xl mx-auto mb-10 sm:mb-12 leading-relaxed font-normal px-2 sm:px-0">
           <%= content.hero.description %>
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full px-4 sm:px-0">
-          <a href="/biaya" aria-label="Lihat Daftar Harga Layanan" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-teal-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition duration-200">
+          <a href="/biaya" aria-label="Lihat Daftar Harga (Pricelist)" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-teal-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition duration-200">
             <i class="fas fa-tags mr-2" aria-hidden="true"></i> <%= content.hero.ctaPrice %>
           </a>
-          <a href="/layanan" aria-label="Pelajari Modul Layanan" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl glass-card text-slate-100 font-semibold text-xs sm:text-sm hover:bg-white/10 hover:text-white transition duration-200">
+          <a href="/layanan" aria-label="Pelajari Layanan Kami" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl glass-card text-slate-100 font-semibold text-xs sm:text-sm hover:bg-white/10 hover:text-white transition duration-200">
             <i class="fas fa-layer-group mr-2 text-cyan-400" aria-hidden="true"></i> <%= content.hero.ctaService %>
           </a>
         </div>
@@ -234,7 +240,7 @@
       </div>
     </section>
 
-    <section id="tentang" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 w-full">
+    <section id="tentang" aria-labelledby="tentang-heading" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 w-full">
       <div class="max-w-6xl mx-auto w-full">
         <div class="glass-panel rounded-3xl p-6 sm:p-14 relative overflow-hidden border border-white/10">
           
@@ -244,7 +250,7 @@
               <span class="inline-block px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-4">
                 <%= content.tentang.badge %>
               </span>
-              <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight mb-4 sm:mb-6">
+              <h2 id="tentang-heading" class="text-2xl sm:text-4xl font-extrabold text-white leading-tight mb-4 sm:mb-6">
                 <%= content.tentang.title %>
               </h2>
               <p class="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed mb-4">
@@ -271,7 +277,7 @@
                 <div class="text-center pb-4 border-b border-white/10">
                   <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[2px] mb-3 shadow-lg shadow-cyan-500/30">
                     <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                      <!-- [UPGRADE] Performa: Tambahkan loading lazy untuk gambar non-LCP -->
+                      <!-- [UPGRADE] Performa: Lazy Load Non-Critical Image -->
                       <img src="/img/jokiborang.png" alt="Profile <%= content?.brand?.title || 'Joki Borang PIDGI' %>" loading="lazy" decoding="async" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
                     </div>
                   </div>
@@ -301,14 +307,14 @@
       </div>
     </section>
 
-    <section id="keunggulan" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 bg-slate-950/40 border-y border-white/5 w-full">
+    <section id="keunggulan" aria-labelledby="keunggulan-heading" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 bg-slate-950/40 border-y border-white/5 w-full">
       <div class="max-w-6xl mx-auto w-full">
         
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
           <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
             <%= content.keunggulan.badge %>
           </span>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
+          <h2 id="keunggulan-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
             <%= content.keunggulan.title %>
           </h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-3">
@@ -333,14 +339,14 @@
       </div>
     </section>
 
-    <section id="layanan" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 w-full">
+    <section id="layanan" aria-labelledby="layanan-heading" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 w-full">
       <div class="max-w-6xl mx-auto w-full">
         
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
           <span class="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
             <%= content.layanan.badge %>
           </span>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
+          <h2 id="layanan-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
             <%= content.layanan.title %>
           </h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-3">
@@ -411,14 +417,14 @@
       </div>
     </section>
 
-    <section id="testimoni" class="py-16 sm:py-24 px-0 sm:px-6 relative z-10 bg-slate-950/40 border-y border-white/5 w-full">
+    <section id="testimoni" aria-labelledby="testimoni-heading" class="py-16 sm:py-24 px-0 sm:px-6 relative z-10 bg-slate-950/40 border-y border-white/5 w-full">
       <div class="max-w-[1400px] mx-auto w-full overflow-hidden">
         
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-4 sm:px-2">
           <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
             <%= content.testimoni.badge %>
           </span>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
+          <h2 id="testimoni-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
             <%= content.testimoni.title %>
           </h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-3">
@@ -426,7 +432,7 @@
           </p>
         </div>
 
-        <div class="relative w-full overflow-hidden flex flex-col gap-6 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] py-2" aria-label="Testimonial Carousel">
+        <div class="relative w-full overflow-hidden flex flex-col gap-6 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] py-2" role="region" aria-label="Testimonial Carousel">
           
           <div class="flex w-max animate-scroll-x hover:[animation-play-state:paused] gap-4 sm:gap-6 pl-4 sm:pl-0">
             <% const half = Math.ceil(content.testimoni.items.length / 2); %>
@@ -513,14 +519,14 @@
       </div>
     </section>
 
-    <section id="biaya" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 w-full">
+    <section id="biaya" aria-labelledby="biaya-heading" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 w-full">
       <div class="max-w-6xl mx-auto w-full">
         
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
           <span class="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
             <%= content.pricelist.badge %>
           </span>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
+          <h2 id="biaya-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
             <%= content.pricelist.title %>
           </h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-3">
@@ -724,14 +730,14 @@
       </div>
     </section>
 
-    <section id="faq" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 bg-slate-950/40 border-t border-white/5 w-full">
+    <section id="faq" aria-labelledby="faq-heading" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 bg-slate-950/40 border-t border-white/5 w-full">
       <div class="max-w-4xl mx-auto w-full">
         
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
           <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
             <%= content.faq.badge %>
           </span>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
+          <h2 id="faq-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4">
             <%= content.faq.title %>
           </h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-3">
