@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const { speedInsights } = require('@vercel/speed-insights/express');
 const app = express();
+speedInsights({ app });
 const PORT = process.env.PORT || 3000;
 
 // Konfigurasi View Engine EJS
