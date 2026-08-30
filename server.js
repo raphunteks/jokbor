@@ -39,54 +39,15 @@ const KV_REST_API_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_R
 
 /**
  * SUPER BIG STRUCTURE DEFAULT SITE CONTENT
- * Memuat SELURUH teks, metadata SEO, Schema Graph, dan komponen UI
+ * Memuat SELURUH teks, array list, dan komponen dari index.ejs (Top to Bottom)
  */
 const DEFAULT_SITE_CONTENT = {
-  // BRAND & NAVIGATION (HEADER)
+  // BRAND & NAVIGATION
   brand: {
     title: "jokiborangpidgi",
     subtitle: "PIDGI Assistance",
     ctaWhatsapp: "Hubungi Kami"
   },
-
-  // FOOTER & COPYRIGHT
-  footer: {
-    copyText: "@jokiborangpidgi. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.",
-    instagram: "https://instagram.com/jokiborangpidgi"
-  },
-
-  // === METADATA SEO REGISTRY (DYNAMIC) ===
-  seo: {
-    home: { route: '', name: 'Beranda', title: 'Joki Borang PIDGI | Solusi Tuntas Logbook Dokter Gigi Internsip', description: 'Jasa Joki Input Borang & E-Logbook Dokter Gigi Internsip (PIDGI) Terpercaya. Handle UKP, UKM, Lapsus, Manajemen & PKRS Stase RS dan Puskesmas.', keywords: 'joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs, kode icd 10 gigi, jasa borang dokter gigi, logbook kemenkes pidgi', section: 'home', ogType: 'website' },
-    tentang: { route: 'tentang', name: 'Tentang Kami', title: 'Tentang Kami - Joki Borang PIDGI | Asisten Administrasi Dokter Gigi', description: 'Kenali layanan asisten administrasi klinis PIDGI terpercaya. Kami membantu input borang SOAP, laporan kasus, dan tugas stase dokter gigi di seluruh wahana Indonesia.', keywords: 'tentang joki borang pidgi, profil joki borang, dokter gigi internsip indonesia, asisten administrasi klinik gigi, rekan logbook pidgi', section: 'tentang', ogType: 'profile' },
-    keunggulan: { route: 'keunggulan', name: 'Keunggulan', title: 'Keunggulan Layanan - Joki Borang PIDGI | Cepat, Rapi & Bergaransi', description: 'Kenapa memilih @jokiborangpidgi? Paham kode ICD-10 gigi, data terenkripsi 100%, opsi pengerjaan kilat 1 hari, dan garansi revisi sampai approval Dokter Pendamping.', keywords: 'keunggulan joki borang pidgi, joki logbook aman, joki borang cepat express, garansi approval dokter pendamping, kerahasiaan data pidgi, kode icd 10 gigi', section: 'keunggulan', ogType: 'article' },
-    layanan: { route: 'layanan', name: 'Layanan Lengkap', title: 'Modul Layanan Lengkap - Joki Borang PIDGI | Stase RS & Puskesmas', description: 'Layanan terintegrasi borang PIDGI: UKP Poli Gigi, Laporan Promkes & Evaluasi UKM, PKRS Word/PPT, Laporan Manajemen, hingga Lapsus Spesialistik.', keywords: 'layanan joki borang, modul ukp pkm, modul ukm puskesmas, lapsus stase rs, modul pkrs manajemen rs, logbook puskesmas dokter gigi', section: 'layanan', ogType: 'article' },
-    testimoni: { route: 'testimoni', name: 'Testimoni Dokter Gigi', title: 'Testimoni Dokter Gigi Internsip - Joki Borang PIDGI', description: 'Lihat ulasan dan kepuasan rekan sejawat dokter gigi PIDGI di berbagai wahana Jawa, Sumatera, dan Sulawesi yang telah terbantu oleh layanan kami.', keywords: 'testimoni joki borang pidgi, review joki logbook gigi, pengalaman dokship pidgi, rekomendasi joki borang, rating jasa borang pidgi', section: 'testimoni', ogType: 'article' },
-    biaya: { route: 'biaya', name: 'Daftar Harga', title: 'Daftar Harga / Pricelist Joki Borang PIDGI | Mulai 5rb/kasus', description: 'Pricelist transparan jasa borang PIDGI: UKP mulai Rp 5.000/kasus, Paket All-in Bulanan, Laporan UKM 10rb, Slide PKRS, Lapsus, & Paket Hemat Combo 6 Bulan.', keywords: 'harga joki borang pidgi, pricelist joki logbook dokter gigi, paket all in pidgi, jasa buat ppt pkrs, lapsus dokter gigi, combo 6 bulan pidgi, biaya joki logbook', section: 'biaya', ogType: 'product' },
-    faq: { route: 'faq', name: 'FAQ Tanya Jawab', title: 'FAQ - Pertanyaan Umum Jasa Joki Borang PIDGI', description: 'Informasi durasi pengerjaan UKP, laporan UKM, manajemen RS, Lapsus, keamanan akun portal, serta garansi revisi sampai validasi DP.', keywords: 'faq joki borang pidgi, lama pengerjaan borang gigi, jaminan privasi logbook pidgi, revisi borang pidgi, tanya jawab joki pidgi', section: 'faq', ogType: 'article' }
-  },
-
-  // === OFFER CATALOG SCHEMA.ORG (DYNAMIC) ===
-  offers: [
-    { name: "UKP Stase Puskesmas (Reguler)", price: "5000", priceCurrency: "IDR", description: "Penginputan borang UKP harian poli gigi Puskesmas per kasus (3-5 hari kerja)" },
-    { name: "UKP Stase Rumah Sakit (Reguler)", price: "5000", priceCurrency: "IDR", description: "Penginputan borang UKP harian poli gigi RS per kasus (3-5 hari kerja)" },
-    { name: "UKP Express 1 Hari Kilat", price: "7000", priceCurrency: "IDR", description: "Penginputan kilat 1x24 jam untuk UKP Puskesmas dan RS (Diskon 10% > 100 kasus)" },
-    { name: "All-in UKP Stase PKM (1 Bulan)", price: "900000", priceCurrency: "IDR", description: "Paket borongan lengkap input UKP stase Puskesmas selama 1 bulan penuh" },
-    { name: "All-in UKP Stase PKM (3 Bulan)", price: "2500000", priceCurrency: "IDR", description: "Paket borongan lengkap input UKP stase Puskesmas selama 3 bulan penuh" },
-    { name: "All-in UKP Stase RS (1 Bulan)", price: "500000", priceCurrency: "IDR", description: "Paket borongan lengkap input UKP stase Rumah Sakit selama 1 bulan penuh" },
-    { name: "All-in UKP Stase RS (3 Bulan)", price: "1800000", priceCurrency: "IDR", description: "Paket borongan lengkap input UKP stase Rumah Sakit selama 3 bulan penuh" },
-    { name: "Combo Hemat Full 6 Bulan (RS + PKM)", price: "4000000", priceCurrency: "IDR", description: "Paket tuntas satu masa internsip penuh (3 bulan RS + 3 bulan Puskesmas)" },
-    { name: "Laporan Promkes UKM PKM", price: "10000", priceCurrency: "IDR", description: "Penyusunan dokumen laporan penyuluhan promosi kesehatan Puskesmas" },
-    { name: "Laporan Evaluasi UKM PKM", price: "35000", priceCurrency: "IDR", description: "Penyusunan dokumen laporan evaluasi program Puskesmas" },
-    { name: "All-in 3 Laporan Evaluasi UKM", price: "100000", priceCurrency: "IDR", description: "Paket hemat penyusunan 3 laporan evaluasi program Puskesmas" },
-    { name: "PKRS Dokumen Word", price: "40000", priceCurrency: "IDR", description: "Penyusunan dokumen laporan PKRS format Microsoft Word" },
-    { name: "PKRS Slide Presentasi PPT", price: "60000", priceCurrency: "IDR", description: "Desain slide presentasi PKRS PowerPoint dari materi Word klien" },
-    { name: "Paket Hemat PKRS (Word + PPT)", price: "100000", priceCurrency: "IDR", description: "Paket komplit dokumen Word dan slide presentasi PPT Promosi Kesehatan Rumah Sakit" },
-    { name: "Laporan Manajemen RS", price: "10000", priceCurrency: "IDR", description: "Penyusunan dan input laporan manajemen mutu Rumah Sakit per laporan" },
-    { name: "Lapsus Dokumen Word (10 Halaman)", price: "100000", priceCurrency: "IDR", description: "Penyusunan karya ilmiah laporan kasus stase RS/PKM format Word (10 halaman)" },
-    { name: "Lapsus Slide Presentasi PPT", price: "150000", priceCurrency: "IDR", description: "Desain slide presentasi Laporan Kasus ilmiah siap monev DP" },
-    { name: "Paket Hemat Lapsus (Word + PPT)", price: "200000", priceCurrency: "IDR", description: "Paket komplit Laporan Kasus dokumen Word dan slide presentasi PPT" }
-  ],
 
   // 1. HERO SECTION
   hero: {
@@ -193,7 +154,7 @@ const DEFAULT_SITE_CONTENT = {
     }
   },
 
-  // 5. TESTIMONI SECTION
+  // 5. TESTIMONI SECTION (LENGKAP 22 REKAN DOKTER GIGI)
   testimoni: {
     badge: "Ulasan Rekan Sejawat",
     title: "Apa Kata Klien Kami?",
@@ -292,6 +253,12 @@ const DEFAULT_SITE_CONTENT = {
       { q: "5. Apakah data akun dan rekam medis pasien dijamin aman?", a: "Kami menjamin 100% kerahasiaan. Kredensial akun portal e-logbook hanya digunakan selama proses penginputan dan langsung dihapus dari perangkat kami setelah transaksi selesai. Identitas pasien dan wahana Anda dijaga secara ketat." },
       { q: "6. Bagaimana jika terdapat revisi dari Dokter Pendamping?", a: "Kami memberikan garansi revisi gratis sampai borang dan laporan Anda dinyatakan valid dan disetujui oleh Dokter Pendamping (DP) wahana Anda." }
     ]
+  },
+
+  // FOOTER & COPYRIGHT
+  footer: {
+    copyText: "@jokiborangpidgi. Seluruh Hak Cipta Dilindungi. Partner Administrasi Dokter Gigi Internsip Indonesia.",
+    instagram: "https://instagram.com/jokiborangpidgi"
   }
 };
 
@@ -407,6 +374,75 @@ app.post('/admin/save', checkAdminAuth, async (req, res) => {
 // ========================================================================
 // [SEO REGISTRY] DYNAMIC SSR SEO payload & SCHEMA GRAPH (GSC GOLD STANDARD)
 // ========================================================================
+/**
+ * Metadata Registry untuk Dynamic SSR SEO (GSC Gold Standard)
+ * SCRIPT ASLI ANDA TETAP UTUH DI SINI SEBAGAI FALLBACK/BASE
+ */
+const SEO_REGISTRY = {
+  home: {
+    route: '',
+    name: 'Beranda',
+    title: 'Joki Borang PIDGI | Solusi Tuntas Logbook Dokter Gigi Internsip',
+    description: 'Jasa Joki Input Borang & E-Logbook Dokter Gigi Internsip (PIDGI) Terpercaya. Handle UKP, UKM, Lapsus, Manajemen & PKRS Stase RS dan Puskesmas.',
+    keywords: 'joki borang pidgi, joki logbook dokter gigi, internsip pidgi, borang ukp gigi, borang ukm puskesmas, lapsus pidgi, pkrs rs, kode icd 10 gigi, jasa borang dokter gigi, logbook kemenkes pidgi',
+    section: 'home',
+    ogType: 'website'
+  },
+  tentang: {
+    route: 'tentang',
+    name: 'Tentang Kami',
+    title: 'Tentang Kami - Joki Borang PIDGI | Asisten Administrasi Dokter Gigi',
+    description: 'Kenali layanan asisten administrasi klinis PIDGI terpercaya. Kami membantu input borang SOAP, laporan kasus, dan tugas stase dokter gigi di seluruh wahana Indonesia.',
+    keywords: 'tentang joki borang pidgi, profil joki borang, dokter gigi internsip indonesia, asisten administrasi klinik gigi, rekan logbook pidgi',
+    section: 'tentang',
+    ogType: 'profile'
+  },
+  keunggulan: {
+    route: 'keunggulan',
+    name: 'Keunggulan',
+    title: 'Keunggulan Layanan - Joki Borang PIDGI | Cepat, Rapi & Bergaransi',
+    description: 'Kenapa memilih @jokiborangpidgi? Paham kode ICD-10 gigi, data terenkripsi 100%, opsi pengerjaan kilat 1 hari, dan garansi revisi sampai approval Dokter Pendamping.',
+    keywords: 'keunggulan joki borang pidgi, joki logbook aman, joki borang cepat express, garansi approval dokter pendamping, kerahasiaan data pidgi, kode icd 10 gigi',
+    section: 'keunggulan',
+    ogType: 'article'
+  },
+  layanan: {
+    route: 'layanan',
+    name: 'Layanan Lengkap',
+    title: 'Modul Layanan Lengkap - Joki Borang PIDGI | Stase RS & Puskesmas',
+    description: 'Layanan terintegrasi borang PIDGI: UKP Poli Gigi, Laporan Promkes & Evaluasi UKM, PKRS Word/PPT, Laporan Manajemen, hingga Lapsus Spesialistik.',
+    keywords: 'layanan joki borang, modul ukp pkm, modul ukm puskesmas, lapsus stase rs, modul pkrs manajemen rs, logbook puskesmas dokter gigi',
+    section: 'layanan',
+    ogType: 'article'
+  },
+  testimoni: {
+    route: 'testimoni',
+    name: 'Testimoni Dokter Gigi',
+    title: 'Testimoni Dokter Gigi Internsip - Joki Borang PIDGI',
+    description: 'Lihat ulasan dan kepuasan rekan sejawat dokter gigi PIDGI di berbagai wahana Jawa, Sumatera, dan Sulawesi yang telah terbantu oleh layanan kami.',
+    keywords: 'testimoni joki borang pidgi, review joki logbook gigi, pengalaman dokship pidgi, rekomendasi joki borang, rating jasa borang pidgi',
+    section: 'testimoni',
+    ogType: 'article'
+  },
+  biaya: {
+    route: 'biaya',
+    name: 'Daftar Harga',
+    title: 'Daftar Harga / Pricelist Joki Borang PIDGI | Mulai 5rb/kasus',
+    description: 'Pricelist transparan jasa borang PIDGI: UKP mulai Rp 5.000/kasus, Paket All-in Bulanan, Laporan UKM 10rb, Slide PKRS, Lapsus, & Paket Hemat Combo 6 Bulan.',
+    keywords: 'harga joki borang pidgi, pricelist joki logbook dokter gigi, paket all in pidgi, jasa buat ppt pkrs, lapsus dokter gigi, combo 6 bulan pidgi, biaya joki logbook',
+    section: 'biaya',
+    ogType: 'product'
+  },
+  faq: {
+    route: 'faq',
+    name: 'FAQ Tanya Jawab',
+    title: 'FAQ - Pertanyaan Umum Jasa Joki Borang PIDGI',
+    description: 'Informasi durasi pengerjaan UKP, laporan UKM, manajemen RS, Lapsus, keamanan akun portal, serta garansi revisi sampai validasi DP.',
+    keywords: 'faq joki borang pidgi, lama pengerjaan borang gigi, jaminan privasi logbook pidgi, revisi borang pidgi, tanya jawab joki pidgi',
+    section: 'faq',
+    ogType: 'article'
+  }
+};
 
 /**
  * Resolver Base URL yang mengutamakan Domain Produksi Resmi
@@ -421,15 +457,11 @@ function getBaseUrl(req) {
 }
 
 /**
- * Generator Dynamic SSR SEO Payload & Complete Schema.org JSON-LD Graph
+ * Generator Dynamic SSR SEO Payload & Complete Schema.org JSON-LD Graph (GSC Gold Standard)
  */
-function buildSeoPayload(req, contentData, sectionKey = 'home') {
+function buildSeoPayload(req, sectionKey = 'home') {
   const baseUrl = getBaseUrl(req);
-  
-  // Mengambil konfigurasi SEO dari database (atau fallback)
-  const seoConfig = contentData.seo || DEFAULT_SITE_CONTENT.seo;
-  const config = seoConfig[sectionKey] || seoConfig.home;
-  
+  const config = SEO_REGISTRY[sectionKey] || SEO_REGISTRY.home;
   const currentUrl = config.route === '' ? `${baseUrl}/` : `${baseUrl}/${config.route}`;
   const logoUrl = `${baseUrl}/img/jokiborang.png`;
 
@@ -462,35 +494,135 @@ function buildSeoPayload(req, contentData, sectionKey = 'home') {
     { name: "FAQ Tanya Jawab", url: `${baseUrl}/faq` }
   ];
 
-  // 3. ItemList / OfferCatalog for Services & Pricing (Dari REDIS)
-  const offerItems = contentData.offers || DEFAULT_SITE_CONTENT.offers;
-  const offerCatalogItems = offerItems.map(offer => ({
-    "@type": "Offer",
-    "name": offer.name,
-    "price": offer.price,
-    "priceCurrency": offer.priceCurrency || "IDR",
-    "description": offer.description
-  }));
-
-  // Map FAQ dari REDIS untuk Schema FAQPage
-  const faqItems = (contentData.faq && contentData.faq.items) ? contentData.faq.items : DEFAULT_SITE_CONTENT.faq.items;
-  const faqSchemaItems = faqItems.map(faq => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a
+  // 3. ItemList / OfferCatalog for Services & Pricing (Updated Pricelist)
+  const offerCatalogItems = [
+    {
+      "@type": "Offer",
+      "name": "UKP Stase Puskesmas (Reguler)",
+      "price": "5000",
+      "priceCurrency": "IDR",
+      "description": "Penginputan borang UKP harian poli gigi Puskesmas per kasus (3-5 hari kerja)"
+    },
+    {
+      "@type": "Offer",
+      "name": "UKP Stase Rumah Sakit (Reguler)",
+      "price": "5000",
+      "priceCurrency": "IDR",
+      "description": "Penginputan borang UKP harian poli gigi RS per kasus (3-5 hari kerja)"
+    },
+    {
+      "@type": "Offer",
+      "name": "UKP Express 1 Hari Kilat",
+      "price": "7000",
+      "priceCurrency": "IDR",
+      "description": "Penginputan kilat 1x24 jam untuk UKP Puskesmas dan RS (Diskon 10% > 100 kasus)"
+    },
+    {
+      "@type": "Offer",
+      "name": "All-in UKP Stase PKM (1 Bulan)",
+      "price": "900000",
+      "priceCurrency": "IDR",
+      "description": "Paket borongan lengkap input UKP stase Puskesmas selama 1 bulan penuh"
+    },
+    {
+      "@type": "Offer",
+      "name": "All-in UKP Stase PKM (3 Bulan)",
+      "price": "2500000",
+      "priceCurrency": "IDR",
+      "description": "Paket borongan lengkap input UKP stase Puskesmas selama 3 bulan penuh"
+    },
+    {
+      "@type": "Offer",
+      "name": "All-in UKP Stase RS (1 Bulan)",
+      "price": "500000",
+      "priceCurrency": "IDR",
+      "description": "Paket borongan lengkap input UKP stase Rumah Sakit selama 1 bulan penuh"
+    },
+    {
+      "@type": "Offer",
+      "name": "All-in UKP Stase RS (3 Bulan)",
+      "price": "1800000",
+      "priceCurrency": "IDR",
+      "description": "Paket borongan lengkap input UKP stase Rumah Sakit selama 3 bulan penuh"
+    },
+    {
+      "@type": "Offer",
+      "name": "Combo Hemat Full 6 Bulan (RS + PKM)",
+      "price": "4000000",
+      "priceCurrency": "IDR",
+      "description": "Paket tuntas satu masa internsip penuh (3 bulan RS + 3 bulan Puskesmas)"
+    },
+    {
+      "@type": "Offer",
+      "name": "Laporan Promkes UKM PKM",
+      "price": "10000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dokumen laporan penyuluhan promosi kesehatan Puskesmas"
+    },
+    {
+      "@type": "Offer",
+      "name": "Laporan Evaluasi UKM PKM",
+      "price": "35000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dokumen laporan evaluasi program Puskesmas"
+    },
+    {
+      "@type": "Offer",
+      "name": "All-in 3 Laporan Evaluasi UKM",
+      "price": "100000",
+      "priceCurrency": "IDR",
+      "description": "Paket hemat penyusunan 3 laporan evaluasi program Puskesmas"
+    },
+    {
+      "@type": "Offer",
+      "name": "PKRS Dokumen Word",
+      "price": "40000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dokumen laporan PKRS format Microsoft Word"
+    },
+    {
+      "@type": "Offer",
+      "name": "PKRS Slide Presentasi PPT",
+      "price": "60000",
+      "priceCurrency": "IDR",
+      "description": "Desain slide presentasi PKRS PowerPoint dari materi Word klien"
+    },
+    {
+      "@type": "Offer",
+      "name": "Paket Hemat PKRS (Word + PPT)",
+      "price": "100000",
+      "priceCurrency": "IDR",
+      "description": "Paket komplit dokumen Word dan slide presentasi PPT Promosi Kesehatan Rumah Sakit"
+    },
+    {
+      "@type": "Offer",
+      "name": "Laporan Manajemen RS",
+      "price": "10000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan dan input laporan manajemen mutu Rumah Sakit per laporan"
+    },
+    {
+      "@type": "Offer",
+      "name": "Lapsus Dokumen Word (10 Halaman)",
+      "price": "100000",
+      "priceCurrency": "IDR",
+      "description": "Penyusunan karya ilmiah laporan kasus stase RS/PKM format Word (10 halaman)"
+    },
+    {
+      "@type": "Offer",
+      "name": "Lapsus Slide Presentasi PPT",
+      "price": "150000",
+      "priceCurrency": "IDR",
+      "description": "Desain slide presentasi Laporan Kasus ilmiah siap monev DP"
+    },
+    {
+      "@type": "Offer",
+      "name": "Paket Hemat Lapsus (Word + PPT)",
+      "price": "200000",
+      "priceCurrency": "IDR",
+      "description": "Paket komplit Laporan Kasus dokumen Word dan slide presentasi PPT"
     }
-  }));
-
-  // Map Testimoni dari REDIS untuk Schema Review
-  const reviewItems = (contentData.testimoni && contentData.testimoni.items) ? contentData.testimoni.items : DEFAULT_SITE_CONTENT.testimoni.items;
-  const reviewSchemaItems = reviewItems.slice(0, 5).map(rev => ({
-    "@type": "Review",
-    "author": { "@type": "Person", "name": rev.name },
-    "reviewBody": rev.comment,
-    "reviewRating": { "@type": "Rating", "ratingValue": "5" }
-  }));
+  ];
 
   // 4. Schema.org Multi-Entity Graph
   const schemaGraph = [
@@ -499,9 +631,11 @@ function buildSeoPayload(req, contentData, sectionKey = 'home') {
       "@type": "WebSite",
       "@id": `${baseUrl}/#website`,
       "url": `${baseUrl}/`,
-      "name": contentData.brand.title || "Joki Borang PIDGI",
-      "description": config.description,
-      "publisher": { "@id": `${baseUrl}/#organization` },
+      "name": "Joki Borang PIDGI",
+      "description": "Layanan Jasa Input Borang & Logbook Dokter Gigi Internsip PIDGI No. 1 di Indonesia",
+      "publisher": {
+        "@id": `${baseUrl}/#organization`
+      },
       "inLanguage": "id-ID"
     },
     // BreadcrumbList Entity
@@ -525,32 +659,80 @@ function buildSeoPayload(req, contentData, sectionKey = 'home') {
     {
       "@type": ["ProfessionalService", "MedicalBusiness"],
       "@id": `${baseUrl}/#organization`,
-      "name": `${contentData.brand.title} (@${contentData.brand.title})`,
+      "name": "Joki Borang PIDGI (@jokiborangpidgi)",
       "alternateName": "Jasa Joki Borang Dokter Gigi Internsip",
       "url": `${baseUrl}/`,
       "logo": {
         "@type": "ImageObject",
         "@id": `${baseUrl}/#logo`,
         "url": logoUrl,
-        "caption": `Logo ${contentData.brand.title}`
+        "caption": "Logo jokiborangpidgi"
       },
       "image": logoUrl,
       "telephone": `+${WHATSAPP_NUMBER}`,
       "priceRange": "Rp 5.000 - Rp 4.000.000",
       "currenciesAccepted": "IDR",
       "paymentAccepted": "Bank Transfer, QRIS, E-Wallet",
-      "description": config.description,
-      "areaServed": { "@type": "Country", "name": "Indonesia" },
-      "address": { "@type": "PostalAddress", "addressCountry": "ID" },
-      "sameAs": [ contentData.footer.instagram || "https://instagram.com/jokiborangpidgi" ],
+      "description": "Jasa Asisten Administrasi & Input Logbook Terpercaya untuk Dokter Gigi Internsip Indonesia (PIDGI). Menangani modul UKP, UKM, Lapsus, Manajemen, dan PKRS.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Indonesia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ID"
+      },
+      "sameAs": [
+        "https://instagram.com/jokiborangpidgi"
+      ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "reviewCount": reviewItems.length.toString(),
+        "reviewCount": "128",
         "bestRating": "5",
         "worstRating": "1"
       },
-      "review": reviewSchemaItems,
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "drg. F*** A***"
+          },
+          "datePublished": "2026-01-15",
+          "reviewBody": "Penyelamat hidup banget pas stase PKM! Pasien lagi rame-ramenya di poli dan harus megang UKGS. Format borangnya rapi banget, kode ICD-10 pas, dan DP langsung approve tanpa revisi.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "drg. R*** P***"
+          },
+          "datePublished": "2026-02-10",
+          "reviewBody": "Pesan paket kilat Express 1 hari buat 140 kasus UKP RS karena mau monev mendadak. Beneran kelar besok siangnya! Sangat profesional dan privasi akun beneran dijaga aman.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "drg. M*** H***"
+          },
+          "datePublished": "2026-03-01",
+          "reviewBody": "Saya ambil paket Combo Full 6 Bulan (RS + PKM). PPT PKRS, lapsus, sama evaluasi UKM-nya keren banget desainnya. Jadi bisa fokus belajar kasus tanpa stres mikirin ketikan borang.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        }
+      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Katalog Jasa Borang PIDGI",
@@ -561,7 +743,56 @@ function buildSeoPayload(req, contentData, sectionKey = 'home') {
     {
       "@type": "FAQPage",
       "@id": `${baseUrl}/#faq`,
-      "mainEntity": faqSchemaItems
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Berapa lama estimasi pengerjaan logbook UKP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Untuk paket reguler stase RS maupun Puskesmas estimasi pengerjaan adalah 3-5 hari kerja. Paket Express bergaransi selesai dalam waktu 1x24 jam."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Berapa lama pengerjaan modul UKM Puskesmas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Laporan Promkes dan Laporan Evaluasi UKM diselesaikan rata-rata dalam 1-3 hari kerja sejak data dasar dikirimkan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Berapa lama pengerjaan Laporan Manajemen & PKRS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Laporan PKRS (Word/PPT) dan laporan manajemen RS memakan waktu pengerjaan 2-3 hari kerja dengan desain presentasi siap pakai."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bagaimana alur pengerjaan Laporan Kasus (Lapsus)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pengerjaan Lapsus membutuhkan waktu 3-5 hari kerja lengkap dengan tinjauan pustaka, SOAP, dokumentasi kasus, dan sitasi jurnal ilmiah terkini."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apakah data akun dan rekam medis pasien dijamin aman?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sangat aman. Kredensial akun hanya digunakan selama proses penginputan dan langsung dihapus dari perangkat kami setelah transaksi tuntas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bagaimana jika terdapat revisi dari Dokter Pendamping?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kami memberikan garansi revisi gratis sampai borang dan laporan dinyatakan valid serta disetujui oleh Dokter Pendamping (DP)."
+          }
+        }
+      ]
     }
   ];
 
@@ -584,8 +815,8 @@ function buildSeoPayload(req, contentData, sectionKey = 'home') {
 // ========================================================================
 // ROUTE 1: Landing Page Root (/)
 app.get('/', async (req, res) => {
+  const seoData = buildSeoPayload(req, 'home');
   const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
-  const seoData = buildSeoPayload(req, siteContent, 'home');
   
   res.render('index', {
     pageTitle: seoData.title,
@@ -606,13 +837,9 @@ app.get('/:tabName', async (req, res, next) => {
     return next();
   }
 
-  const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
-  
-  // Gunakan SEO config dari DB Redis
-  const seoConfig = siteContent.seo || DEFAULT_SITE_CONTENT.seo;
-  
-  if (seoConfig[tabName]) {
-    const seoData = buildSeoPayload(req, siteContent, tabName);
+  if (SEO_REGISTRY[tabName]) {
+    const seoData = buildSeoPayload(req, tabName);
+    const siteContent = await getSiteContent(); // <-- Tarik data dari Database Redis
     
     return res.render('index', {
       pageTitle: seoData.title,
