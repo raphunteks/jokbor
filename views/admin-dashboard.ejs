@@ -1,126 +1,321 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard - Joki Borang PIDGI</title>
+  <title>Admin CMS Dashboard - Joki Borang PIDGI</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/css/main.css">
-</head>
-<body class="bg-brand-dark text-slate-100 min-h-screen flex flex-col md:flex-row">
 
-  <aside class="w-full md:w-64 glass-panel border-r border-white/10 md:min-h-screen flex flex-col z-20 sticky top-0">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#0d9488',
+              cyan: '#06b6d4',
+              indigo: '#6366f1',
+              dark: '#070b14',
+              slate: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-dark text-slate-100 antialiased selection:bg-cyan-500 selection:text-white min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
+
+  <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+    <div class="mesh-glow mesh-teal w-[500px] h-[500px] absolute top-[-100px] left-[-100px]"></div>
+    <div class="mesh-glow mesh-cyan w-[400px] h-[400px] absolute bottom-[-50px] right-[-50px]"></div>
+  </div>
+
+  <aside class="w-full md:w-72 glass-panel border-r border-white/10 md:min-h-screen flex flex-col sticky top-0 z-30 shadow-2xl">
+    
     <div class="p-6 border-b border-white/10 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-cyan-400 p-[1px]">
-          <div class="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center text-lg">⚙️</div>
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20 shrink-0">
+          <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center">
+            <span class="text-xl">⚙️</span>
+          </div>
         </div>
-        <div>
-          <h1 class="font-bold text-white text-sm">Panel Admin</h1>
-          <p class="text-[10px] text-cyan-400">Database Redis</p>
+        <div class="flex flex-col">
+          <span class="font-extrabold text-base tracking-tight bg-gradient-to-r from-teal-300 via-cyan-200 to-white bg-clip-text text-transparent">
+            Admin Panel
+          </span>
+          <span class="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">Vercel KV Redis CMS</span>
         </div>
       </div>
-      <a href="/admin/logout" class="md:hidden text-rose-400 hover:text-rose-300"><i class="fas fa-power-off"></i></a>
+      
+      <a href="/admin/logout" title="Logout" class="md:hidden w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 flex items-center justify-center border border-rose-500/20 transition">
+        <i class="fas fa-power-off text-sm"></i>
+      </a>
     </div>
 
-    <nav class="flex-1 p-4 overflow-y-auto space-y-2 flex md:flex-col gap-2 overflow-x-auto md:overflow-x-visible">
-      <button onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-home w-5"></i> Hero Section</button>
-      <button onclick="switchTab('tentang')" id="tab-tentang" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-info-circle w-5"></i> Tentang Kami</button>
-      <button onclick="switchTab('keunggulan')" id="tab-keunggulan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-star w-5"></i> Keunggulan</button>
-      <button onclick="switchTab('layanan')" id="tab-layanan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-layer-group w-5"></i> Layanan Modul</button>
-      <button onclick="switchTab('testimoni')" id="tab-testimoni" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-comments w-5"></i> Testimoni</button>
-      <button onclick="switchTab('pricelist')" id="tab-pricelist" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-tags w-5"></i> Pricelist</button>
-      <button onclick="switchTab('faq')" id="tab-faq" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 text-xs sm:text-sm font-semibold shrink-0 transition"><i class="fas fa-question-circle w-5"></i> FAQ</button>
+    <nav class="flex-1 p-4 space-y-1.5 overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0 no-scrollbar">
+      <button type="button" onclick="switchTab('hero')" id="tab-hero" class="tab-btn w-full text-left px-4 py-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-home w-5 text-center"></i> <span>1. Hero Section</span>
+      </button>
+
+      <button type="button" onclick="switchTab('tentang')" id="tab-tentang" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-info-circle w-5 text-center"></i> <span>2. Tentang Kami</span>
+      </button>
+
+      <button type="button" onclick="switchTab('keunggulan')" id="tab-keunggulan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-star w-5 text-center"></i> <span>3. Keunggulan</span>
+      </button>
+
+      <button type="button" onclick="switchTab('layanan')" id="tab-layanan" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-layer-group w-5 text-center"></i> <span>4. Layanan Modul</span>
+      </button>
+
+      <button type="button" onclick="switchTab('testimoni')" id="tab-testimoni" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-comments w-5 text-center"></i> <span>5. Testimoni</span>
+      </button>
+
+      <button type="button" onclick="switchTab('pricelist')" id="tab-pricelist" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-tags w-5 text-center"></i> <span>6. Pricelist</span>
+      </button>
+
+      <button type="button" onclick="switchTab('faq')" id="tab-faq" class="tab-btn w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 border border-transparent text-xs sm:text-sm font-semibold shrink-0 transition flex items-center gap-3">
+        <i class="fas fa-question-circle w-5 text-center"></i> <span>7. FAQ</span>
+      </button>
     </nav>
 
-    <div class="p-4 border-t border-white/10 hidden md:block">
-      <a href="/admin/logout" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 text-sm font-bold transition border border-rose-500/20">
-        <i class="fas fa-power-off"></i> Logout
+    <div class="p-4 border-t border-white/10 hidden md:flex flex-col gap-2">
+      <a href="/" target="_blank" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold transition border border-white/10">
+        <i class="fas fa-external-link-alt text-cyan-400"></i> Lihat Website Utama
       </a>
-      <a href="/" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 mt-2 rounded-xl bg-white/5 text-slate-300 hover:bg-white/10 text-sm font-bold transition border border-white/10">
-        <i class="fas fa-external-link-alt"></i> Lihat Web
+      <a href="/admin/logout" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-bold transition border border-rose-500/20">
+        <i class="fas fa-power-off"></i> Logout Admin
       </a>
     </div>
   </aside>
 
-  <main class="flex-1 p-4 md:p-8 overflow-y-auto relative z-10">
-    <div class="max-w-4xl mx-auto">
-      <div class="flex justify-between items-center mb-8">
+  <main class="flex-1 p-4 sm:p-6 md:p-10 overflow-y-auto relative z-10 w-full">
+    <div class="max-w-4xl mx-auto space-y-6">
+      
+      <div class="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-white/10">
         <div>
-          <h2 class="text-2xl font-extrabold text-white">Content Editor (CMS)</h2>
-          <p class="text-slate-400 text-xs mt-1">Ubah data di sini, website akan otomatis terupdate realtime.</p>
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <span>Management Content Studio</span>
+          </h2>
+          <p class="text-slate-400 text-xs mt-1">
+            Sunting teks bagian mana saja, lalu klik simpan untuk langsung update ke database Redis.
+          </p>
         </div>
-        <button id="saveBtn" class="bg-gradient-to-r from-teal-500 to-cyan-500 px-6 py-3 rounded-xl text-white font-bold text-sm shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95 transition flex items-center gap-2">
-          <i class="fas fa-save"></i> <span>Simpan Perubahan</span>
+
+        <button type="button" id="saveBtn" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 flex items-center justify-center gap-2 shrink-0">
+          <i class="fas fa-cloud-upload-alt text-base"></i>
+          <span>Simpan Perubahan</span>
         </button>
       </div>
 
-      <div class="glass-card p-6 md:p-8 rounded-3xl">
-        <form id="editorForm" class="space-y-6">
+      <div id="statusAlert" class="hidden p-4 rounded-2xl text-xs font-semibold flex items-center justify-between transition-all">
+        <div class="flex items-center gap-2.5">
+          <i id="statusIcon" class="fas fa-info-circle text-base"></i>
+          <span id="statusMessage">Status message</span>
+        </div>
+        <button onclick="document.getElementById('statusAlert').classList.add('hidden')" class="opacity-60 hover:opacity-100"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 relative">
+        <form id="editorForm" onsubmit="return false;" class="space-y-6">
           
-          <div id="form-hero" class="tab-content block">
-            <h3 class="text-lg font-bold text-cyan-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-home"></i> Hero / Beranda</h3>
+          <div id="form-hero" class="tab-content block space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
+                <i class="fas fa-home"></i> <span>Hero Section (Halaman Depan Utamanya)</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur badge promosi, headline utama, dan paragraf pembuka di bagian paling atas.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="hero-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Headline Utama (Putih)</label> <input type="text" id="hero-titleMain" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Headline Highlight (Gradient)</label> <input type="text" id="hero-titleHighlight" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Deskripsi Paragraf</label> <textarea id="hero-description" rows="4" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Promosi (Teks Kecil Atas Header)</label>
+                <input type="text" id="hero-badge" class="admin-input" placeholder="Contoh: Jasa Administrasi & Input Logbook PIDGI No. 1 di Indonesia">
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-2">Headline Utama (Baris Atas Teks Putih)</label>
+                  <input type="text" id="hero-titleMain" class="admin-input" placeholder="Contoh: Fokus Tangani Pasien,">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-2">Headline Highlight (Baris Bawah Teks Gradient)</label>
+                  <input type="text" id="hero-titleHighlight" class="admin-input" placeholder="Contoh: Biar Borang PIDGI Kami yang Tuntaskan.">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Paragraf Hero</label>
+                <textarea id="hero-description" rows="4" class="admin-input" placeholder="Masukkan deskripsi pembuka website..."></textarea>
+              </div>
             </div>
           </div>
 
-          <div id="form-tentang" class="tab-content hidden">
-            <h3 class="text-lg font-bold text-teal-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-info-circle"></i> Tentang Kami</h3>
+          <div id="form-tentang" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-teal-400 flex items-center gap-2">
+                <i class="fas fa-info-circle"></i> <span>Tentang Kami</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur informasi profil, deskripsi layanan, dan komitmen layanan @jokiborangpidgi.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="tentang-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Judul</label> <input type="text" id="tentang-title" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Paragraf 1</label> <textarea id="tentang-p1" rows="3" class="admin-input"></textarea></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Paragraf 2</label> <textarea id="tentang-p2" rows="4" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
+                <input type="text" id="tentang-badge" class="admin-input" placeholder="Contoh: Tentang Layanan Kami">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
+                <input type="text" id="tentang-title" class="admin-input" placeholder="Contoh: Sahabat Administrasi Terbaik untuk Dokter Gigi Internsip">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Paragraf Pertama</label>
+                <textarea id="tentang-p1" rows="3" class="admin-input" placeholder="Masukkan paragraf pertama..."></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Paragraf Kedua</label>
+                <textarea id="tentang-p2" rows="4" class="admin-input" placeholder="Masukkan paragraf kedua..."></textarea>
+              </div>
             </div>
           </div>
 
-          <div id="form-keunggulan" class="tab-content hidden">
-            <h3 class="text-lg font-bold text-indigo-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-star"></i> Header Keunggulan</h3>
+          <div id="form-keunggulan" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-indigo-400 flex items-center gap-2">
+                <i class="fas fa-star"></i> <span>Header Section Keunggulan Utama</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul dan sub-deskripsi di atas 6 poin keunggulan utama.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="keunggulan-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Judul</label> <input type="text" id="keunggulan-title" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Deskripsi</label> <textarea id="keunggulan-desc" rows="2" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
+                <input type="text" id="keunggulan-badge" class="admin-input" placeholder="Contoh: Keunggulan Utama">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
+                <input type="text" id="keunggulan-title" class="admin-input" placeholder="Contoh: Mengapa Memilih @jokiborangpidgi?">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
+                <textarea id="keunggulan-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat keunggulan..."></textarea>
+              </div>
             </div>
           </div>
 
-          <div id="form-layanan" class="tab-content hidden">
-            <h3 class="text-lg font-bold text-cyan-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-layer-group"></i> Header Layanan Modul</h3>
+          <div id="form-layanan" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
+                <i class="fas fa-layer-group"></i> <span>Header Section Layanan & Modul</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul header pembuka stase Puskesmas dan Rumah Sakit.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="layanan-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Judul</label> <input type="text" id="layanan-title" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Deskripsi</label> <textarea id="layanan-desc" rows="2" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
+                <input type="text" id="layanan-badge" class="admin-input" placeholder="Contoh: Modul & Cakupan">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
+                <input type="text" id="layanan-title" class="admin-input" placeholder="Contoh: Layanan Lengkap Logbook PIDGI">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
+                <textarea id="layanan-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat cakupan modul..."></textarea>
+              </div>
             </div>
           </div>
 
-          <div id="form-testimoni" class="tab-content hidden">
-            <h3 class="text-lg font-bold text-amber-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-comments"></i> Header Testimoni</h3>
+          <div id="form-testimoni" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                <i class="fas fa-comments"></i> <span>Header Section Testimoni Klien</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul header bagian animasi ulasan marquee berjalan horizontal.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="testimoni-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Judul</label> <input type="text" id="testimoni-title" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Deskripsi</label> <textarea id="testimoni-desc" rows="2" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
+                <input type="text" id="testimoni-badge" class="admin-input" placeholder="Contoh: Ulasan Rekan Sejawat">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
+                <input type="text" id="testimoni-title" class="admin-input" placeholder="Contoh: Apa Kata Klien Kami?">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
+                <textarea id="testimoni-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat ulasan..."></textarea>
+              </div>
             </div>
           </div>
 
-          <div id="form-pricelist" class="tab-content hidden">
-            <h3 class="text-lg font-bold text-emerald-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-tags"></i> Header Pricelist</h3>
+          <div id="form-pricelist" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                <i class="fas fa-tags"></i> <span>Header Section Pricelist Transparan</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul pembuka daftar tarif harga paket UKP, UKM, PKRS & Lapsus.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="pricelist-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Judul</label> <input type="text" id="pricelist-title" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Deskripsi</label> <textarea id="pricelist-desc" rows="2" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
+                <input type="text" id="pricelist-badge" class="admin-input" placeholder="Contoh: Pricelist Transparan">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
+                <input type="text" id="pricelist-title" class="admin-input" placeholder="Contoh: Biaya Jasa / Pricelist Borang PIDGI">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
+                <textarea id="pricelist-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat pricelist..."></textarea>
+              </div>
             </div>
           </div>
 
-          <div id="form-faq" class="tab-content hidden">
-            <h3 class="text-lg font-bold text-rose-400 border-b border-white/10 pb-3 mb-5"><i class="fas fa-question-circle"></i> Header FAQ</h3>
+          <div id="form-faq" class="tab-content hidden space-y-5">
+            <div class="border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2">
+                <i class="fas fa-question-circle"></i> <span>Header Section FAQ (Tanya Jawab)</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Mengatur judul header bagian pertanyaan umum klien.</p>
+            </div>
+
             <div class="space-y-4">
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Badge Text</label> <input type="text" id="faq-badge" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Judul</label> <input type="text" id="faq-title" class="admin-input"></div>
-              <div><label class="block text-xs font-bold text-slate-400 mb-2">Deskripsi</label> <textarea id="faq-desc" rows="2" class="admin-input"></textarea></div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Badge Section</label>
+                <input type="text" id="faq-badge" class="admin-input" placeholder="Contoh: Tanya Jawab">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Judul Section</label>
+                <input type="text" id="faq-title" class="admin-input" placeholder="Contoh: Ada yang Ingin Ditanyakan?">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-2">Deskripsi Singkat Section</label>
+                <textarea id="faq-desc" rows="2" class="admin-input" placeholder="Masukkan deskripsi singkat FAQ..."></textarea>
+              </div>
             </div>
           </div>
 
@@ -131,71 +326,123 @@
   </main>
 
   <script>
-    // Load Data JSON dari Backend EJS Injection
+    // 1. Injeksi Data JSON Konten Terbaru dari Server Backend (EJS)
     const currentData = <%- JSON.stringify(content) %>;
     
-    // Auto-Populate Inputs saat halaman dimuat
-    document.addEventListener('DOMContentLoaded', () => {
-      // Loop Object dan masukkan value ke input berdasarkan ID (format id: tab-key)
-      Object.keys(currentData).forEach(tab => {
-        Object.keys(currentData[tab]).forEach(key => {
-          const el = document.getElementById(`${tab}-${key}`);
-          if (el) el.value = currentData[tab][key];
+    // 2. Otomatis mengisi semua Input Form saat halaman dibuka
+    document.addEventListener('DOMContentLoaded', function() {
+      if (currentData) {
+        Object.keys(currentData).forEach(function(sectionKey) {
+          if (currentData[sectionKey] && typeof currentData[sectionKey] === 'object') {
+            Object.keys(currentData[sectionKey]).forEach(function(fieldKey) {
+              const elementId = sectionKey + '-' + fieldKey;
+              const inputElement = document.getElementById(elementId);
+              if (inputElement) {
+                inputElement.value = currentData[sectionKey][fieldKey] || '';
+              }
+            });
+          }
         });
-      });
+      }
     });
 
-    // Fungsi Switching Tab Visual
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(el => {
-        el.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
-        el.classList.add('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+    // 3. Fungsi berpindah Tab Form secara Visual
+    function switchTab(activeTabId) {
+      // Sembunyikan semua tab content
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(function(content) {
+        content.classList.add('hidden');
+        content.classList.remove('block');
       });
-      
-      document.getElementById(`form-${tabId}`).classList.remove('hidden');
-      
-      const activeBtn = document.getElementById(`tab-${tabId}`);
-      activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
-      activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+
+      // Reset semua style tombol tab
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(function(btn) {
+        btn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+        btn.classList.add('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+      });
+
+      // Tampilkan tab yang dipilih
+      const targetForm = document.getElementById('form-' + activeTabId);
+      if (targetForm) {
+        targetForm.classList.remove('hidden');
+        targetForm.classList.add('block');
+      }
+
+      // Aktifkan style tombol tab yang dipilih
+      const activeBtn = document.getElementById('tab-' + activeTabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('hover:bg-white/5', 'text-slate-300', 'border-transparent');
+        activeBtn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/30');
+      }
     }
 
-    // Fungsi Ambil Data Dari Form dan Simpan
-    document.getElementById('saveBtn').addEventListener('click', async (e) => {
+    // 4. Fungsi Ambil Data dari Form dan Simpan Realtime ke Endpoint Backend Redis
+    document.getElementById('saveBtn').addEventListener('click', async function(e) {
       e.preventDefault();
-      const btn = e.currentTarget;
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Menyimpan...</span>';
       
-      // Ambil seluruh object (sesuai struktur asli) lalu ganti isinya dengan value dari form
-      const updatedData = JSON.parse(JSON.stringify(currentData)); 
-      Object.keys(updatedData).forEach(tab => {
-        Object.keys(updatedData[tab]).forEach(key => {
-          const el = document.getElementById(`${tab}-${key}`);
-          if (el) updatedData[tab][key] = el.value;
-        });
+      const saveBtn = document.getElementById('saveBtn');
+      const statusAlert = document.getElementById('statusAlert');
+      const statusIcon = document.getElementById('statusIcon');
+      const statusMessage = document.getElementById('statusMessage');
+      
+      const originalBtnHTML = saveBtn.innerHTML;
+      
+      // Ubah status tombol menjadi loading
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-base"></i> <span>Menyimpan ke Redis...</span>';
+
+      // Clone struktur data asli agar struktur tetap utuh
+      const updatedData = JSON.parse(JSON.stringify(currentData));
+
+      // Loop dan ambil nilai terbaru dari setiap field input
+      Object.keys(updatedData).forEach(function(sectionKey) {
+        if (updatedData[sectionKey] && typeof updatedData[sectionKey] === 'object') {
+          Object.keys(updatedData[sectionKey]).forEach(function(fieldKey) {
+            const elementId = sectionKey + '-' + fieldKey;
+            const inputElement = document.getElementById(elementId);
+            if (inputElement) {
+              updatedData[sectionKey][fieldKey] = inputElement.value;
+            }
+          });
+        }
       });
 
       try {
+        // Kirim request POST ke route /admin/save di server.js
         const response = await fetch('/admin/save', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify(updatedData)
         });
 
         const result = await response.json();
-        
+
+        statusAlert.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/30', 'bg-rose-500/20', 'text-rose-300', 'border-rose-500/30');
+
         if (result.success) {
-          alert('✅ Data Berhasil Disimpan ke Vercel Redis!');
+          statusAlert.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
+          statusIcon.className = 'fas fa-check-circle text-base';
+          statusMessage.innerText = '✅ Perubahan berhasil disimpan ke Vercel Redis Database! Website otomatis terupdate.';
         } else {
-          alert('❌ Gagal: ' + result.message);
+          statusAlert.classList.add('bg-rose-500/20', 'text-rose-300', 'border', 'border-rose-500/30');
+          statusIcon.className = 'fas fa-exclamation-triangle text-base';
+          statusMessage.innerText = '❌ Gagal menyimpan: ' + (result.message || 'Terjadi kesalahan pada server');
         }
       } catch (err) {
-        alert('❌ Error Koneksi: ' + err.message);
+        statusAlert.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/30');
+        statusAlert.classList.add('bg-rose-500/20', 'text-rose-300', 'border', 'border-rose-500/30');
+        statusIcon.className = 'fas fa-wifi text-base';
+        statusMessage.innerText = '❌ Kesalahan Koneksi API: ' + err.message;
       } finally {
-        btn.innerHTML = originalText;
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = originalBtnHTML;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
   </script>
+
 </body>
 </html>
