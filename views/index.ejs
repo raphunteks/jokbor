@@ -38,7 +38,7 @@
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta property="og:image:alt" content="Joki Borang PIDGI - Layanan Input Logbook Dokter Gigi Internsip">
-  <meta property="og:site_name" content="jokiborangpidgi">
+  <meta property="og:site_name" content="<%= content.brand.title %>">
   <meta property="og:locale" content="id_ID">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -109,9 +109,9 @@
         </div>
         <div class="flex flex-col">
           <span class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-teal-300 via-cyan-200 to-white bg-clip-text text-transparent truncate">
-            jokiborangpidgi
+            <%= content.brand.title %>
           </span>
-          <span class="text-[9px] sm:text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">PIDGI Assistance</span>
+          <span class="text-[9px] sm:text-[10px] text-cyan-400 font-semibold tracking-wider uppercase"><%= content.brand.subtitle %></span>
         </div>
       </a>
 
@@ -127,7 +127,7 @@
       <div class="flex items-center gap-2 sm:gap-3">
         <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin%20jokiborangpidgi,%20saya%20mau%20konsultasi%20jasa%20input%20borang%20PIDGI" target="_blank" rel="noopener noreferrer" class="hidden sm:flex px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition duration-200 items-center gap-2">
           <i class="fab fa-whatsapp text-sm"></i>
-          <span>Hubungi Kami</span>
+          <span><%= content.brand.ctaWhatsapp %></span>
         </a>
 
         <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" aria-expanded="false" class="lg:hidden w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl glass-card flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 active:scale-95 transition duration-200 focus:outline-none shadow-lg shadow-cyan-500/10">
@@ -195,30 +195,20 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full px-4 sm:px-0">
         <a href="/biaya" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-teal-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition duration-200">
-          <i class="fas fa-tags mr-2"></i> Lihat Daftar Harga (Pricelist)
+          <i class="fas fa-tags mr-2"></i> <%= content.hero.ctaPrice %>
         </a>
         <a href="/layanan" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl glass-card text-slate-200 font-semibold text-xs sm:text-sm hover:bg-white/10 hover:text-white transition duration-200">
-          <i class="fas fa-layer-group mr-2 text-cyan-400"></i> Pelajari Layanan Modul
+          <i class="fas fa-layer-group mr-2 text-cyan-400"></i> <%= content.hero.ctaService %>
         </a>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto w-full px-2 sm:px-0">
-        <div class="glass-card p-3 sm:p-4 rounded-2xl">
-          <div class="text-xl sm:text-2xl font-black text-cyan-400">100%</div>
-          <div class="text-[9px] sm:text-[11px] text-slate-400 uppercase font-semibold mt-1">Kerahasiaan Akun</div>
-        </div>
-        <div class="glass-card p-3 sm:p-4 rounded-2xl">
-          <div class="text-xl sm:text-2xl font-black text-teal-400">ICD-10</div>
-          <div class="text-[9px] sm:text-[11px] text-slate-400 uppercase font-semibold mt-1">Kode ICD-10 Tepat</div>
-        </div>
-        <div class="glass-card p-3 sm:p-4 rounded-2xl">
-          <div class="text-xl sm:text-2xl font-black text-indigo-400">1 Hari</div>
-          <div class="text-[9px] sm:text-[11px] text-slate-400 uppercase font-semibold mt-1">Opsi Express Kilat</div>
-        </div>
-        <div class="glass-card p-3 sm:p-4 rounded-2xl">
-          <div class="text-xl sm:text-2xl font-black text-pink-400">Valid</div>
-          <div class="text-[9px] sm:text-[11px] text-slate-400 uppercase font-semibold mt-1">Garansi Approval DP</div>
-        </div>
+        <% content.hero.stats.forEach(function(stat) { %>
+          <div class="glass-card p-3 sm:p-4 rounded-2xl">
+            <div class="text-xl sm:text-2xl font-black <%= stat.color %>"><%= stat.value %></div>
+            <div class="text-[9px] sm:text-[11px] text-slate-400 uppercase font-semibold mt-1"><%= stat.label %></div>
+          </div>
+        <% }); %>
       </div>
 
     </div>
@@ -245,15 +235,14 @@
             </p>
             
             <div class="flex flex-wrap gap-2.5 sm:gap-4 text-[10px] sm:text-xs font-semibold text-slate-300">
-              <div class="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-xl border border-white/10">
-                <i class="fas fa-check-circle text-teal-400"></i> Standar SOAP Klinis
-              </div>
-              <div class="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-xl border border-white/10">
-                <i class="fas fa-check-circle text-cyan-400"></i> Format Laporan Terstandar
-              </div>
-              <div class="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-xl border border-white/10">
-                <i class="fas fa-check-circle text-indigo-400"></i> Garansi Revisi
-              </div>
+              <% content.tentang.highlights.forEach(function(highlight, index) { 
+                const colors = ['text-teal-400', 'text-cyan-400', 'text-indigo-400'];
+                const color = colors[index % colors.length];
+              %>
+                <div class="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-xl border border-white/10">
+                  <i class="fas fa-check-circle <%= color %>"></i> <%= highlight %>
+                </div>
+              <% }); %>
             </div>
           </div>
 
@@ -265,21 +254,21 @@
                     <img src="/img/jokiborang.png" alt="Profile Joki Borang PIDGI" class="w-full h-full object-cover rounded-[14px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl\'>🦷</span>';">
                   </div>
                 </div>
-                <h3 class="font-bold text-white text-sm sm:text-base">@jokiborangpidgi</h3>
-                <p class="text-[10px] sm:text-xs text-cyan-400 mt-0.5">Asisten Logbook Terpercaya</p>
+                <h3 class="font-bold text-white text-sm sm:text-base"><%= content.tentang.profileCard.handle %></h3>
+                <p class="text-[10px] sm:text-xs text-cyan-400 mt-0.5"><%= content.tentang.profileCard.subhandle %></p>
               </div>
               <div class="pt-4 space-y-3 text-[10px] sm:text-xs text-slate-300">
                 <div class="flex justify-between items-center">
                   <span class="text-slate-400">Target Pelayanan:</span>
-                  <span class="font-semibold text-white">Stase RS & PKM</span>
+                  <span class="font-semibold text-white"><%= content.tentang.profileCard.targetVal %></span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-slate-400">Kecepatan Respon:</span>
-                  <span class="font-semibold text-teal-400">&lt; 15 Menit</span>
+                  <span class="font-semibold text-teal-400"><%= content.tentang.profileCard.speedVal %></span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-slate-400">Privasi Akun Portal:</span>
-                  <span class="font-semibold text-emerald-400">Terenkripsi 100%</span>
+                  <span class="font-semibold text-emerald-400"><%= content.tentang.profileCard.privacyVal %></span>
                 </div>
               </div>
             </div>
@@ -307,67 +296,17 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full">
-        
-        <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner">
-            <i class="fas fa-tooth"></i>
+        <% content.keunggulan.items.forEach(function(item) { %>
+          <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner <%= item.color %>">
+              <i class="<%= item.icon %>"></i>
+            </div>
+            <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5"><%= item.title %></h3>
+            <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
+              <%= item.desc %>
+            </p>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5">Paham Istilah & Kode ICD-10 Gigi</h3>
-          <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-            Tidak asal ketik. Kami memahami terminologi odontologi, penulisan status lokalis, prosedur konservasi, bedah mulut, serta kode ICD-10 gigi yang valid.
-          </p>
-        </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner">
-            <i class="fas fa-user-shield"></i>
-          </div>
-          <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5">Kerahasiaan Data 100%</h3>
-          <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-            Privasi akun e-Logbook, nama wahana, nomor registrasi pasien, dan identitas dokter internsip dijamin aman dengan protokol pembersihan data berkala.
-          </p>
-        </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5">Pengerjaan Tepat Waktu</h3>
-          <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-            Komitmen deadline ketat. Tersedia opsi Reguler (3-5 hari) hingga layanan Express (1x24 jam) saat menghadapi batas akhir monev bulanan.
-          </p>
-        </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner">
-            <i class="fas fa-clipboard-check"></i>
-          </div>
-          <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5">Format Standar Approval DP</h3>
-          <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-            Penyusunan format SOAP, kegiatan promkes, dan laporan evaluasi telah disesuaikan agar mudah diverifikasi dan disetujui Dokter Pendamping.
-          </p>
-        </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner">
-            <i class="fas fa-tags"></i>
-          </div>
-          <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5">Biaya Fleksibel & Transparan</h3>
-          <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-            Tersedia skema per kasus, paket mingguan, bulanan, hingga paket combo 6 bulan all-in dengan transparansi harga tanpa biaya tersembunyi.
-          </p>
-        </div>
-
-        <div class="glass-card p-6 sm:p-8 rounded-3xl w-full">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl sm:text-2xl mb-5 sm:mb-6 shadow-inner">
-            <i class="fas fa-headset"></i>
-          </div>
-          <h3 class="font-bold text-base sm:text-lg text-white mb-2 sm:mb-2.5">Konsultasi Ramah & Responsif</h3>
-          <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-            Komunikasi mudah melalui WhatsApp langsung dengan admin yang mengerti alur sistem internsip dokter gigi di berbagai wahana Indonesia.
-          </p>
-        </div>
-
+        <% }); %>
       </div>
 
     </div>
@@ -396,39 +335,25 @@
               <i class="fas fa-clinic-medical"></i>
             </div>
             <div>
-              <h3 class="text-xl sm:text-2xl font-bold text-white">Logbook Stase Puskesmas</h3>
-              <p class="text-[10px] sm:text-xs text-teal-300 font-medium">Poli Gigi, Posyandu, & Pelayanan Masyarakat</p>
+              <h3 class="text-xl sm:text-2xl font-bold text-white"><%= content.layanan.pkm.title %></h3>
+              <p class="text-[10px] sm:text-xs text-teal-300 font-medium"><%= content.layanan.pkm.subtitle %></p>
             </div>
           </div>
 
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
-            Pengelolaan menyeluruh untuk pemenuhan kuota tindakan di poli gigi puskesmas serta pelaporan kegiatan terpadu lintas sektor.
+            <%= content.layanan.pkm.desc %>
           </p>
 
           <div class="space-y-4">
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">1</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">UKP (Upaya Kesehatan Perseorangan)</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Input logbook kasus harian poli: ekstraksi, tumpatan (GIC/Komposit), scalling, premedikasi, serta edukasi pasien (KIE).</p>
+            <% content.layanan.pkm.modules.forEach(function(modul, index) { %>
+              <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0"><%= index + 1 %></span>
+                <div>
+                  <h4 class="text-sm font-bold text-white"><%= modul.name %></h4>
+                  <p class="text-[11px] sm:text-xs text-slate-400 mt-1"><%= modul.desc %></p>
+                </div>
               </div>
-            </div>
-
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">2</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">UKM (Upaya Kesehatan Masyarakat)</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Penyusunan laporan Promkes lapangan, program UKGS di sekolah, penyuluhan posyandu, dan laporan evaluasi program puskesmas.</p>
-              </div>
-            </div>
-
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">3</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">Laporan Kasus (Lapsus) Puskesmas</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Penyusunan makalah laporan kasus komprehensif dari pasien poli gigi puskesmas lengkap dengan tinjauan teori terkini.</p>
-              </div>
-            </div>
+            <% }); %>
           </div>
         </div>
 
@@ -438,47 +363,25 @@
               <i class="fas fa-hospital"></i>
             </div>
             <div>
-              <h3 class="text-xl sm:text-2xl font-bold text-white">Logbook Stase Rumah Sakit</h3>
-              <p class="text-[10px] sm:text-xs text-cyan-300 font-medium">Poli Spesialis, IGD, Manajemen & Penunjang</p>
+              <h3 class="text-xl sm:text-2xl font-bold text-white"><%= content.layanan.rs.title %></h3>
+              <p class="text-[10px] sm:text-xs text-cyan-300 font-medium"><%= content.layanan.rs.subtitle %></p>
             </div>
           </div>
 
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
-            Penyusunan administrasi klinis rumah sakit terintegrasi, laporan divisi manajemen mutu pelayanan, serta presentasi edukasi pasien.
+            <%= content.layanan.rs.desc %>
           </p>
 
           <div class="space-y-4">
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">1</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">UKP Rumah Sakit</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Input kasus poli gigi RS, asistensi tindakan bedah minor (odontektomi/alveolektomi), serta penanganan kasus kegawatdaruratan gigi di IGD.</p>
+            <% content.layanan.rs.modules.forEach(function(modul, index) { %>
+              <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0"><%= index + 1 %></span>
+                <div>
+                  <h4 class="text-sm font-bold text-white"><%= modul.name %></h4>
+                  <p class="text-[11px] sm:text-xs text-slate-400 mt-1"><%= modul.desc %></p>
+                </div>
               </div>
-            </div>
-
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">2</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">UKM Stase RS</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Kegiatan edukasi dan penyuluhan kesehatan gigi untuk pasien rawat jalan / keluarga penunggu pasien di area Rumah Sakit.</p>
-              </div>
-            </div>
-
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">3</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">Manajemen & PKRS</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Laporan manajemen RS, serta pembuatan dokumen Word & Slide Presentasi PPT Promosi Kesehatan Rumah Sakit (PKRS).</p>
-              </div>
-            </div>
-
-            <div class="glass-card p-4 rounded-2xl flex items-start gap-3">
-              <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] sm:text-xs font-bold mt-0.5 shrink-0">4</span>
-              <div>
-                <h4 class="text-sm font-bold text-white">Laporan Kasus (Lapsus) RS</h4>
-                <p class="text-[11px] sm:text-xs text-slate-400 mt-1">Penulisan ilmiah laporan kasus spesialistik RS disertai dokumentasi foto klinis, rontgen panoramik, dan pembahasan jurnal.</p>
-              </div>
-            </div>
+            <% }); %>
           </div>
         </div>
 
@@ -505,590 +408,80 @@
       <div class="relative w-full overflow-hidden flex flex-col gap-6 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] py-2">
         
         <div class="flex w-max animate-scroll-x hover:[animation-play-state:paused] gap-4 sm:gap-6 pl-4 sm:pl-0">
-          <div class="flex gap-4 sm:gap-6">
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Pelayanan luar biasa cepat. Kasus stase RS saya terinput sempurna, sangat membantu saat jadwal IGD padat!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">RD</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ro*** De*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSAD TK IV dr. R. Ismoyo Kendari</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Sangat profesional! Laporan manajemen RS dan PKRS disusun sangat rapi, DP langsung approve tanpa revisi sedikitpun."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">US</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ul**** Sy*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Kota Kendari</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Gak perlu pusing lagi mikirin laporan Promkes. Semua tuntas dikerjakan dengan baik dan tepat waktu. Mantap!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">NK</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Nu*** Kh****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Lepo-Lepo</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Borang harian terisi dengan kode ICD-10 yang valid. Beban kerja di poli jadi jauh lebih ringan berkat JokiBorangPIDGI."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">MT</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Mu***** Th***</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Perumnas</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Penyelamat banget di akhir bulan! Lapsus dibuat sangat detail dengan referensi jurnal terbaru. Highly recommended!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">NA</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Nur*** Ar****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSU Sayang Rakyat</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Sangat amanah dan terpercaya. Privasi akun logbook saya benar-benar dijaga. Bakal langganan sampai internsip selesai."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">LJ</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. L** J****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Kaluku Bodoa</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Adminnya ramah dan responsif. Konsultasi gampang, pengerjaannya cepat, harganya juga sangat pas di kantong internsip."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">AI</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ai** In***</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Sudiang</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Sangat membantu di tengah jadwal stase RS yang padat. Logbook selesai tepat waktu tanpa ada hari yang terlewat."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">AF</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. An*** Fi*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Undata Palu</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Pusing mikirin laporan UKM hilang seketika! Laporan penyuluhan dan evaluasinya sangat terstruktur. Recommended banget!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">RM</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ri** Ma*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Tamalanrea Makassar</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Kerjanya cepat dan rapi. Kode ICD-10 untuk kasus bedah mulut tepat semua. DP saya langsung acc tanpa babibu."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">FN</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Fa*** No****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Kota Mataram</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Jujur awalnya ragu, tapi setelah coba paket 1 bulan langsung berlangganan full stase! Aman 100% dan terpercaya."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">DP</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Di** Pr*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Kuta Selatan</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <% const half = Math.ceil(content.testimoni.items.length / 2); %>
+          <% const row1Items = content.testimoni.items.slice(0, half); %>
           
           <div class="flex gap-4 sm:gap-6">
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Pelayanan luar biasa cepat. Kasus stase RS saya terinput sempurna, sangat membantu saat jadwal IGD padat!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">RD</div>
+            <% row1Items.forEach(function(t) { %>
+              <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
                 <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ro*** De*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSAD TK IV dr. R. Ismoyo Kendari</div>
+                  <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                  <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"<%= t.comment %>"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0 <%= t.color %>"><%= t.initials %></div>
+                  <div>
+                    <div class="font-bold text-xs sm:text-sm text-white line-clamp-1"><%= t.name %></div>
+                    <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1"><%= t.wahana %></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Sangat profesional! Laporan manajemen RS dan PKRS disusun sangat rapi, DP langsung approve tanpa revisi sedikitpun."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">US</div>
+            <% }); %>
+          </div>
+          <div class="flex gap-4 sm:gap-6">
+            <% row1Items.forEach(function(t) { %>
+              <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
                 <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ul**** Sy*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Kota Kendari</div>
+                  <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                  <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"<%= t.comment %>"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0 <%= t.color %>"><%= t.initials %></div>
+                  <div>
+                    <div class="font-bold text-xs sm:text-sm text-white line-clamp-1"><%= t.name %></div>
+                    <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1"><%= t.wahana %></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Gak perlu pusing lagi mikirin laporan Promkes. Semua tuntas dikerjakan dengan baik dan tepat waktu. Mantap!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">NK</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Nu*** Kh****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Lepo-Lepo</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Borang harian terisi dengan kode ICD-10 yang valid. Beban kerja di poli jadi jauh lebih ringan berkat JokiBorangPIDGI."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">MT</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Mu***** Th***</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Perumnas</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Penyelamat banget di akhir bulan! Lapsus dibuat sangat detail dengan referensi jurnal terbaru. Highly recommended!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">NA</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Nur*** Ar****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSU Sayang Rakyat</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Sangat amanah dan terpercaya. Privasi akun logbook saya benar-benar dijaga. Bakal langganan sampai internsip selesai."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">LJ</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. L** J****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Kaluku Bodoa</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Adminnya ramah dan responsif. Konsultasi gampang, pengerjaannya cepat, harganya juga sangat pas di kantong internsip."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">AI</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ai** In***</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Sudiang</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Sangat membantu di tengah jadwal stase RS yang padat. Logbook selesai tepat waktu tanpa ada hari yang terlewat."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">AF</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. An*** Fi*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Undata Palu</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Pusing mikirin laporan UKM hilang seketika! Laporan penyuluhan dan evaluasinya sangat terstruktur. Recommended banget!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">RM</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ri** Ma*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Tamalanrea Makassar</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Kerjanya cepat dan rapi. Kode ICD-10 untuk kasus bedah mulut tepat semua. DP saya langsung acc tanpa babibu."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">FN</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Fa*** No****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Kota Mataram</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Jujur awalnya ragu, tapi setelah coba paket 1 bulan langsung berlangganan full stase! Aman 100% dan terpercaya."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">DP</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Di** Pr*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Kuta Selatan</div>
-                </div>
-              </div>
-            </div>
+            <% }); %>
           </div>
         </div>
 
         <div class="flex w-max animate-scroll-x-reverse hover:[animation-play-state:paused] gap-4 sm:gap-6 mt-2 pr-4 sm:pr-0">
+          <% const row2Items = content.testimoni.items.slice(half); %>
           <div class="flex gap-4 sm:gap-6">
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Lapsus saya dikerjakan dengan sangat baik. Tinjauan pustakanya up-to-date dan PPT presentasinya keren abis."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">HW</div>
+            <% row2Items.forEach(function(t) { %>
+              <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
                 <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. He*** Wi****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD dr. Doris Sylvanus</div>
+                  <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                  <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"<%= t.comment %>"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0 <%= t.color %>"><%= t.initials %></div>
+                  <div>
+                    <div class="font-bold text-xs sm:text-sm text-white line-clamp-1"><%= t.name %></div>
+                    <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1"><%= t.wahana %></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Adminnya ramah banget, fast respon. Pasien poli numpuk jadi nggak beban lagi mikirin ngetik borang malem-malem."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">MS</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Me** Sa****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Sekip Palembang</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Privasi benar-benar dijaga. Pengerjaan rapi dan sesuai format resmi Kemenkes. Sukses terus Jokiborangpidgi!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">YA</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Yo** Ad*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Tarakan Jakarta</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Gak nyangka bisa secepat ini, pesan paket express malam hari, besok paginya udah beres semua. Gokil mantap!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">CL</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ch*** Li***</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Denpasar Barat</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Presentasi PKRS saya dipuji sama konsulen. Materinya berbobot dan desainnya elegan. Terima kasih banyak tim!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">BS</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Bu** Sa*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUP dr. Sardjito</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Layanan asisten logbook PIDGI paling the best! Harganya masuk akal untuk kualitas dan garansi yang diberikan."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">AK</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. An*** Ku*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Banjarmasin Indah</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Kasus konservasi dan pedo diinput dengan rapi, catatan SOAP-nya detail banget. Sangat profesional kerjanya."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">SN</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Si** Nu*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Arifin Achmad</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Beneran ngebantu buat dokter internsip yang kewalahan bagi waktu istirahat antara jaga malam IGD dan poli gigi."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">ER</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ek* Ra*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Pontianak Kota</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Garansi revisinya beneran jalan. Ada sedikit koreksi format dari DP dan langsung diperbaiki hari itu juga. Keren!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">RO</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Re** Ok*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD dr. Zainoel Abidin</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Borang bulanan aman terkendali. Saya bisa lebih fokus melayani pasien dan punya waktu cukup buat belajar."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">VA</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Vi** Am*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Sukajadi Bandung</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Layanan sangat amanah. Awalnya takut data bocor, tapi ternyata sistem mereka sangat secure. 100% Trusted!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">GH</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Gu*** He****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Jayapura</div>
-                </div>
-              </div>
-            </div>
+            <% }); %>
           </div>
-          
           <div class="flex gap-4 sm:gap-6">
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Lapsus saya dikerjakan dengan sangat baik. Tinjauan pustakanya up-to-date dan PPT presentasinya keren abis."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">HW</div>
+            <% row2Items.forEach(function(t) { %>
+              <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
                 <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. He*** Wi****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD dr. Doris Sylvanus</div>
+                  <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                  <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"<%= t.comment %>"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0 <%= t.color %>"><%= t.initials %></div>
+                  <div>
+                    <div class="font-bold text-xs sm:text-sm text-white line-clamp-1"><%= t.name %></div>
+                    <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1"><%= t.wahana %></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Adminnya ramah banget, fast respon. Pasien poli numpuk jadi nggak beban lagi mikirin ngetik borang malem-malem."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">MS</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Me** Sa****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Sekip Palembang</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Privasi benar-benar dijaga. Pengerjaan rapi dan sesuai format resmi Kemenkes. Sukses terus Jokiborangpidgi!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">YA</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Yo** Ad*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Tarakan Jakarta</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Gak nyangka bisa secepat ini, pesan paket express malam hari, besok paginya udah beres semua. Gokil mantap!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">CL</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ch*** Li***</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Denpasar Barat</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Presentasi PKRS saya dipuji sama konsulen. Materinya berbobot dan desainnya elegan. Terima kasih banyak tim!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">BS</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Bu** Sa*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUP dr. Sardjito</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Layanan asisten logbook PIDGI paling the best! Harganya masuk akal untuk kualitas dan garansi yang diberikan."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">AK</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. An*** Ku*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Banjarmasin Indah</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Kasus konservasi dan pedo diinput dengan rapi, catatan SOAP-nya detail banget. Sangat profesional kerjanya."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">SN</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Si** Nu*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Arifin Achmad</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Beneran ngebantu buat dokter internsip yang kewalahan bagi waktu istirahat antara jaga malam IGD dan poli gigi."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">ER</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Ek* Ra*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Pontianak Kota</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Garansi revisinya beneran jalan. Ada sedikit koreksi format dari DP dan langsung diperbaiki hari itu juga. Keren!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">RO</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Re** Ok*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD dr. Zainoel Abidin</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Borang bulanan aman terkendali. Saya bisa lebih fokus melayani pasien dan punya waktu cukup buat belajar."</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">VA</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Vi** Am*****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">PKM Sukajadi Bandung</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between w-[280px] sm:w-[340px] shrink-0 border border-white/5 hover:border-cyan-500/30 transition-colors">
-              <div>
-                <div class="text-amber-400 text-xs mb-4 flex gap-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p class="text-slate-300 text-[11px] sm:text-sm italic leading-relaxed mb-6">"Layanan sangat amanah. Awalnya takut data bocor, tapi ternyata sistem mereka sangat secure. 100% Trusted!"</p>
-              </div>
-              <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] sm:text-sm shrink-0">GH</div>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">drg. Gu*** He****</div>
-                  <div class="text-[9px] sm:text-[11px] text-slate-400 line-clamp-1">RSUD Jayapura</div>
-                </div>
-              </div>
-            </div>
+            <% }); %>
           </div>
         </div>
 
@@ -1125,26 +518,22 @@
           <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between border-teal-500/20 w-full">
             <div>
               <div class="inline-block px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider mb-4">
-                Stase Puskesmas (PKM)
+                <%= content.pricelist.ukpPkm.tag %>
               </div>
-              <div class="text-[11px] sm:text-xs text-slate-400 mb-1">Reguler (3-5 Hari Kerja)</div>
+              <div class="text-[11px] sm:text-xs text-slate-400 mb-1"><%= content.pricelist.ukpPkm.type %></div>
               <div class="text-2xl sm:text-3xl font-black text-white mb-6">
-                Rp 5.000 <span class="text-[10px] sm:text-xs text-slate-400 font-normal">/ kasus</span>
+                <%= content.pricelist.ukpPkm.price %> <span class="text-[10px] sm:text-xs text-slate-400 font-normal"><%= content.pricelist.ukpPkm.unit %></span>
               </div>
               
               <ul class="text-[11px] sm:text-xs text-slate-300 space-y-3 pt-4 border-t border-white/10 mb-6">
-                <li class="flex justify-between items-center">
-                  <span>Paket 1 Minggu</span>
-                  <span class="font-bold text-white">Rp 250.000</span>
-                </li>
-                <li class="flex justify-between items-center text-teal-300">
-                  <span>All-in 1 Bulan PKM</span>
-                  <span class="font-bold">Rp 900.000</span>
-                </li>
-                <li class="flex justify-between items-center text-teal-200">
-                  <span>All-in 3 Bulan PKM</span>
-                  <span class="font-bold">Rp 2.500.000</span>
-                </li>
+                <% content.pricelist.ukpPkm.features.forEach(function(feat, idx) { 
+                  let colorClass = idx === 1 ? 'text-teal-300' : idx === 2 ? 'text-teal-200' : '';
+                %>
+                  <li class="flex justify-between items-center <%= colorClass %>">
+                    <span><%= feat.label %></span>
+                    <span class="font-bold <%= idx === 0 ? 'text-white' : '' %>"><%= feat.val %></span>
+                  </li>
+                <% }); %>
               </ul>
             </div>
             <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20PKM" target="_blank" rel="noopener noreferrer" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-teal-500 text-white font-bold text-[11px] sm:text-xs transition duration-200">
@@ -1155,26 +544,22 @@
           <div class="glass-card p-5 sm:p-6 rounded-3xl flex flex-col justify-between border-cyan-500/20 w-full">
             <div>
               <div class="inline-block px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider mb-4">
-                Stase Rumah Sakit (RS)
+                <%= content.pricelist.ukpRs.tag %>
               </div>
-              <div class="text-[11px] sm:text-xs text-slate-400 mb-1">Reguler (3-5 Hari Kerja)</div>
+              <div class="text-[11px] sm:text-xs text-slate-400 mb-1"><%= content.pricelist.ukpRs.type %></div>
               <div class="text-2xl sm:text-3xl font-black text-white mb-6">
-                Rp 5.000 <span class="text-[10px] sm:text-xs text-slate-400 font-normal">/ kasus</span>
+                <%= content.pricelist.ukpRs.price %> <span class="text-[10px] sm:text-xs text-slate-400 font-normal"><%= content.pricelist.ukpRs.unit %></span>
               </div>
               
               <ul class="text-[11px] sm:text-xs text-slate-300 space-y-3 pt-4 border-t border-white/10 mb-6">
-                <li class="flex justify-between items-center">
-                  <span>Paket 1 Minggu</span>
-                  <span class="font-bold text-white">Rp 150.000</span>
-                </li>
-                <li class="flex justify-between items-center text-cyan-300">
-                  <span>All-in 1 Bulan RS</span>
-                  <span class="font-bold">Rp 500.000</span>
-                </li>
-                <li class="flex justify-between items-center text-cyan-200">
-                  <span>All-in 3 Bulan RS</span>
-                  <span class="font-bold">Rp 1.800.000</span>
-                </li>
+                <% content.pricelist.ukpRs.features.forEach(function(feat, idx) { 
+                  let colorClass = idx === 1 ? 'text-cyan-300' : idx === 2 ? 'text-cyan-200' : '';
+                %>
+                  <li class="flex justify-between items-center <%= colorClass %>">
+                    <span><%= feat.label %></span>
+                    <span class="font-bold <%= idx === 0 ? 'text-white' : '' %>"><%= feat.val %></span>
+                  </li>
+                <% }); %>
               </ul>
             </div>
             <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20UKP%20Stase%20RS" target="_blank" rel="noopener noreferrer" class="w-full text-center py-3 rounded-xl bg-white/5 hover:bg-cyan-500 text-white font-bold text-[11px] sm:text-xs transition duration-200">
@@ -1186,18 +571,18 @@
             <div class="absolute -top-3 -right-3 w-20 h-20 sm:w-24 sm:h-24 bg-indigo-500/20 rounded-full blur-xl pointer-events-none"></div>
             <div class="relative z-10">
               <div class="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider mb-4">
-                Express & Paket Combo
+                <%= content.pricelist.expressCombo.tag %>
               </div>
-              <div class="text-[11px] sm:text-xs text-slate-400 mb-1">Pengerjaan 1x24 Jam Kilat</div>
+              <div class="text-[11px] sm:text-xs text-slate-400 mb-1"><%= content.pricelist.expressCombo.type %></div>
               <div class="text-2xl sm:text-3xl font-black text-white mb-2">
-                Rp 7.000 <span class="text-[10px] sm:text-xs text-slate-400 font-normal">/ kasus</span>
+                <%= content.pricelist.expressCombo.price %> <span class="text-[10px] sm:text-xs text-slate-400 font-normal"><%= content.pricelist.expressCombo.unit %></span>
               </div>
-              <div class="text-[10px] sm:text-[11px] text-cyan-300 font-medium mb-5 sm:mb-6 leading-tight">⚡ Diskon 10% pemesanan &gt; 100 kasus</div>
+              <div class="text-[10px] sm:text-[11px] text-cyan-300 font-medium mb-5 sm:mb-6 leading-tight"><%= content.pricelist.expressCombo.discount %></div>
               
               <div class="p-3 sm:p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 mb-5 sm:mb-6">
-                <div class="text-[10px] sm:text-xs font-bold text-indigo-300 mb-1">🔥 COMBO FULL 6 BULAN (RS + PKM)</div>
-                <div class="text-xl sm:text-2xl font-black text-white">Rp 4.000.000</div>
-                <div class="text-[9px] sm:text-[10px] text-slate-400 mt-1">Solusi tenang tuntas satu masa internsip penuh</div>
+                <div class="text-[10px] sm:text-xs font-bold text-indigo-300 mb-1"><%= content.pricelist.expressCombo.comboTitle %></div>
+                <div class="text-xl sm:text-2xl font-black text-white"><%= content.pricelist.expressCombo.comboPrice %></div>
+                <div class="text-[9px] sm:text-[10px] text-slate-400 mt-1"><%= content.pricelist.expressCombo.comboSub %></div>
               </div>
             </div>
             <a href="https://wa.me/<%= whatsappNumber %>?text=Halo%20Admin,%20saya%20mau%20order%20Paket%20Combo%206%20Bulan%20atau%20Express" target="_blank" rel="noopener noreferrer" class="relative z-10 w-full text-center py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-[11px] sm:text-xs shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition duration-200">
@@ -1220,18 +605,17 @@
             </div>
 
             <div class="space-y-2.5 sm:space-y-3 mb-5 sm:mb-6">
-              <div class="flex justify-between items-center p-2.5 sm:p-3 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <span class="text-slate-300">Laporan Promkes</span>
-                <span class="font-bold text-white">Rp 10.000 <span class="text-[10px] text-slate-400 font-normal">/laporan</span></span>
-              </div>
-              <div class="flex justify-between items-center p-2.5 sm:p-3 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <span class="text-slate-300">Laporan Evaluasi</span>
-                <span class="font-bold text-white">Rp 35.000 <span class="text-[10px] text-slate-400 font-normal">/laporan</span></span>
-              </div>
-              <div class="flex justify-between items-center p-2.5 sm:p-3 rounded-xl bg-teal-950/30 border border-teal-500/30 text-[11px] sm:text-xs">
-                <span class="font-semibold text-teal-300">All-in 3 Lap Evaluasi</span>
-                <span class="font-bold text-white text-xs sm:text-sm">Rp 100.000</span>
-              </div>
+              <% content.pricelist.ukm.forEach(function(item, index) { 
+                const isHighlight = index === content.pricelist.ukm.length - 1;
+                const bgClass = isHighlight ? 'bg-teal-950/30 border border-teal-500/30' : 'bg-white/5';
+              %>
+                <div class="flex justify-between items-center p-2.5 sm:p-3 rounded-xl <%= bgClass %> text-[11px] sm:text-xs">
+                  <span class="<%= isHighlight ? 'font-semibold text-teal-300' : 'text-slate-300' %>"><%= item.name %></span>
+                  <span class="font-bold text-white <%= isHighlight ? 'text-xs sm:text-sm' : '' %>">
+                    <%= item.price %> <span class="text-[10px] text-slate-400 font-normal"><%= item.unit %></span>
+                  </span>
+                </div>
+              <% }); %>
             </div>
           </div>
 
@@ -1250,25 +634,25 @@
             </div>
 
             <div class="space-y-2 mb-5 sm:mb-6">
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <span class="text-slate-300">PKRS Dokumen Word</span>
-                <span class="font-bold text-white">Rp 40.000</span>
-              </div>
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <div>
-                  <span class="text-slate-300 block">PKRS Slide PPT</span>
-                  <span class="text-[9px] sm:text-[10px] text-slate-500">*Materi teks dlm Word</span>
+              <% content.pricelist.pkrs.forEach(function(item, index) { 
+                const isHighlight = index === 2; // Paket Hemat index 2
+                const bgClass = isHighlight ? 'bg-cyan-950/30 border border-cyan-500/30' : 'bg-white/5';
+              %>
+                <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl <%= bgClass %> text-[11px] sm:text-xs">
+                  <% if (item.note && !item.note.startsWith('/')) { %>
+                    <div>
+                      <span class="<%= isHighlight ? 'font-semibold text-cyan-300' : 'text-slate-300 block' %>"><%= item.name %></span>
+                      <span class="text-[9px] sm:text-[10px] text-slate-500"><%= item.note %></span>
+                    </div>
+                  <% } else { %>
+                    <span class="<%= isHighlight ? 'font-semibold text-cyan-300' : 'text-slate-300' %>"><%= item.name %></span>
+                  <% } %>
+                  
+                  <span class="font-bold text-white">
+                    <%= item.price %> <% if (item.note && item.note.startsWith('/')) { %><span class="text-[10px] text-slate-400 font-normal"><%= item.note %></span><% } %>
+                  </span>
                 </div>
-                <span class="font-bold text-white">Rp 60.000</span>
-              </div>
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-[11px] sm:text-xs">
-                <span class="font-semibold text-cyan-300">Paket Hemat (Word+PPT)</span>
-                <span class="font-bold text-white">Rp 100.000</span>
-              </div>
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <span class="text-slate-300">Laporan Manajemen RS</span>
-                <span class="font-bold text-white">Rp 10.000 <span class="text-[10px] text-slate-400 font-normal">/lap</span></span>
-              </div>
+              <% }); %>
             </div>
           </div>
 
@@ -1287,21 +671,23 @@
             </div>
 
             <div class="space-y-2 mb-5 sm:mb-6">
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <div>
-                  <span class="text-slate-300 block">Lapsus Dokumen Word</span>
-                  <span class="text-[9px] sm:text-[10px] text-slate-500">10 hal, +5rb/hal berikutnya</span>
+              <% content.pricelist.lapsus.forEach(function(item, index) { 
+                const isHighlight = index === 2; // Paket Hemat
+                const bgClass = isHighlight ? 'bg-indigo-950/30 border border-indigo-500/30' : 'bg-white/5';
+              %>
+                <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl <%= bgClass %> text-[11px] sm:text-xs">
+                  <% if (item.note) { %>
+                    <div>
+                      <span class="<%= isHighlight ? 'font-semibold text-indigo-300' : 'text-slate-300 block' %>"><%= item.name %></span>
+                      <span class="text-[9px] sm:text-[10px] text-slate-500"><%= item.note %></span>
+                    </div>
+                  <% } else { %>
+                    <span class="<%= isHighlight ? 'font-semibold text-indigo-300' : 'text-slate-300' %>"><%= item.name %></span>
+                  <% } %>
+                  
+                  <span class="font-bold text-white <%= isHighlight ? 'text-xs sm:text-sm' : '' %>"><%= item.price %></span>
                 </div>
-                <span class="font-bold text-white">Rp 100.000</span>
-              </div>
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-white/5 text-[11px] sm:text-xs">
-                <span class="text-slate-300">Lapsus Slide PPT</span>
-                <span class="font-bold text-white">Rp 150.000</span>
-              </div>
-              <div class="flex justify-between items-center p-2 sm:p-2.5 rounded-xl bg-indigo-950/30 border border-indigo-500/30 text-[11px] sm:text-xs">
-                <span class="font-semibold text-indigo-300">Paket Hemat (Word+PPT)</span>
-                <span class="font-bold text-white text-xs sm:text-sm">Rp 200.000</span>
-              </div>
+              <% }); %>
             </div>
           </div>
 
@@ -1331,67 +717,17 @@
       </div>
 
       <div class="space-y-3 sm:space-y-4">
-        
-        <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
-          <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
-            <span class="pr-4">1. Berapa lama estimasi pengerjaan logbook UKP?</span>
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </summary>
-          <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
-            Untuk paket reguler stase RS maupun Puskesmas estimasi pengerjaan adalah 3-5 hari kerja. Jika Anda membutuhkan pengerjaan mendesak sebelum monev atau rotasi stase, Anda dapat memilih paket Express dengan jaminan selesai dalam kurun waktu 1x24 jam.
-          </div>
-        </details>
-
-        <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
-          <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
-            <span class="pr-4">2. Berapa lama pengerjaan modul UKM Puskesmas?</span>
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </summary>
-          <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
-            Laporan Promkes dan Laporan Evaluasi UKM diselesaikan rata-rata dalam 1-3 hari kerja sejak data dasar, topik kegiatan, atau materi penyuluhan dikirimkan kepada tim kami.
-          </div>
-        </details>
-
-        <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
-          <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
-            <span class="pr-4">3. Berapa lama pengerjaan Laporan Manajemen & PKRS?</span>
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </summary>
-          <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
-            Laporan PKRS (baik dokumen Word maupun slide presentasi PowerPoint) dan laporan manajemen RS memakan waktu pengerjaan 2-3 hari kerja. Desain PPT kami rancang secara visual, profesional, dan siap dipresentasikan di hadapan Dokter Pendamping.
-          </div>
-        </details>
-
-        <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
-          <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
-            <span class="pr-4">4. Bagaimana alur pengerjaan Laporan Kasus (Lapsus)?</span>
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </summary>
-          <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
-            Pengerjaan Lapsus membutuhkan waktu 3-5 hari kerja. Laporan disusun secara komprehensif mulai dari tinjauan pustaka, anamnesis, pemeriksaan klinis, rencana perawatan, hingga pembahasan ilmiah yang dilengkapi sitasi jurnal kedokteran gigi terkini.
-          </div>
-        </details>
-
-        <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
-          <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
-            <span class="pr-4">5. Apakah data akun dan rekam medis pasien dijamin aman?</span>
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </summary>
-          <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
-            Kami menjamin 100% kerahasiaan. Kredensial akun portal e-logbook hanya digunakan selama proses penginputan dan akan langsung dihapus dari perangkat kami setelah transaksi selesai. Identitas pasien dan wahana Anda dijaga secara ketat.
-          </div>
-        </details>
-
-        <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
-          <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
-            <span class="pr-4">6. Bagaimana jika terdapat revisi dari Dokter Pendamping?</span>
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </summary>
-          <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
-            Kami memberikan garansi revisi gratis sampai borang dan laporan Anda dinyatakan valid dan disetujui oleh Dokter Pendamping (DP) wahana Anda.
-          </div>
-        </details>
-
+        <% content.faq.items.forEach(function(item) { %>
+          <details class="glass-card rounded-2xl p-5 sm:p-6 cursor-pointer group transition-all w-full">
+            <summary class="font-bold text-[13px] sm:text-base text-white flex justify-between items-center outline-none">
+              <span class="pr-4"><%= item.q %></span>
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="text-[11px] sm:text-sm text-slate-400 mt-4 leading-relaxed border-t border-white/10 pt-4">
+              <%= item.a %>
+            </div>
+          </details>
+        <% }); %>
       </div>
 
     </div>
@@ -1406,15 +742,15 @@
             <img src="/img/jokiborang.png" alt="Logo jokiborangpidgi" class="w-full h-full object-cover rounded-[11px]" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-lg\'>🦷</span>';">
           </div>
         </div>
-        <span class="font-extrabold text-sm tracking-tight text-white">jokiborangpidgi</span>
+        <span class="font-extrabold text-sm tracking-tight text-white"><%= content.brand.title %></span>
       </div>
 
       <div class="text-[10px] sm:text-xs text-slate-400 text-center px-4 md:px-0 leading-relaxed">
-        &copy; <%= currentYear %> <strong>@jokiborangpidgi</strong>. Seluruh Hak Cipta Dilindungi. <br class="sm:hidden" />Partner Administrasi Dokter Gigi Internsip Indonesia.
+        &copy; <%= currentYear %> <strong><%= content.footer.copyText %></strong>
       </div>
 
       <div class="flex items-center gap-4 text-slate-400 text-sm">
-        <a href="https://instagram.com/jokiborangpidgi" target="_blank" rel="noopener noreferrer" aria-label="Instagram jokiborangpidgi" class="hover:text-pink-400 transition-colors">
+        <a href="<%= content.footer.instagram %>" target="_blank" rel="noopener noreferrer" aria-label="Instagram <%= content.brand.title %>" class="hover:text-pink-400 transition-colors">
           <i class="fab fa-instagram text-lg sm:text-xl"></i>
         </a>
         <a href="https://wa.me/<%= whatsappNumber %>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Admin" class="hover:text-emerald-400 transition-colors">
